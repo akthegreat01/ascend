@@ -16,6 +16,9 @@ export const metadata: Metadata = {
   title: "Ascend | Ultimate Life Operating System & Productivity Dashboard",
   description: "Ascend is a premium, all-in-one productivity app and life operating system. Track habits, manage goals, utilize Pomodoro focus timers, and analyze your execution velocity in a cinematic dashboard designed for deep work, flow state, and high performance.",
   keywords: "productivity app, life operating system, habit tracker, pomodoro timer, goal management, deep work, ADHD planner, daily routine, time management, personal dashboard, focus app, task manager",
+  other: {
+    "google-adsense-account": "ca-pub-9046932302377091",
+  },
   openGraph: {
     title: "Ascend | Ultimate Life Operating System",
     description: "Transform your productivity with Ascend. Track habits, goals, and deep work in a premium dashboard.",
