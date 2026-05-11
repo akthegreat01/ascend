@@ -19,6 +19,8 @@ import ActivityHeatmap from "@/components/ActivityHeatmap";
 import StrategicRoadmap from "@/components/StrategicRoadmap";
 import SystemActionFeed from "@/components/SystemActionFeed";
 import DigitalEcosystem from "@/components/DigitalEcosystem";
+import HealthTracker from "@/components/HealthTracker";
+
 
 export default function Home() {
   return (
@@ -69,7 +71,13 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Grid Layer 3: Execution & Sidebars */}
+      {/* Grid Layer 3: Health & Biometrics */}
+      <div className="mb-8">
+        <HealthTracker />
+      </div>
+
+      {/* Grid Layer 4: Execution & Sidebars */}
+
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
         <div className="xl:col-span-1 h-[600px]">
           <TodoList />
