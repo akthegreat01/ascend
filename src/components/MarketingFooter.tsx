@@ -73,7 +73,7 @@ export default function MarketingFooter() {
 
         <div className="pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
           <p className="text-gray-600 text-sm">
-            © {currentYear} Ascend Focus. All rights reserved.
+            © {currentYear} Ascend Focus. Created by <span className="text-white font-medium hover:text-emerald-500 transition-colors cursor-default">Akshath Kataria</span>. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
             <div className="flex items-center gap-2">

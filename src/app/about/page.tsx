@@ -57,9 +57,24 @@ export default function AboutPage() {
 
         <section className="pt-12 border-t border-white/10">
           <h2 className="text-3xl font-bold text-white mb-6">Our Commitment to Quality</h2>
-          <p className="text-gray-400 text-lg leading-relaxed">
+          <p className="text-gray-400 text-lg leading-relaxed mb-12">
             We are dedicated to providing high-value, original content and tools. Our platform is continuously evolving based on the latest research in human performance and user feedback. We don't just build software; we build systems for life.
           </p>
+
+          <div className="p-8 rounded-3xl bg-gradient-to-br from-white/[0.05] to-transparent border border-white/10">
+            <div className="flex flex-col md:flex-row items-center gap-8">
+              <div className="w-24 h-24 rounded-2xl bg-white/10 flex items-center justify-center text-3xl font-black text-white shrink-0">
+                AK
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-white mb-2">Meet the Founder</h3>
+                <p className="text-2xl font-black text-white mb-4 tracking-tight font-['Outfit']">Akshath Kataria</p>
+                <p className="text-gray-400 leading-relaxed">
+                  Akshath is a visionary developer and productivity enthusiast dedicated to building tools that empower individuals to reach their peak performance. Ascend Focus is the culmination of his passion for elegant design and effective systems.
+                </p>
+              </div>
+            </div>
+          </div>
         </section>
       </div>
     </div>

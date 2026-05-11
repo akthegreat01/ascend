@@ -99,6 +99,15 @@ export default function ContactPage() {
                 </div>
                 <div className="flex items-center gap-4 text-gray-400 hover:text-white transition-colors cursor-pointer group">
                   <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center group-hover:bg-white/10 transition-all">
+                    <Users size={20} />
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium text-gray-500 uppercase tracking-wider">Vision & Partnerships</p>
+                    <p className="text-lg">akshath@ascendfocus.com</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-4 text-gray-400 hover:text-white transition-colors cursor-pointer group">
+                  <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center group-hover:bg-white/10 transition-all">
                     <MessageSquare size={20} />
                   </div>
                   <div>

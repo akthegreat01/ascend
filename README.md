@@ -1,4 +1,12 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Ascend Focus
+
+The ultimate operating system for high performers and lifelong learners.
+
+**Created by Akshath Kataria**
+
+---
+
+This is a [Next.js](https://nextjs.org) project designed for maximum productivity and focus.
 
 ## Getting Started
 
