@@ -16,24 +16,24 @@ export default function DashboardHeader() {
     else setGreeting("Good evening");
 
     // Get name from storage
-    const savedName = localStorage.getItem("nexus_name");
+    const savedName = localStorage.getItem("ascend_name");
     if (savedName) setUserName(savedName);
 
     // Listen for name updates
     const handleProfileUpdate = () => {
-      const updatedName = localStorage.getItem("nexus_name");
+      const updatedName = localStorage.getItem("ascend_name");
       if (updatedName) setUserName(updatedName);
     };
-    window.addEventListener("nexus_profile_updated", handleProfileUpdate);
-    return () => window.removeEventListener("nexus_profile_updated", handleProfileUpdate);
+    window.addEventListener("ascend_profile_updated", handleProfileUpdate);
+    return () => window.removeEventListener("ascend_profile_updated", handleProfileUpdate);
   }, []);
 
   const openSettings = () => {
-    window.dispatchEvent(new Event("nexus_open_settings"));
+    window.dispatchEvent(new Event("ascend_open_settings"));
   };
 
   const openCommandMenu = () => {
-    window.dispatchEvent(new Event("nexus_open_command_menu"));
+    window.dispatchEvent(new Event("ascend_open_command_menu"));
   };
 
   return (

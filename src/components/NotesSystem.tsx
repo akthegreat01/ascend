@@ -20,7 +20,7 @@ export default function NotesSystem() {
   const [isFullView, setIsFullView] = useState(false);
 
   useEffect(() => {
-    const saved = localStorage.getItem("nexus_notes");
+    const saved = localStorage.getItem("ascend_notes");
     if (saved) {
       setNotes(JSON.parse(saved));
     } else {
@@ -34,7 +34,7 @@ export default function NotesSystem() {
 
   useEffect(() => {
     if (isLoaded) {
-      localStorage.setItem("nexus_notes", JSON.stringify(notes));
+      localStorage.setItem("ascend_notes", JSON.stringify(notes));
     }
   }, [notes, isLoaded]);
 

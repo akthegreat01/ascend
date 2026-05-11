@@ -15,14 +15,14 @@ export default function DailyBriefing() {
     const today = new Date().toISOString().split("T")[0];
 
     // Gather all data
-    const tasks = JSON.parse(localStorage.getItem("nexus_premium_tasks") || "[]");
-    const habits = JSON.parse(localStorage.getItem("nexus_habits") || "[]");
-    const habitRecords = JSON.parse(localStorage.getItem("nexus_habit_records") || "{}");
-    const goals = JSON.parse(localStorage.getItem("nexus_goals") || "[]");
-    const journal = JSON.parse(localStorage.getItem("nexus_journal") || "[]");
-    const focusDates = JSON.parse(localStorage.getItem("nexus_focus_dates") || "[]");
-    const wellness = JSON.parse(localStorage.getItem("nexus_wellness") || "{}");
-    const stats = JSON.parse(localStorage.getItem("nexus_stats") || "{}");
+    const tasks = JSON.parse(localStorage.getItem("ascend_premium_tasks") || "[]");
+    const habits = JSON.parse(localStorage.getItem("ascend_habits") || "[]");
+    const habitRecords = JSON.parse(localStorage.getItem("ascend_habit_records") || "{}");
+    const goals = JSON.parse(localStorage.getItem("ascend_goals") || "[]");
+    const journal = JSON.parse(localStorage.getItem("ascend_journal") || "[]");
+    const focusDates = JSON.parse(localStorage.getItem("ascend_focus_dates") || "[]");
+    const wellness = JSON.parse(localStorage.getItem("ascend_wellness") || "{}");
+    const stats = JSON.parse(localStorage.getItem("ascend_stats") || "{}");
 
     const pendingTasks = tasks.filter((t: any) => !t.completed && t.status !== "done");
     const completedToday = tasks.filter((t: any) => t.completed || t.status === "done").length;
@@ -66,7 +66,7 @@ export default function DailyBriefing() {
   if (hour >= 12 && hour < 17) { greeting = "Good afternoon"; emoji = "🌤"; }
   else if (hour >= 17) { greeting = "Good evening"; emoji = "🌙"; }
 
-  const name = typeof window !== "undefined" ? localStorage.getItem("nexus_name") || "User" : "User";
+  const name = typeof window !== "undefined" ? localStorage.getItem("ascend_name") || "User" : "User";
 
   const cards = [
     { label: "Pending Tasks", value: data.totalPending, icon: Target, color: "text-blue-400", link: "/tasks" },

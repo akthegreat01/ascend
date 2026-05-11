@@ -1,6 +1,6 @@
 {
-  "name": "Nexus Life OS",
-  "short_name": "Nexus",
+  "name": "Ascend Life OS",
+  "short_name": "Ascend",
   "description": "Premium Life Operating System",
   "start_url": "/",
   "display": "standalone",
@@ -9,12 +9,12 @@
   "orientation": "portrait",
   "icons": [
     {
-      "src": "https://upload.wikimedia.org/wikipedia/commons/4/41/Nexus_logo.png",
+      "src": "https://upload.wikimedia.org/wikipedia/commons/4/41/Ascend_logo.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "https://upload.wikimedia.org/wikipedia/commons/4/41/Nexus_logo.png",
+      "src": "https://upload.wikimedia.org/wikipedia/commons/4/41/Ascend_logo.png",
       "sizes": "512x512",
       "type": "image/png"
     }

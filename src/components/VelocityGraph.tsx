@@ -16,10 +16,10 @@ export default function VelocityGraph() {
   useEffect(() => {
     // Calculate velocity based on actual user data
     const calculateVelocity = () => {
-      const datesStr = localStorage.getItem("nexus_focus_dates");
+      const datesStr = localStorage.getItem("ascend_focus_dates");
       const focusDates = datesStr ? JSON.parse(datesStr) : [];
       
-      const recordsStr = localStorage.getItem("nexus_habit_records");
+      const recordsStr = localStorage.getItem("ascend_habit_records");
       const habitRecords = recordsStr ? JSON.parse(recordsStr) : {};
       
       const last7Days = [];

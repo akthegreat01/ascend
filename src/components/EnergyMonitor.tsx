@@ -11,8 +11,8 @@ export default function EnergyMonitor() {
 
   useEffect(() => {
     // Calculate synthetic "Energy" based on real local storage data
-    const statsStr = localStorage.getItem("nexus_stats");
-    const tasksStr = localStorage.getItem("nexus_premium_tasks");
+    const statsStr = localStorage.getItem("ascend_stats");
+    const tasksStr = localStorage.getItem("ascend_premium_tasks");
     
     let drain = 0;
     

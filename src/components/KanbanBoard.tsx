@@ -19,7 +19,7 @@ export default function KanbanBoard() {
   const [isAdding, setIsAdding] = useState(false);
 
   useEffect(() => {
-    const saved = localStorage.getItem("nexus_premium_tasks");
+    const saved = localStorage.getItem("ascend_premium_tasks");
     if (saved) {
       const parsed = JSON.parse(saved);
       // Migrate old tasks
@@ -34,7 +34,7 @@ export default function KanbanBoard() {
 
   useEffect(() => {
     if (isLoaded) {
-      localStorage.setItem("nexus_premium_tasks", JSON.stringify(tasks));
+      localStorage.setItem("ascend_premium_tasks", JSON.stringify(tasks));
     }
   }, [tasks, isLoaded]);
 

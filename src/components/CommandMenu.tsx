@@ -20,10 +20,10 @@ export default function CommandMenu() {
     const handleOpen = () => setOpen(true);
     
     document.addEventListener("keydown", down);
-    window.addEventListener("nexus_open_command_menu", handleOpen);
+    window.addEventListener("ascend_open_command_menu", handleOpen);
     return () => {
       document.removeEventListener("keydown", down);
-      window.removeEventListener("nexus_open_command_menu", handleOpen);
+      window.removeEventListener("ascend_open_command_menu", handleOpen);
     };
   }, []);
 
@@ -174,7 +174,7 @@ export default function CommandMenu() {
                   </Command.Item>
                   <Command.Item 
                     onSelect={() => runCommand(() => {
-                      window.dispatchEvent(new Event("nexus_open_settings"));
+                      window.dispatchEvent(new Event("ascend_open_settings"));
                     })}
                     className="flex items-center gap-3 px-3 py-2.5 rounded-xl cursor-pointer text-sm text-white aria-selected:bg-[#ffffff15] transition-colors"
                   >

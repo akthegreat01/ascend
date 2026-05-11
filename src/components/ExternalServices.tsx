@@ -20,7 +20,7 @@ export default function ExternalServices() {
   const [newUrl, setNewUrl] = useState("");
 
   useEffect(() => {
-    const saved = localStorage.getItem("nexus_services");
+    const saved = localStorage.getItem("ascend_services");
     if (saved) {
       setServices(JSON.parse(saved));
     } else {
@@ -34,7 +34,7 @@ export default function ExternalServices() {
 
   useEffect(() => {
     if (isLoaded) {
-      localStorage.setItem("nexus_services", JSON.stringify(services));
+      localStorage.setItem("ascend_services", JSON.stringify(services));
     }
   }, [services, isLoaded]);
 

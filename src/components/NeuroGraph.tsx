@@ -21,9 +21,9 @@ export default function NeuroGraph() {
 
   useEffect(() => {
     const loadData = () => {
-      const goals = JSON.parse(localStorage.getItem("nexus_goals") || "[]");
-      const habits = JSON.parse(localStorage.getItem("nexus_habits") || "[]");
-      const tasks = JSON.parse(localStorage.getItem("nexus_premium_tasks") || "[]");
+      const goals = JSON.parse(localStorage.getItem("ascend_goals") || "[]");
+      const habits = JSON.parse(localStorage.getItem("ascend_habits") || "[]");
+      const tasks = JSON.parse(localStorage.getItem("ascend_premium_tasks") || "[]");
       
       const newNodes: Node[] = [];
       const width = 800;

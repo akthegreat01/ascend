@@ -23,10 +23,10 @@ export default function StreakTracker() {
       return streak;
     };
 
-    const focus = calculateStreak("focus", () => JSON.parse(localStorage.getItem("nexus_focus_dates") || "[]"));
+    const focus = calculateStreak("focus", () => JSON.parse(localStorage.getItem("ascend_focus_dates") || "[]"));
 
     // Habits streak: days where at least one habit was done
-    const habitRecords = JSON.parse(localStorage.getItem("nexus_habit_records") || "{}");
+    const habitRecords = JSON.parse(localStorage.getItem("ascend_habit_records") || "{}");
     const habitDates = new Set<string>();
     Object.values(habitRecords).forEach((record: any) => {
       Object.keys(record).forEach(date => { if (record[date]) habitDates.add(date); });
@@ -34,16 +34,16 @@ export default function StreakTracker() {
     const habits = calculateStreak("habits", () => [...habitDates]);
 
     // Journal streak
-    const journal = JSON.parse(localStorage.getItem("nexus_journal") || "[]");
+    const journal = JSON.parse(localStorage.getItem("ascend_journal") || "[]");
     const journalDates = journal.map((e: any) => e.date?.split("T")?.[0]).filter(Boolean);
     const journalStreak = calculateStreak("journal", () => journalDates);
 
     // Login streak
-    const loginDates = JSON.parse(localStorage.getItem("nexus_login_dates") || "[]");
+    const loginDates = JSON.parse(localStorage.getItem("ascend_login_dates") || "[]");
     const today = new Date().toISOString().split("T")[0];
     if (!loginDates.includes(today)) {
       loginDates.push(today);
-      localStorage.setItem("nexus_login_dates", JSON.stringify(loginDates));
+      localStorage.setItem("ascend_login_dates", JSON.stringify(loginDates));
     }
     const loginStreak = calculateStreak("login", () => loginDates);
 

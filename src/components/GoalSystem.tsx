@@ -27,7 +27,7 @@ export default function GoalSystem() {
   const [newDesc, setNewDesc] = useState("");
 
   useEffect(() => {
-    const saved = localStorage.getItem("nexus_goals");
+    const saved = localStorage.getItem("ascend_goals");
     if (saved) {
       setGoals(JSON.parse(saved));
     } else {
@@ -38,7 +38,7 @@ export default function GoalSystem() {
 
   useEffect(() => {
     if (isLoaded) {
-      localStorage.setItem("nexus_goals", JSON.stringify(goals));
+      localStorage.setItem("ascend_goals", JSON.stringify(goals));
     }
   }, [goals, isLoaded]);
 

@@ -16,8 +16,8 @@ export default function ProtocolEngine() {
     setTimeout(() => {
       if (protocol === "deep_work") {
         // Example: Turn on DND, set soundscape, open focus forge
-        localStorage.setItem("nexus_active_sound", "neural_static");
-        window.dispatchEvent(new Event("nexus_sound_change"));
+        localStorage.setItem("ascend_active_sound", "neural_static");
+        window.dispatchEvent(new Event("ascend_sound_change"));
         router.push("/focus");
       } else if (protocol === "end_of_day") {
         router.push("/briefing");

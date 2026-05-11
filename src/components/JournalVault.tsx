@@ -20,7 +20,7 @@ export default function JournalVault() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    const saved = localStorage.getItem("nexus_journal");
+    const saved = localStorage.getItem("ascend_journal");
     if (saved) {
       setEntries(JSON.parse(saved));
     }
@@ -39,14 +39,14 @@ export default function JournalVault() {
     
     const updated = [newEntry, ...entries];
     setEntries(updated);
-    localStorage.setItem("nexus_journal", JSON.stringify(updated));
+    localStorage.setItem("ascend_journal", JSON.stringify(updated));
     setCurrentEntry("");
   };
 
   const deleteEntry = (id: string) => {
     const updated = entries.filter(e => e.id !== id);
     setEntries(updated);
-    localStorage.setItem("nexus_journal", JSON.stringify(updated));
+    localStorage.setItem("ascend_journal", JSON.stringify(updated));
   };
 
   if (!isLoaded) return <div className="animate-pulse h-[600px] w-full" />;

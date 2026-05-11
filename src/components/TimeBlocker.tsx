@@ -23,7 +23,7 @@ export default function TimeBlocker() {
   const [selectedColor, setSelectedColor] = useState(COLORS[0]);
 
   useEffect(() => {
-    const saved = localStorage.getItem("nexus_time_blocks");
+    const saved = localStorage.getItem("ascend_time_blocks");
     if (saved) {
       setBlocks(JSON.parse(saved));
     }
@@ -32,7 +32,7 @@ export default function TimeBlocker() {
 
   useEffect(() => {
     if (isLoaded) {
-      localStorage.setItem("nexus_time_blocks", JSON.stringify(blocks));
+      localStorage.setItem("ascend_time_blocks", JSON.stringify(blocks));
     }
   }, [blocks, isLoaded]);
 

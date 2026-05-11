@@ -9,7 +9,7 @@ export default function ActivityHeatmap() {
   const [streak, setStreak] = useState(0);
 
   useEffect(() => {
-    const savedDates = localStorage.getItem("nexus_focus_dates");
+    const savedDates = localStorage.getItem("ascend_focus_dates");
     if (savedDates) {
       const parsed = JSON.parse(savedDates);
       setDates(parsed);

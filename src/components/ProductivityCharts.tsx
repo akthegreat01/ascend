@@ -31,7 +31,7 @@ export default function ProductivityCharts() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   const loadStats = () => {
-    const statsStr = localStorage.getItem("nexus_stats");
+    const statsStr = localStorage.getItem("ascend_stats");
     if (statsStr) {
       setStats(JSON.parse(statsStr));
     }
@@ -40,8 +40,8 @@ export default function ProductivityCharts() {
 
   useEffect(() => {
     loadStats();
-    window.addEventListener("nexus_stats_updated", loadStats);
-    return () => window.removeEventListener("nexus_stats_updated", loadStats);
+    window.addEventListener("ascend_stats_updated", loadStats);
+    return () => window.removeEventListener("ascend_stats_updated", loadStats);
   }, []);
 
   if (!isLoaded) return <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 animate-pulse h-[400px]" />;

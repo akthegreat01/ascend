@@ -9,15 +9,15 @@ export default function SettingsModal() {
 
   useEffect(() => {
     const handleOpenSettings = () => setIsOpen(true);
-    window.addEventListener("nexus_open_settings", handleOpenSettings);
-    return () => window.removeEventListener("nexus_open_settings", handleOpenSettings);
+    window.addEventListener("ascend_open_settings", handleOpenSettings);
+    return () => window.removeEventListener("ascend_open_settings", handleOpenSettings);
   }, []);
 
   const exportData = () => {
     const data: Record<string, string> = {};
     for (let i = 0; i < localStorage.length; i++) {
       const key = localStorage.key(i);
-      if (key && key.startsWith("nexus_")) {
+      if (key && key.startsWith("ascend_")) {
         data[key] = localStorage.getItem(key) || "";
       }
     }
@@ -26,7 +26,7 @@ export default function SettingsModal() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `nexus_backup_${new Date().toISOString().split('T')[0]}.json`;
+    a.download = `ascend_backup_${new Date().toISOString().split('T')[0]}.json`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -42,7 +42,7 @@ export default function SettingsModal() {
       try {
         const data = JSON.parse(event.target?.result as string);
         Object.keys(data).forEach((key) => {
-          if (key.startsWith("nexus_")) {
+          if (key.startsWith("ascend_")) {
             localStorage.setItem(key, data[key]);
           }
         });
@@ -62,10 +62,10 @@ export default function SettingsModal() {
   const [currency, setCurrency] = useState("USD");
 
   useEffect(() => {
-    const savedName = localStorage.getItem("nexus_name");
-    const savedTheme = localStorage.getItem("nexus_theme");
-    const savedWebhook = localStorage.getItem("nexus_webhook");
-    const savedCurrency = localStorage.getItem("nexus_currency");
+    const savedName = localStorage.getItem("ascend_name");
+    const savedTheme = localStorage.getItem("ascend_theme");
+    const savedWebhook = localStorage.getItem("ascend_webhook");
+    const savedCurrency = localStorage.getItem("ascend_currency");
     
     if (savedName) setName(savedName);
     if (savedWebhook) setWebhookUrl(savedWebhook);
@@ -90,12 +90,12 @@ export default function SettingsModal() {
   }, [isOpen]);
 
   const saveSettings = () => {
-    localStorage.setItem("nexus_name", name);
-    localStorage.setItem("nexus_theme", theme);
-    localStorage.setItem("nexus_webhook", webhookUrl);
-    localStorage.setItem("nexus_currency", currency);
+    localStorage.setItem("ascend_name", name);
+    localStorage.setItem("ascend_theme", theme);
+    localStorage.setItem("ascend_webhook", webhookUrl);
+    localStorage.setItem("ascend_currency", currency);
     document.documentElement.style.setProperty('--color-accent', theme);
-    window.dispatchEvent(new Event("nexus_profile_updated"));
+    window.dispatchEvent(new Event("ascend_profile_updated"));
     setIsOpen(false);
   };
 
@@ -316,7 +316,7 @@ export default function SettingsModal() {
                           if (confirm("Are you absolutely sure? This will wipe your entire Ascend OS data.")) {
                             for (let i = localStorage.length - 1; i >= 0; i--) {
                               const key = localStorage.key(i);
-                              if (key && key.startsWith("nexus_")) {
+                              if (key && key.startsWith("ascend_")) {
                                 localStorage.removeItem(key);
                               }
                             }

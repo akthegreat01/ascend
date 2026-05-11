@@ -18,7 +18,7 @@ export default function VisionBoard() {
   const [newCaption, setNewCaption] = useState("");
 
   useEffect(() => {
-    const saved = localStorage.getItem("nexus_vision");
+    const saved = localStorage.getItem("ascend_vision");
     if (saved) {
       setImages(JSON.parse(saved));
     } else {
@@ -33,7 +33,7 @@ export default function VisionBoard() {
 
   useEffect(() => {
     if (isLoaded) {
-      localStorage.setItem("nexus_vision", JSON.stringify(images));
+      localStorage.setItem("ascend_vision", JSON.stringify(images));
     }
   }, [images, isLoaded]);
 

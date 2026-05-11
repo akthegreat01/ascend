@@ -1,7 +1,7 @@
 "use client";
 
 interface AdSlotProps {
-  format?: "horizontal" | "square" | "vertical";
+  format?: "horizontal" | "square" | "vertical" | "sidebar";
   className?: string;
 }
 
@@ -10,6 +10,7 @@ export default function AdSlot({ format = "horizontal", className = "" }: AdSlot
     horizontal: "w-full h-[90px]",
     square: "w-full h-[250px]",
     vertical: "w-full h-[600px]",
+    sidebar: "w-full h-[300px]",
   };
 
   return (

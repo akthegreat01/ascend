@@ -12,7 +12,7 @@ export default function WellnessWidget() {
   const today = new Date().toISOString().split("T")[0];
 
   useEffect(() => {
-    const saved = localStorage.getItem("nexus_wellness");
+    const saved = localStorage.getItem("ascend_wellness");
     if (saved) {
       const data = JSON.parse(saved);
       if (data.date === today) {
@@ -26,7 +26,7 @@ export default function WellnessWidget() {
   const save = (w: number, s: number) => {
     setWater(w);
     setSleep(s);
-    localStorage.setItem("nexus_wellness", JSON.stringify({ date: today, water: w, sleep: s }));
+    localStorage.setItem("ascend_wellness", JSON.stringify({ date: today, water: w, sleep: s }));
   };
 
   if (!isLoaded) return null;

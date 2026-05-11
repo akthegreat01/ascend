@@ -31,7 +31,7 @@ export default function HobbyTracker() {
   const [newIcon, setNewIcon] = useState("general");
 
   useEffect(() => {
-    const saved = localStorage.getItem("nexus_hobbies");
+    const saved = localStorage.getItem("ascend_hobbies");
     if (saved) {
       setHobbies(JSON.parse(saved));
     } else {
@@ -42,7 +42,7 @@ export default function HobbyTracker() {
 
   useEffect(() => {
     if (isLoaded) {
-      localStorage.setItem("nexus_hobbies", JSON.stringify(hobbies));
+      localStorage.setItem("ascend_hobbies", JSON.stringify(hobbies));
     }
   }, [hobbies, isLoaded]);
 

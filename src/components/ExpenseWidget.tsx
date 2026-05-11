@@ -21,14 +21,14 @@ export default function ExpenseWidget() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    const saved = localStorage.getItem("nexus_expenses");
+    const saved = localStorage.getItem("ascend_expenses");
     if (saved) setEntries(JSON.parse(saved));
     setIsLoaded(true);
   }, []);
 
   const save = (updated: Expense[]) => {
     setEntries(updated);
-    localStorage.setItem("nexus_expenses", JSON.stringify(updated));
+    localStorage.setItem("ascend_expenses", JSON.stringify(updated));
   };
 
   const addEntry = () => {

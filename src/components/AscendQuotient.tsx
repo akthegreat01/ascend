@@ -13,8 +13,8 @@ export default function AscendQuotient() {
     let score = 0;
 
     // 1. Habits (Max 30 points)
-    const habitRecords = JSON.parse(localStorage.getItem("nexus_habit_records") || "{}");
-    const habits = JSON.parse(localStorage.getItem("nexus_habits") || "[]");
+    const habitRecords = JSON.parse(localStorage.getItem("ascend_habit_records") || "{}");
+    const habits = JSON.parse(localStorage.getItem("ascend_habits") || "[]");
     if (habits.length > 0) {
       let done = 0;
       habits.forEach((h: any) => {
@@ -24,7 +24,7 @@ export default function AscendQuotient() {
     }
 
     // 2. Tasks (Max 30 points)
-    const tasks = JSON.parse(localStorage.getItem("nexus_premium_tasks") || "[]");
+    const tasks = JSON.parse(localStorage.getItem("ascend_premium_tasks") || "[]");
     const tasksToday = tasks.filter((t: any) => t.date === today || t.completedAt?.startsWith(today));
     if (tasksToday.length > 0) {
       const completed = tasksToday.filter((t: any) => t.completed || t.status === "done").length;
@@ -32,14 +32,14 @@ export default function AscendQuotient() {
     }
 
     // 3. Focus (Max 20 points)
-    const focusDates = JSON.parse(localStorage.getItem("nexus_focus_dates") || "[]");
+    const focusDates = JSON.parse(localStorage.getItem("ascend_focus_dates") || "[]");
     if (focusDates.includes(today)) score += 20;
 
     // 4. Journaling & Wellness (Max 20 points)
-    const journal = JSON.parse(localStorage.getItem("nexus_journal") || "[]");
+    const journal = JSON.parse(localStorage.getItem("ascend_journal") || "[]");
     if (journal.some((j: any) => j.date === today)) score += 10;
     
-    const wellness = JSON.parse(localStorage.getItem("nexus_wellness") || "{}");
+    const wellness = JSON.parse(localStorage.getItem("ascend_wellness") || "{}");
     if (wellness.date === today && wellness.water >= 6) score += 10;
 
     setAq(Math.round(score));
@@ -49,7 +49,7 @@ export default function AscendQuotient() {
     calculateAQ();
     setIsLoaded(true);
     
-    const events = ["nexus_habit_updated", "nexus_task_updated", "nexus_focus_updated", "nexus_journal_updated", "nexus_wellness_updated"];
+    const events = ["ascend_habit_updated", "ascend_task_updated", "ascend_focus_updated", "ascend_journal_updated", "ascend_wellness_updated"];
     events.forEach(e => window.addEventListener(e, calculateAQ));
     return () => events.forEach(e => window.removeEventListener(e, calculateAQ));
   }, []);

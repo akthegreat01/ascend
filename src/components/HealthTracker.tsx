@@ -40,7 +40,7 @@ export default function HealthTracker() {
   const todayStr = new Date().toISOString().split("T")[0];
 
   useEffect(() => {
-    const saved = localStorage.getItem("nexus_health_data");
+    const saved = localStorage.getItem("ascend_health_data");
     if (saved) {
       setData(JSON.parse(saved));
     }
@@ -56,13 +56,13 @@ export default function HealthTracker() {
       }
     };
     setData(newData);
-    localStorage.setItem("nexus_health_data", JSON.stringify(newData));
+    localStorage.setItem("ascend_health_data", JSON.stringify(newData));
     setShowInput(false);
     setInputWeight("");
     setInputCalories("");
     
     // Trigger custom event for other components if needed
-    window.dispatchEvent(new Event("nexus_health_updated"));
+    window.dispatchEvent(new Event("ascend_health_updated"));
   };
 
   const getDaysInMonth = (year: number, month: number) => {
@@ -114,7 +114,7 @@ export default function HealthTracker() {
         <div>
           <h2 className="text-3xl font-light text-white font-['Outfit'] mb-2 flex items-center gap-3">
             <Calendar className="text-[#66fcf1]" size={28} />
-            Biometric Nexus
+            Biometric Ascend
           </h2>
           <p className="text-xs text-[#a1a1aa] uppercase tracking-[0.3em] font-bold">Monthly Synchronization Log</p>
         </div>

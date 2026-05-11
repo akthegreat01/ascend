@@ -27,14 +27,14 @@ export default function WorkoutLog() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    const saved = localStorage.getItem("nexus_workouts");
+    const saved = localStorage.getItem("ascend_workouts");
     if (saved) setEntries(JSON.parse(saved));
     setIsLoaded(true);
   }, []);
 
   const save = (updated: WorkoutEntry[]) => {
     setEntries(updated);
-    localStorage.setItem("nexus_workouts", JSON.stringify(updated));
+    localStorage.setItem("ascend_workouts", JSON.stringify(updated));
   };
 
   const addExercise = () => {

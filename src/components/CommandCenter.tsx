@@ -21,14 +21,14 @@ export default function CommandCenter() {
   }, []);
 
   const toggleHabit = (habitId: string) => {
-    const savedRecords = localStorage.getItem("nexus_habit_records");
+    const savedRecords = localStorage.getItem("ascend_habit_records");
     const records = savedRecords ? JSON.parse(savedRecords) : {};
     const today = new Date().toISOString().split('T')[0];
     
     if (!records[habitId]) records[habitId] = {};
     records[habitId][today] = !records[habitId][today];
     
-    localStorage.setItem("nexus_habit_records", JSON.stringify(records));
+    localStorage.setItem("ascend_habit_records", JSON.stringify(records));
     // Trigger update
     const updatedHabits = activeHabits.map(h => {
       if (h.id === habitId) {
@@ -37,13 +37,13 @@ export default function CommandCenter() {
       return h;
     });
     setActiveHabits(updatedHabits);
-    window.dispatchEvent(new Event("nexus_habit_updated"));
+    window.dispatchEvent(new Event("ascend_habit_updated"));
   };
 
   useEffect(() => {
     const loadHabits = () => {
-      const savedHabits = localStorage.getItem("nexus_habits");
-      const savedRecords = localStorage.getItem("nexus_habit_records");
+      const savedHabits = localStorage.getItem("ascend_habits");
+      const savedRecords = localStorage.getItem("ascend_habit_records");
       const records = savedRecords ? JSON.parse(savedRecords) : {};
       const today = new Date().toISOString().split('T')[0];
 
@@ -61,8 +61,8 @@ export default function CommandCenter() {
     };
     
     loadHabits();
-    window.addEventListener("nexus_habit_updated", loadHabits);
-    return () => window.removeEventListener("nexus_habit_updated", loadHabits);
+    window.addEventListener("ascend_habit_updated", loadHabits);
+    return () => window.removeEventListener("ascend_habit_updated", loadHabits);
   }, []);
 
   const quickSaveJournal = () => {
@@ -73,7 +73,7 @@ export default function CommandCenter() {
     
     // AI Smart Routing logic
     if (lowerText.startsWith("task:") || lowerText.startsWith("todo:") || lowerText.startsWith("remind me to") || lowerText.startsWith("buy ")) {
-      const savedTasks = localStorage.getItem("nexus_premium_tasks");
+      const savedTasks = localStorage.getItem("ascend_premium_tasks");
       const tasks = savedTasks ? JSON.parse(savedTasks) : [];
       
       let cleanText = text;
@@ -88,11 +88,11 @@ export default function CommandCenter() {
         priority: (lowerText.includes("urgent") || lowerText.includes("asap")) ? "high" : "medium"
       };
       
-      localStorage.setItem("nexus_premium_tasks", JSON.stringify([newTask, ...tasks]));
+      localStorage.setItem("ascend_premium_tasks", JSON.stringify([newTask, ...tasks]));
       alert("AI Routed: Added to Tasks ✅");
       
     } else if (lowerText.startsWith("goal:") || lowerText.startsWith("target:")) {
-      const savedGoals = localStorage.getItem("nexus_goals");
+      const savedGoals = localStorage.getItem("ascend_goals");
       const goals = savedGoals ? JSON.parse(savedGoals) : [];
       
       let cleanText = text;
@@ -108,11 +108,11 @@ export default function CommandCenter() {
         milestones: []
       };
       
-      localStorage.setItem("nexus_goals", JSON.stringify([newGoal, ...goals]));
+      localStorage.setItem("ascend_goals", JSON.stringify([newGoal, ...goals]));
       alert("AI Routed: Added to Strategic Goals 🎯");
       
     } else {
-      const saved = localStorage.getItem("nexus_journal");
+      const saved = localStorage.getItem("ascend_journal");
       const entries = saved ? JSON.parse(saved) : [];
       
       const newEntry = {
@@ -122,7 +122,7 @@ export default function CommandCenter() {
         mood: "⚡️"
       };
       
-      localStorage.setItem("nexus_journal", JSON.stringify([newEntry, ...entries]));
+      localStorage.setItem("ascend_journal", JSON.stringify([newEntry, ...entries]));
       alert("Memory sealed to Vault 🧠");
     }
     

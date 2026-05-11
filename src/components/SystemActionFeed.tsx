@@ -20,7 +20,7 @@ export default function SystemActionFeed() {
       const feed: Action[] = [];
       
       // Pull from focus records
-      const focusDates = localStorage.getItem("nexus_focus_dates");
+      const focusDates = localStorage.getItem("ascend_focus_dates");
       if (focusDates) {
         const dates = JSON.parse(focusDates);
         dates.slice(-2).forEach((d: string) => {
@@ -35,7 +35,7 @@ export default function SystemActionFeed() {
       }
 
       // Pull from tasks
-      const tasks = localStorage.getItem("nexus_premium_tasks");
+      const tasks = localStorage.getItem("ascend_premium_tasks");
       if (tasks) {
         const parsed = JSON.parse(tasks);
         parsed.filter((t: any) => t.completed).slice(0, 3).forEach((t: any) => {
@@ -50,7 +50,7 @@ export default function SystemActionFeed() {
       }
 
       // Pull from wealth
-      const transactions = localStorage.getItem("nexus_transactions");
+      const transactions = localStorage.getItem("ascend_transactions");
       if (transactions) {
         const parsed = JSON.parse(transactions);
         parsed.slice(0, 2).forEach((t: any) => {

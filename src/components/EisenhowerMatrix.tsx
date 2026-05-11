@@ -24,14 +24,14 @@ export default function EisenhowerMatrix() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    const saved = localStorage.getItem("nexus_eisenhower");
+    const saved = localStorage.getItem("ascend_eisenhower");
     if (saved) setTasks(JSON.parse(saved));
     setIsLoaded(true);
   }, []);
 
   const save = (updated: MatrixTask[]) => {
     setTasks(updated);
-    localStorage.setItem("nexus_eisenhower", JSON.stringify(updated));
+    localStorage.setItem("ascend_eisenhower", JSON.stringify(updated));
   };
 
   const addTask = (quadrant: MatrixTask["quadrant"]) => {

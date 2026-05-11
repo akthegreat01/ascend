@@ -11,14 +11,14 @@ export default function Scratchpad() {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
-    const saved = localStorage.getItem("nexus_scratchpad");
+    const saved = localStorage.getItem("ascend_scratchpad");
     if (saved) setContent(saved);
     setIsLoaded(true);
   }, []);
 
   useEffect(() => {
     if (isLoaded) {
-      localStorage.setItem("nexus_scratchpad", content);
+      localStorage.setItem("ascend_scratchpad", content);
     }
   }, [content, isLoaded]);
 

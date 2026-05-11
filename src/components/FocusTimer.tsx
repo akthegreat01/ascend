@@ -94,7 +94,7 @@ export default function FocusTimer() {
       }
       
       // Log the completed session to local storage
-      const statsStr = localStorage.getItem("nexus_stats");
+      const statsStr = localStorage.getItem("ascend_stats");
       const stats = statsStr ? JSON.parse(statsStr) : { workTime: 0, breakTime: 0 };
       
       if (mode === "Pomodoro") {
@@ -102,15 +102,15 @@ export default function FocusTimer() {
         
         // Log the date for the streak feature
         const today = new Date().toISOString().split('T')[0];
-        const datesStr = localStorage.getItem("nexus_focus_dates");
+        const datesStr = localStorage.getItem("ascend_focus_dates");
         const dates = datesStr ? JSON.parse(datesStr) : [];
         if (!dates.includes(today)) {
           dates.push(today);
-          localStorage.setItem("nexus_focus_dates", JSON.stringify(dates));
+          localStorage.setItem("ascend_focus_dates", JSON.stringify(dates));
         }
 
         // Fire Global Webhook Integration (Zapier / Discord)
-        const webhookUrl = localStorage.getItem("nexus_webhook");
+        const webhookUrl = localStorage.getItem("ascend_webhook");
         if (webhookUrl && webhookUrl.trim().length > 10) {
           try {
             fetch(webhookUrl, {
@@ -118,7 +118,7 @@ export default function FocusTimer() {
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({
                 content: `🚀 **Ascend Level Up!** Just completed a ${MODES["Pomodoro"]/60}-minute Deep Work session.`,
-                username: localStorage.getItem("nexus_name") || "Ascend User",
+                username: localStorage.getItem("ascend_name") || "Ascend User",
                 avatar_url: "https://i.imgur.com/AfFp7pu.png",
                 event: "pomodoro_completed",
                 duration: MODES["Pomodoro"]
@@ -130,9 +130,9 @@ export default function FocusTimer() {
         stats.breakTime += MODES[mode];
       }
       
-      localStorage.setItem("nexus_stats", JSON.stringify(stats));
+      localStorage.setItem("ascend_stats", JSON.stringify(stats));
       // Dispatch custom event to update other components
-      window.dispatchEvent(new Event("nexus_stats_updated"));
+      window.dispatchEvent(new Event("ascend_stats_updated"));
     }
 
     return () => {

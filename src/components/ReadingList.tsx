@@ -38,14 +38,14 @@ export default function ReadingList() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    const saved = localStorage.getItem("nexus_reading_list");
+    const saved = localStorage.getItem("ascend_reading_list");
     if (saved) setItems(JSON.parse(saved));
     setIsLoaded(true);
   }, []);
 
   const save = (updated: ReadingItem[]) => {
     setItems(updated);
-    localStorage.setItem("nexus_reading_list", JSON.stringify(updated));
+    localStorage.setItem("ascend_reading_list", JSON.stringify(updated));
   };
 
   const addItem = () => {

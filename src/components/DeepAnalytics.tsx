@@ -15,9 +15,9 @@ export default function DeepAnalytics() {
   const [consistency, setConsistency] = useState(0);
 
   useEffect(() => {
-    const statsStr = localStorage.getItem("nexus_stats");
-    const tasksStr = localStorage.getItem("nexus_premium_tasks");
-    const datesStr = localStorage.getItem("nexus_focus_dates");
+    const statsStr = localStorage.getItem("ascend_stats");
+    const tasksStr = localStorage.getItem("ascend_premium_tasks");
+    const datesStr = localStorage.getItem("ascend_focus_dates");
     
     if (statsStr) setStats(JSON.parse(statsStr));
     

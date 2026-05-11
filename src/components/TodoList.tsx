@@ -78,8 +78,8 @@ export default function TodoList() {
   }, []);
 
   useEffect(() => {
-    const savedToday = localStorage.getItem("nexus_premium_tasks");
-    const savedTomorrow = localStorage.getItem("nexus_premium_tasks_tomorrow");
+    const savedToday = localStorage.getItem("ascend_premium_tasks");
+    const savedTomorrow = localStorage.getItem("ascend_premium_tasks_tomorrow");
     
     if (savedToday) setTasks(JSON.parse(savedToday));
     else setTasks(initialTasks);
@@ -91,8 +91,8 @@ export default function TodoList() {
 
   useEffect(() => {
     if (isLoaded) {
-      localStorage.setItem("nexus_premium_tasks", JSON.stringify(tasks));
-      localStorage.setItem("nexus_premium_tasks_tomorrow", JSON.stringify(tomorrowTasks));
+      localStorage.setItem("ascend_premium_tasks", JSON.stringify(tasks));
+      localStorage.setItem("ascend_premium_tasks_tomorrow", JSON.stringify(tomorrowTasks));
     }
   }, [tasks, tomorrowTasks, isLoaded]);
 

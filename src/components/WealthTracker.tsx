@@ -40,25 +40,25 @@ export default function WealthTracker() {
   };
 
   const loadCurrency = () => {
-    const saved = localStorage.getItem("nexus_currency") || "USD";
+    const saved = localStorage.getItem("ascend_currency") || "USD";
     setCurrency(saved);
   };
 
   useEffect(() => {
     loadCurrency();
-    window.addEventListener("nexus_profile_updated", loadCurrency);
-    return () => window.removeEventListener("nexus_profile_updated", loadCurrency);
+    window.addEventListener("ascend_profile_updated", loadCurrency);
+    return () => window.removeEventListener("ascend_profile_updated", loadCurrency);
   }, []);
 
   useEffect(() => {
-    const saved = localStorage.getItem("nexus_wealth");
+    const saved = localStorage.getItem("ascend_wealth");
     if (saved) setTransactions(JSON.parse(saved));
     setIsLoaded(true);
   }, []);
 
   useEffect(() => {
     if (isLoaded) {
-      localStorage.setItem("nexus_wealth", JSON.stringify(transactions));
+      localStorage.setItem("ascend_wealth", JSON.stringify(transactions));
     }
   }, [transactions, isLoaded]);
 

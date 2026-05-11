@@ -57,8 +57,8 @@ export default function HabitSheet() {
   }, []);
 
   useEffect(() => {
-    const savedHabits = localStorage.getItem("nexus_habits");
-    const savedRecords = localStorage.getItem("nexus_habit_records");
+    const savedHabits = localStorage.getItem("ascend_habits");
+    const savedRecords = localStorage.getItem("ascend_habit_records");
     if (savedHabits) {
       setHabits(JSON.parse(savedHabits));
     } else {
@@ -72,8 +72,8 @@ export default function HabitSheet() {
 
   useEffect(() => {
     if (isLoaded) {
-      localStorage.setItem("nexus_habits", JSON.stringify(habits));
-      localStorage.setItem("nexus_habit_records", JSON.stringify(records));
+      localStorage.setItem("ascend_habits", JSON.stringify(habits));
+      localStorage.setItem("ascend_habit_records", JSON.stringify(records));
     }
   }, [habits, records, isLoaded]);
 

@@ -11,7 +11,7 @@ const navGroups = [
   {
     label: "Core",
     items: [
-      { name: "Dashboard", href: "/", icon: LayoutDashboard },
+      { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
       { name: "Daily Briefing", href: "/briefing", icon: Sunrise },
       { name: "Focus Timer", href: "/timer", icon: Timer },
       { name: "Focus Sounds", href: "/focus-sounds", icon: Music },
@@ -67,7 +67,7 @@ const navGroups = [
   {
     label: "Learn",
     items: [
-      { name: "Guides", href: "/learn", icon: BookHeart },
+      { name: "Library", href: "/blog", icon: BookHeart },
     ]
   }
 ];
@@ -78,18 +78,18 @@ export default function Sidebar() {
 
   useEffect(() => {
     const loadProfile = () => {
-      const savedName = localStorage.getItem("nexus_name");
+      const savedName = localStorage.getItem("ascend_name");
       if (savedName) setName(savedName);
       
-      const savedTheme = localStorage.getItem("nexus_theme");
+      const savedTheme = localStorage.getItem("ascend_theme");
       if (savedTheme) {
         document.documentElement.style.setProperty('--color-accent', savedTheme);
       }
     };
     
     loadProfile();
-    window.addEventListener("nexus_profile_updated", loadProfile);
-    return () => window.removeEventListener("nexus_profile_updated", loadProfile);
+    window.addEventListener("ascend_profile_updated", loadProfile);
+    return () => window.removeEventListener("ascend_profile_updated", loadProfile);
   }, []);
 
   return (
@@ -101,7 +101,7 @@ export default function Sidebar() {
         <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-white to-gray-300 flex items-center justify-center shadow-[0_0_20px_rgba(255,255,255,0.4)] group-hover:shadow-[0_0_30px_rgba(255,255,255,0.6)] group-hover:scale-105 transition-all duration-300 relative z-10">
           <span className="text-black font-black text-xl leading-none tracking-tighter">A</span>
         </div>
-        <span className="text-lg font-bold tracking-[0.2em] text-white font-['Outfit'] relative z-10 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-gray-500 transition-all duration-300">ASCEND</span>
+        <span className="text-lg font-bold tracking-[0.2em] text-white font-['Outfit'] relative z-10 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-gray-500 transition-all duration-300">ASCEND FOCUS</span>
       </div>
 
       {/* Global Search Mockup */}
@@ -164,7 +164,7 @@ export default function Sidebar() {
         <SettingsModal />
         
         <button 
-          onClick={() => window.dispatchEvent(new Event("nexus_open_settings"))}
+          onClick={() => window.dispatchEvent(new Event("ascend_open_settings"))}
           className="w-full px-3 py-3 rounded-xl flex items-center gap-3 group transition-all hover:bg-white/[0.03] mt-2 border border-transparent hover:border-white/10 hover:shadow-[0_0_20px_rgba(255,255,255,0.05)] relative overflow-hidden"
         >
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:animate-[shimmer_2s_infinite] pointer-events-none" />

@@ -9,7 +9,7 @@ export default function YearMap() {
 
   useEffect(() => {
     // Read the focus dates from local storage
-    const datesStr = localStorage.getItem("nexus_focus_dates");
+    const datesStr = localStorage.getItem("ascend_focus_dates");
     const mapData: Record<string, number> = {};
     
     // Override with actual real user data

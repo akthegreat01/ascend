@@ -19,7 +19,7 @@ export default function CountdownWidget() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    const saved = localStorage.getItem("nexus_countdowns");
+    const saved = localStorage.getItem("ascend_countdowns");
     if (saved) setCountdowns(JSON.parse(saved));
     setIsLoaded(true);
 
@@ -29,7 +29,7 @@ export default function CountdownWidget() {
 
   const save = (updated: Countdown[]) => {
     setCountdowns(updated);
-    localStorage.setItem("nexus_countdowns", JSON.stringify(updated));
+    localStorage.setItem("ascend_countdowns", JSON.stringify(updated));
   };
 
   const addCountdown = () => {

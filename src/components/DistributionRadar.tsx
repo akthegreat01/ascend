@@ -22,7 +22,7 @@ export default function DistributionRadar() {
 
   useEffect(() => {
     // Read user data from localStorage
-    const hobbiesStr = localStorage.getItem("nexus_hobbies");
+    const hobbiesStr = localStorage.getItem("ascend_hobbies");
     let mind = 0, body = 0, wealth = 0, learning = 0, social = 0;
     
     if (hobbiesStr) {

@@ -18,14 +18,14 @@ export default function MediaVault() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    const saved = localStorage.getItem("nexus_media_vault");
+    const saved = localStorage.getItem("ascend_media_vault");
     if (saved) setItems(JSON.parse(saved));
     setIsLoaded(true);
   }, []);
 
   useEffect(() => {
     if (isLoaded) {
-      localStorage.setItem("nexus_media_vault", JSON.stringify(items));
+      localStorage.setItem("ascend_media_vault", JSON.stringify(items));
     }
   }, [items, isLoaded]);
 

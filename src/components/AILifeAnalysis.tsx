@@ -10,9 +10,9 @@ export default function AILifeAnalysis() {
 
   useEffect(() => {
     // Read user data to generate "AI" insights
-    const statsStr = localStorage.getItem("nexus_stats");
-    const tasksStr = localStorage.getItem("nexus_premium_tasks");
-    const datesStr = localStorage.getItem("nexus_focus_dates");
+    const statsStr = localStorage.getItem("ascend_stats");
+    const tasksStr = localStorage.getItem("ascend_premium_tasks");
+    const datesStr = localStorage.getItem("ascend_focus_dates");
 
     const generatedInsights: string[] = [];
 

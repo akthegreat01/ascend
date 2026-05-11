@@ -9,7 +9,7 @@ export default function KPICards() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   const loadStats = () => {
-    const statsStr = localStorage.getItem("nexus_stats");
+    const statsStr = localStorage.getItem("ascend_stats");
     if (statsStr) {
       setStats(JSON.parse(statsStr));
     }
@@ -18,8 +18,8 @@ export default function KPICards() {
 
   useEffect(() => {
     loadStats();
-    window.addEventListener("nexus_stats_updated", loadStats);
-    return () => window.removeEventListener("nexus_stats_updated", loadStats);
+    window.addEventListener("ascend_stats_updated", loadStats);
+    return () => window.removeEventListener("ascend_stats_updated", loadStats);
   }, []);
 
   const formatHours = (seconds: number) => {
@@ -32,7 +32,7 @@ export default function KPICards() {
   const calculateConsistency = () => {
     if (typeof window === "undefined") return "0 Days";
     
-    const datesStr = localStorage.getItem("nexus_focus_dates");
+    const datesStr = localStorage.getItem("ascend_focus_dates");
     if (!datesStr) return "0 Days";
     const dates: string[] = JSON.parse(datesStr);
     

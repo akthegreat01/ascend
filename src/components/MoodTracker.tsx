@@ -28,7 +28,7 @@ export default function MoodTracker() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    const saved = localStorage.getItem("nexus_mood_entries");
+    const saved = localStorage.getItem("ascend_mood_entries");
     if (saved) {
       const parsed = JSON.parse(saved);
       setEntries(parsed);
@@ -54,7 +54,7 @@ export default function MoodTracker() {
 
     const updated = [newEntry, ...entries.filter(e => e.date !== today)];
     setEntries(updated);
-    localStorage.setItem("nexus_mood_entries", JSON.stringify(updated));
+    localStorage.setItem("ascend_mood_entries", JSON.stringify(updated));
     setTodayLogged(true);
     setSelectedMood(null);
     setNote("");

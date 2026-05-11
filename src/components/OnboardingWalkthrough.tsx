@@ -44,7 +44,7 @@ export default function OnboardingWalkthrough() {
 
   useEffect(() => {
     setIsMounted(true);
-    const hasCompleted = localStorage.getItem("nexus_onboarding_completed");
+    const hasCompleted = localStorage.getItem("ascend_onboarding_completed");
     if (!hasCompleted) {
       setIsOpen(true);
     }
@@ -59,7 +59,7 @@ export default function OnboardingWalkthrough() {
   };
 
   const completeOnboarding = () => {
-    localStorage.setItem("nexus_onboarding_completed", "true");
+    localStorage.setItem("ascend_onboarding_completed", "true");
     setIsOpen(false);
   };
 

@@ -16,8 +16,8 @@ export default function HabitTracker() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    const savedHabits = localStorage.getItem("nexus_habits");
-    const savedRecords = localStorage.getItem("nexus_habit_records");
+    const savedHabits = localStorage.getItem("ascend_habits");
+    const savedRecords = localStorage.getItem("ascend_habit_records");
     
     if (savedHabits && savedRecords) {
       const parsedHabits = JSON.parse(savedHabits);

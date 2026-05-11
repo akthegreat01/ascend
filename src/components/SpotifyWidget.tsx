@@ -10,17 +10,17 @@ export default function SpotifyWidget() {
   const [spotifyUrl, setSpotifyUrl] = useState("https://open.spotify.com/embed/playlist/37i9dQZF1DX8Ueb9CidYvC");
 
   useEffect(() => {
-    const saved = localStorage.getItem("nexus_spotify_url");
+    const saved = localStorage.getItem("ascend_spotify_url");
     if (saved) setSpotifyUrl(saved.includes('embed') ? saved : saved.replace('open.spotify.com/', 'open.spotify.com/embed/'));
     
-    const savedMode = localStorage.getItem("nexus_spotify_mode") as any;
+    const savedMode = localStorage.getItem("ascend_spotify_mode") as any;
     if (savedMode) setMode(savedMode);
   }, []);
 
   const toggleMode = () => {
     const newMode = mode === "cinematic" ? "embed" : "cinematic";
     setMode(newMode);
-    localStorage.setItem("nexus_spotify_mode", newMode);
+    localStorage.setItem("ascend_spotify_mode", newMode);
   };
 
   return (

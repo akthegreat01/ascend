@@ -20,13 +20,13 @@ export default function LifeDashboard() {
 
   useEffect(() => {
     // Calculate values from real data
-    const focusDates = JSON.parse(localStorage.getItem("nexus_focus_dates") || "[]");
-    const tasks = JSON.parse(localStorage.getItem("nexus_premium_tasks") || "[]");
-    const habits = JSON.parse(localStorage.getItem("nexus_habits") || "[]");
-    const habitRecords = JSON.parse(localStorage.getItem("nexus_habit_records") || "{}");
-    const goals = JSON.parse(localStorage.getItem("nexus_goals") || "[]");
-    const journal = JSON.parse(localStorage.getItem("nexus_journal") || "[]");
-    const workouts = JSON.parse(localStorage.getItem("nexus_workouts") || "[]");
+    const focusDates = JSON.parse(localStorage.getItem("ascend_focus_dates") || "[]");
+    const tasks = JSON.parse(localStorage.getItem("ascend_premium_tasks") || "[]");
+    const habits = JSON.parse(localStorage.getItem("ascend_habits") || "[]");
+    const habitRecords = JSON.parse(localStorage.getItem("ascend_habit_records") || "{}");
+    const goals = JSON.parse(localStorage.getItem("ascend_goals") || "[]");
+    const journal = JSON.parse(localStorage.getItem("ascend_journal") || "[]");
+    const workouts = JSON.parse(localStorage.getItem("ascend_workouts") || "[]");
 
     const completedTasks = tasks.filter((t: any) => t.completed).length;
     const totalTasks = tasks.length;

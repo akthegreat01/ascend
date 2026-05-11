@@ -41,5 +41,5 @@ yarn-error.log*
 next-env.d.ts
 
 # SSH Keys
-nexus_deploy_key
-nexus_deploy_key.pub
+ascend_deploy_key
+ascend_deploy_key.pub
