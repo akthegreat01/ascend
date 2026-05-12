@@ -200,19 +200,19 @@ export default function LandingPage() {
                 name: "Anonymous User",
                 role: "Verified Achiever",
                 text: "Ascend Focus is the only app that managed to get me off my phone and into a flow state. The velocity tracking is a game changer.",
-                avatar: "https://i.pravatar.cc/150?u=anonymous1"
+                avatar: "https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LqbHPxZ0WvgZATwWUXecS9EFRdKzU0S7.jpg"
               },
               {
                 name: "Anonymous User",
                 role: "Verified Achiever",
                 text: "The study techniques blog and the habit tracker have literally transformed my grades. I feel so much more in control.",
-                avatar: "https://i.pravatar.cc/150?u=anonymous2"
+                avatar: "https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LqbHPxZ0WvgZATwWUXecS9EFRdKzU0S7.jpg"
               },
               {
                 name: "Anonymous User",
                 role: "Verified Achiever",
                 text: "I've tried every productivity app. Ascend is the only one that feels like it was designed for how my brain actually works.",
-                avatar: "https://i.pravatar.cc/150?u=anonymous3"
+                avatar: "https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LqbHPxZ0WvgZATwWUXecS9EFRdKzU0S7.jpg"
               }
             ].map((t, i) => (
               <div key={i} className="p-10 rounded-[2.5rem] bg-white/[0.02] border border-white/5">
