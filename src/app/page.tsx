@@ -69,11 +69,11 @@ export default function LandingPage() {
             <div className="absolute -inset-1 bg-gradient-to-r from-white/20 via-white/5 to-white/20 rounded-[2.5rem] blur-xl opacity-50" />
             <div className="relative rounded-[2rem] overflow-hidden border border-white/10 bg-[#0a0a0a] shadow-2xl">
               <Image 
-                src="https://images.unsplash.com/photo-1542744094-3a31f272c490?auto=format&fit=crop&q=80&w=1200" 
+                src="/images/dashboard-hero.png" 
                 alt="Ascend Focus Dashboard" 
                 width={1200} 
                 height={800}
-                className="w-full opacity-80"
+                className="w-full opacity-90"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent" />
             </div>
