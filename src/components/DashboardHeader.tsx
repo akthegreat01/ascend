@@ -40,31 +40,31 @@ export default function DashboardHeader() {
     <motion.header 
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-      className="flex flex-col md:flex-row md:items-center justify-between gap-4 relative z-10"
+      transition={{ duration: 0.8, ease: "easeOut" }}
+      className="flex flex-col md:flex-row md:items-center justify-between gap-6 relative z-10"
     >
       <div>
-        <h1 className="text-3xl font-light text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-[#a1a1aa] tracking-tight mb-2 flex items-center gap-2">
+        <h1 className="text-3xl md:text-4xl font-light text-white tracking-tighter mb-3 flex items-center gap-3">
           {greeting}, <span 
             onClick={openSettings}
-            className="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-accent)] to-rose-400 cursor-pointer hover:drop-shadow-[0_0_10px_rgba(244,63,94,0.8)] transition-all"
+            className="font-black text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-accent)] to-rose-400 cursor-pointer hover:drop-shadow-[0_0_15px_rgba(244,63,94,0.5)] transition-all duration-500 font-['Outfit']"
             title="Click to change name"
           >{userName}.</span>
         </h1>
-        <p className="text-[#a1a1aa] text-sm flex items-center gap-2">
-          <Sparkles size={14} className="text-amber-400 animate-pulse" />
-          The dashboard is primed. Execute the plan.
+        <p className="text-[#a1a1aa] text-sm md:text-base font-medium flex items-center gap-2.5 opacity-80">
+          <Sparkles size={16} className="text-amber-400 animate-pulse" />
+          The system is optimized. Current focus: <span className="text-white font-bold">Peak Performance</span>
         </p>
       </div>
 
       <motion.button 
-        whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.98 }}
+        whileHover={{ scale: 1.05, y: -2 }}
+        whileTap={{ scale: 0.95 }}
         onClick={openCommandMenu}
-        className="relative group overflow-hidden flex items-center justify-center gap-2 px-5 py-2.5 bg-white text-black rounded-[12px] shadow-[0_0_15px_rgba(255,255,255,0.1)] hover:shadow-[0_0_25px_rgba(255,255,255,0.3)] transition-all font-semibold text-[13px] tracking-wide"
+        className="relative group overflow-hidden flex items-center justify-center gap-3 px-8 py-4 bg-white text-black rounded-2xl shadow-[0_20px_40px_rgba(255,255,255,0.1)] hover:shadow-[0_25px_50px_rgba(255,255,255,0.2)] transition-all font-black text-sm tracking-widest uppercase"
       >
-        <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-black/10 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite] pointer-events-none" />
-        <Plus size={16} strokeWidth={2.5} className="relative z-10" />
+        <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-black/5 to-transparent -translate-x-full group-hover:animate-[shimmer_2s_infinite] pointer-events-none" />
+        <Plus size={18} strokeWidth={3} className="relative z-10" />
         <span className="relative z-10">New Objective</span>
       </motion.button>
     </motion.header>

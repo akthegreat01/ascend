@@ -4,54 +4,60 @@ import { motion } from "framer-motion";
 import { Target, ChevronRight, Compass } from "lucide-react";
 
 export default function StrategicRoadmap() {
-  const roadmap: any[] = [];
+  const roadmap = [
+    { phase: "Q2 Core", title: "Neural Protocol Sync", progress: 65 },
+    { phase: "Q3 Expansion", title: "Digital Ecosystem Hub", progress: 20 },
+    { phase: "Q4 Mastery", title: "Automated Life OS", progress: 5 }
+  ];
 
   return (
-    <div className="glass-panel p-6 bg-[#0a0a0a] border border-[#ffffff10] group overflow-hidden relative">
-      <div className="absolute top-0 right-0 w-32 h-32 bg-sky-500 opacity-5 blur-[50px] pointer-events-none rounded-full group-hover:opacity-10 transition-all duration-700" />
+    <div className="glass-panel p-8 group relative overflow-hidden h-full">
+      <div className="absolute top-0 right-0 w-48 h-48 bg-sky-500/10 blur-[80px] pointer-events-none rounded-full group-hover:bg-sky-500/20 transition-all duration-1000" />
       
-      <div className="flex items-center justify-between mb-6">
-        <h3 className="text-sm font-bold text-white tracking-widest uppercase flex items-center gap-2">
-          <Compass size={16} className="text-sky-400" />
-          Strategic Roadmap
-        </h3>
-        <button className="text-[10px] font-black text-[#a1a1aa] hover:text-white transition-colors uppercase tracking-widest">Master Plan</button>
+      <div className="flex items-center justify-between mb-8 relative z-10">
+        <div className="flex items-center gap-4">
+          <div className="p-2.5 rounded-xl bg-sky-500/10 text-sky-400 shadow-[0_0_20px_rgba(14,165,233,0.15)] group-hover:scale-110 transition-transform duration-500">
+            <Compass size={20} />
+          </div>
+          <h3 className="text-[11px] font-black text-white tracking-[0.2em] uppercase">Strategic Roadmap</h3>
+        </div>
+        <button className="text-[10px] font-black text-[#a1a1aa] hover:text-sky-400 transition-all duration-300 uppercase tracking-widest border-b border-transparent hover:border-sky-400/50 pb-0.5">Master Plan</button>
       </div>
 
-      <div className="space-y-6">
+      <div className="space-y-8 relative z-10">
         {roadmap.map((item, idx) => (
           <div key={idx} className="relative">
-            <div className="flex justify-between items-end mb-2">
+            <div className="flex justify-between items-end mb-3">
               <div>
-                <span className="text-[10px] font-black text-sky-400 uppercase tracking-widest block mb-1">{item.phase}</span>
-                <h4 className="text-[13px] font-semibold text-white group-hover:text-sky-100 transition-colors">{item.title}</h4>
+                <span className="text-[9px] font-black text-sky-400 uppercase tracking-[0.25em] block mb-1.5 opacity-80">{item.phase}</span>
+                <h4 className="text-[14px] font-black text-white group-hover:text-sky-100 transition-colors tracking-tight">{item.title}</h4>
               </div>
-              <span className="text-[11px] font-black text-[#a1a1aa] uppercase tabular-nums">{item.progress}%</span>
+              <span className="text-[11px] font-black text-[#a1a1aa] uppercase tabular-nums tracking-widest">{item.progress}%</span>
             </div>
-            <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+            <div className="h-2 w-full bg-white/5 rounded-full overflow-hidden p-[1px] border border-white/5">
               <motion.div 
                 initial={{ width: 0 }}
                 animate={{ width: `${item.progress}%` }}
                 transition={{ duration: 1.5, delay: idx * 0.2 }}
-                className="h-full bg-gradient-to-r from-sky-500 to-sky-300 shadow-[0_0_10px_rgba(14,165,233,0.3)]"
+                className="h-full bg-gradient-to-r from-sky-600 to-sky-300 shadow-[0_0_15px_rgba(14,165,233,0.4)] rounded-full"
               />
             </div>
           </div>
         ))}
       </div>
 
-      <div className="mt-8 pt-6 border-t border-white/5">
-        <div className="flex items-center justify-between p-3 rounded-xl bg-white/5 border border-white/10 group/item hover:bg-white/10 transition-all cursor-pointer">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-sky-500/20 flex items-center justify-center text-sky-400">
-              <Target size={16} />
+      <div className="mt-10 pt-8 border-t border-white/[0.05] relative z-10">
+        <div className="flex items-center justify-between p-5 rounded-2xl bg-white/[0.02] border border-white/[0.05] group/item hover:bg-white/[0.04] hover:border-sky-500/30 transition-all duration-500 cursor-pointer hover:-translate-y-1">
+          <div className="flex items-center gap-4">
+            <div className="w-10 h-10 rounded-xl bg-sky-500/10 flex items-center justify-center text-sky-400 shadow-[0_0_15px_rgba(14,165,233,0.1)] group-hover/item:scale-110 transition-transform duration-500">
+              <Target size={20} />
             </div>
             <div>
-              <p className="text-[12px] font-bold text-white uppercase tracking-tight">Main Objective</p>
-              <p className="text-[10px] text-[#a1a1aa]">Neural Engine Integration</p>
+              <p className="text-[12px] font-black text-white uppercase tracking-wider mb-0.5">Primary Directive</p>
+              <p className="text-[11px] font-bold text-[#a1a1aa] tracking-tight uppercase opacity-60">Neural Engine Integration</p>
             </div>
           </div>
-          <ChevronRight size={14} className="text-[#a1a1aa] group-hover/item:text-white transition-all transform group-hover/item:translate-x-1" />
+          <ChevronRight size={16} className="text-[#a1a1aa] group-hover/item:text-white transition-all transform group-hover/item:translate-x-1" />
         </div>
       </div>
     </div>

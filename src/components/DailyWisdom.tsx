@@ -47,43 +47,46 @@ export default function DailyWisdom() {
     <motion.div 
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
-      className="glass-panel p-6 bg-[#0a0a0a] relative overflow-hidden group border border-[#ffffff10] flex flex-col justify-center"
+      className="glass-panel p-8 relative overflow-hidden group flex flex-col justify-center h-full"
     >
-      <div className="absolute top-0 right-0 p-4 opacity-5 pointer-events-none group-hover:scale-110 transition-transform duration-700">
-        <Quote size={80} />
+      <div className="absolute top-0 right-0 p-6 opacity-[0.03] pointer-events-none group-hover:scale-110 group-hover:opacity-[0.06] transition-all duration-1000">
+        <Quote size={120} />
       </div>
 
-      <div className="flex justify-between items-start mb-3 relative z-10">
-        <div className="px-2.5 py-1 rounded-md bg-[#111] border border-[#ffffff10] text-[#a1a1aa] text-[10px] uppercase font-bold tracking-widest flex items-center gap-1.5 w-max">
-          <Quote size={10} /> Daily Wisdom
+      <div className="flex justify-between items-start mb-6 relative z-10">
+        <div className="px-3 py-1.5 rounded-xl bg-white/[0.03] border border-white/5 text-white/50 text-[10px] uppercase font-black tracking-[0.2em] flex items-center gap-2 w-max">
+          <Quote size={12} className="text-[var(--color-accent)]" /> Daily Wisdom
         </div>
         <button 
           onClick={refreshQuote}
-          className={`text-[#a1a1aa] hover:text-white transition-colors p-1 rounded-md hover:bg-[#ffffff10] ${isRefreshing ? 'animate-spin' : ''}`}
+          className={`text-[#a1a1aa] hover:text-white transition-all duration-500 p-2 rounded-xl hover:bg-white/5 border border-transparent hover:border-white/5 ${isRefreshing ? 'animate-spin' : ''}`}
         >
-          <RefreshCw size={14} />
+          <RefreshCw size={16} />
         </button>
       </div>
 
       <div className="relative z-10 mt-2">
         <motion.p 
           key={quote.text}
-          initial={{ opacity: 0, filter: "blur(10px)" }}
-          animate={{ opacity: 1, filter: "blur(0px)" }}
+          initial={{ opacity: 0, y: 10, filter: "blur(10px)" }}
+          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           transition={{ duration: 0.8 }}
-          className="text-lg font-light text-white leading-relaxed italic mb-4"
+          className="text-xl md:text-2xl font-light text-white leading-relaxed italic mb-6 font-['Outfit'] tracking-tight"
         >
           "{quote.text}"
         </motion.p>
-        <motion.p 
+        <motion.div 
           key={quote.author}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          className="text-sm font-medium text-[var(--color-accent)] uppercase tracking-wider"
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="flex items-center gap-3"
         >
-          — {quote.author}
-        </motion.p>
+          <div className="h-[1px] w-8 bg-[var(--color-accent)] opacity-50" />
+          <p className="text-[11px] font-black text-[var(--color-accent)] uppercase tracking-[0.25em]">
+            {quote.author}
+          </p>
+        </motion.div>
       </div>
     </motion.div>
   );

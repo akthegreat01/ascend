@@ -64,41 +64,41 @@ export default function KPICards() {
   if (!isLoaded) return <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 animate-pulse h-[120px]" />;
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
       {kpiData.map((kpi, idx) => (
         <motion.div
           key={idx}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: idx * 0.1 }}
-          className="glass-panel p-5 relative overflow-hidden group hover:border-[var(--color-accent)]/30 transition-all duration-300 bg-[#111111] glow-border"
+          className="glass-panel p-6 relative overflow-hidden group hover:border-[var(--color-accent)]/30 transition-all duration-500 bg-[#0c0c0c]/50 glow-border"
         >
-          <div className="flex justify-between items-start mb-4">
-            <span className="text-sm font-medium text-[#a1a1aa] tracking-wide uppercase">{kpi.title}</span>
-            <div className={`p-2 rounded-lg ${kpi.bg} shadow-lg shadow-${kpi.color.split('-')[1]}/20`}>
-              <kpi.icon size={16} className={kpi.color} />
+          <div className="flex justify-between items-start mb-6">
+            <span className="text-[10px] font-black text-[#a1a1aa]/60 tracking-[0.2em] uppercase">{kpi.title}</span>
+            <div className={`p-2.5 rounded-xl ${kpi.bg} shadow-lg shadow-black/20 group-hover:scale-110 transition-transform duration-500`}>
+              <kpi.icon size={18} className={kpi.color} />
             </div>
           </div>
           <div className="flex items-end justify-between">
-            <h3 className="text-3xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400 tracking-wider font-['Outfit'] tabular-nums group-hover:from-white group-hover:to-[var(--color-accent)] transition-all duration-500">
+            <h3 className="text-3xl sm:text-4xl font-black text-white tracking-tighter font-['Outfit'] tabular-nums group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-gray-500 transition-all duration-500">
               {kpi.value}
             </h3>
             
             {/* Sparkline decoration */}
-            <div className="flex items-end gap-[3px] h-8 opacity-30 group-hover:opacity-100 transition-opacity duration-500">
+            <div className="flex items-end gap-[4px] h-10 opacity-20 group-hover:opacity-60 transition-opacity duration-700">
               {[...Array(6)].map((_, i) => (
                 <motion.div
                   key={i}
                   initial={{ height: "20%" }}
                   animate={{ height: ["20%", `${30 + Math.random() * 70}%`, "20%"] }}
-                  transition={{ duration: 1.5 + Math.random(), repeat: Infinity, ease: "easeInOut" }}
-                  className={`w-1.5 rounded-t-[1px] ${kpi.color.replace('text-', 'bg-')} shadow-[0_0_10px_currentColor]`}
+                  transition={{ duration: 2 + Math.random(), repeat: Infinity, ease: "easeInOut" }}
+                  className={`w-1.5 rounded-full ${kpi.color.replace('text-', 'bg-')} shadow-[0_0_15px_currentColor]`}
                 />
               ))}
             </div>
           </div>
           {/* Subtle background glow effect on hover */}
-          <div className={`absolute -inset-2 opacity-0 group-hover:opacity-10 bg-gradient-to-tr from-${kpi.color.split('-')[1]}-500 to-transparent blur-2xl transition-opacity duration-500 pointer-events-none`} />
+          <div className={`absolute -inset-2 opacity-0 group-hover:opacity-5 bg-gradient-to-tr from-${kpi.color.split('-')[1]}-500 to-transparent blur-3xl transition-opacity duration-700 pointer-events-none`} />
         </motion.div>
       ))}
     </div>

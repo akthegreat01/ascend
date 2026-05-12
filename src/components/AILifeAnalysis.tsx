@@ -74,43 +74,45 @@ export default function AILifeAnalysis() {
     <motion.div 
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
-      className="glass-panel p-6 bg-[#0a0a0a] relative overflow-hidden group border border-[var(--color-accent)]/20 hover:border-[var(--color-accent)]/50 hover:shadow-[0_0_30px_rgba(244,63,94,0.15)] transition-all duration-500"
+      className="glass-panel p-8 relative overflow-hidden group border border-[var(--color-accent)]/20 hover:border-[var(--color-accent)]/50 hover:shadow-[0_20px_50px_rgba(244,63,94,0.2)] transition-all duration-700 h-full flex flex-col"
     >
-      <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--color-accent)] opacity-5 blur-[50px] pointer-events-none rounded-full group-hover:opacity-20 group-hover:scale-150 transition-all duration-700" />
-      <div className="absolute -inset-1 bg-gradient-to-tr from-[var(--color-accent)]/10 to-transparent opacity-0 group-hover:opacity-100 blur-2xl transition-opacity duration-700 pointer-events-none" />
+      <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--color-accent)]/10 blur-[100px] pointer-events-none rounded-full group-hover:scale-150 transition-transform duration-1000" />
+      <div className="absolute -inset-1 bg-gradient-to-tr from-[var(--color-accent)]/10 to-transparent opacity-0 group-hover:opacity-100 blur-3xl transition-opacity duration-1000 pointer-events-none" />
       
-      <div className="flex justify-between items-center mb-6 relative z-10">
-        <div className="flex items-center gap-2">
-          <BrainCircuit size={18} className="text-[var(--color-accent)]" />
-          <h3 className="text-sm font-medium text-white tracking-wide uppercase">Ascend Intelligence</h3>
+      <div className="flex justify-between items-center mb-10 relative z-10">
+        <div className="flex items-center gap-4">
+          <div className="p-2.5 rounded-xl bg-[var(--color-accent)]/10 text-[var(--color-accent)] shadow-[0_0_20px_rgba(244,63,94,0.15)] group-hover:scale-110 transition-transform duration-500">
+            <BrainCircuit size={20} />
+          </div>
+          <h3 className="text-[11px] font-black text-white tracking-[0.2em] uppercase">Ascend Intelligence</h3>
         </div>
-        <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[var(--color-accent)]/10 text-[var(--color-accent)] border border-[var(--color-accent)]/20">
-          <div className="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)] animate-pulse" />
-          <span className="text-[10px] font-bold tracking-widest uppercase">Analyzing</span>
+        <div className="flex items-center gap-2.5 px-3 py-1.5 rounded-xl bg-black/40 border border-white/5 text-[var(--color-accent)] shadow-inner">
+          <div className="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)] animate-pulse shadow-[0_0_10px_var(--color-accent)]" />
+          <span className="text-[10px] font-black tracking-[0.2em] uppercase opacity-80">Syncing</span>
         </div>
       </div>
 
-      <div className="space-y-4 relative z-10">
+      <div className="space-y-6 relative z-10 flex-1">
         {insights.map((insight, idx) => (
           <motion.div 
             key={idx} 
             initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.5 + idx * 1.2, duration: 0.8 }}
-            className="flex gap-3 items-start group/item relative"
+            className="flex gap-5 items-start group/item relative"
           >
-            <div className="mt-0.5 opacity-50 group-hover/item:opacity-100 transition-opacity">
-              {idx === 0 ? <Sparkles size={14} className="text-emerald-400" /> : 
-               idx === 1 ? <Activity size={14} className="text-amber-400" /> : 
-               <BrainCircuit size={14} className="text-purple-400" />}
+            <div className="mt-1 flex-shrink-0 opacity-40 group-hover/item:opacity-100 transition-all duration-500 transform group-hover/item:scale-125">
+              {idx === 0 ? <Sparkles size={16} className="text-emerald-400" /> : 
+               idx === 1 ? <Activity size={16} className="text-amber-400" /> : 
+               <BrainCircuit size={16} className="text-purple-400" />}
             </div>
-            <p className="text-sm text-[#a1a1aa] leading-relaxed group-hover/item:text-white transition-colors">
+            <p className="text-[14px] font-medium text-[#a1a1aa] leading-relaxed group-hover/item:text-white transition-colors duration-500">
               {insight.split("").map((char, i) => (
                 <motion.span
                   key={i}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  transition={{ delay: 0.5 + (idx * 1.2) + (i * 0.015) }}
+                  transition={{ delay: 0.5 + (idx * 1.2) + (i * 0.01) }}
                 >
                   {char}
                 </motion.span>
@@ -122,12 +124,12 @@ export default function AILifeAnalysis() {
       
       {/* Scanning Line Effect */}
       <motion.div 
-        className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[var(--color-accent)] to-transparent opacity-50 z-20 pointer-events-none shadow-[0_0_10px_var(--color-accent)]"
+        className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-transparent via-[var(--color-accent)]/40 to-transparent z-20 pointer-events-none shadow-[0_0_20px_rgba(244,63,94,0.3)]"
         animate={{ top: ["0%", "100%", "0%"] }}
-        transition={{ duration: 6, ease: "linear", repeat: Infinity }}
+        transition={{ duration: 8, ease: "linear", repeat: Infinity }}
       />
       {/* Background Pulse Grid */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff02_1px,transparent_1px),linear-gradient(to_bottom,#ffffff02_1px,transparent_1px)] bg-[size:1rem_1rem] opacity-20 pointer-events-none z-0 mix-blend-overlay group-hover:opacity-50 transition-opacity duration-1000" />
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff02_1px,transparent_1px),linear-gradient(to_bottom,#ffffff02_1px,transparent_1px)] bg-[size:1.5rem_1.5rem] opacity-20 pointer-events-none z-0 mix-blend-overlay group-hover:opacity-40 transition-opacity duration-1000" />
     </motion.div>
   );
 }

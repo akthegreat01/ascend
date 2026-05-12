@@ -94,43 +94,43 @@ export default function SystemActionFeed() {
   };
 
   return (
-    <div className="glass-panel p-6 bg-[#0a0a0a] border border-[#ffffff10] flex flex-col h-[400px]">
-      <div className="flex items-center justify-between mb-6">
-        <h3 className="text-sm font-bold text-white tracking-widest uppercase flex items-center gap-2">
-          <Activity size={16} className="text-[var(--color-accent)]" />
+    <div className="glass-panel p-8 flex flex-col h-[450px] group relative overflow-hidden">
+      <div className="flex items-center justify-between mb-8 relative z-10">
+        <h3 className="text-[11px] font-black text-white tracking-[0.2em] uppercase flex items-center gap-3">
+          <Activity size={18} className="text-[var(--color-accent)] group-hover:scale-110 transition-transform duration-500" />
           Neural Action Feed
         </h3>
-        <span className="text-[10px] font-black text-[#a1a1aa] uppercase tracking-tighter animate-pulse">Live Telemetry</span>
+        <span className="text-[9px] font-black text-[#a1a1aa] uppercase tracking-widest animate-pulse opacity-60">Live Telemetry</span>
       </div>
 
-      <div className="flex-1 overflow-y-auto custom-scrollbar space-y-4 pr-2">
+      <div className="flex-1 overflow-y-auto custom-scrollbar space-y-6 pr-3 relative z-10">
         {actions.map((action) => (
           <motion.div 
             key={action.id}
             initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
-            className="flex gap-4 group cursor-default"
+            className="flex gap-5 group/item cursor-default"
           >
-            <div className={`mt-1 flex-shrink-0 w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center ${action.color} border border-white/10 group-hover:scale-110 transition-transform`}>
+            <div className={`mt-0.5 flex-shrink-0 w-10 h-10 rounded-xl bg-white/[0.03] flex items-center justify-center ${action.color} border border-white/[0.05] group-hover/item:scale-110 group-hover/item:border-white/20 transition-all duration-500`}>
               {getIcon(action.type)}
             </div>
-            <div className="flex flex-col gap-1">
-              <p className="text-[13px] text-white/90 leading-snug group-hover:text-white transition-colors">
+            <div className="flex flex-col gap-2">
+              <p className="text-[14px] font-medium text-white/80 leading-snug group-hover/item:text-white transition-colors duration-300">
                 {action.content}
               </p>
-              <div className="flex items-center gap-2">
-                <span className="text-[9px] font-black text-[#a1a1aa] uppercase tracking-widest">{action.timestamp}</span>
-                <div className="h-[1px] w-4 bg-white/10" />
-                <span className={`text-[9px] font-black uppercase tracking-widest ${action.color}`}>{action.type}</span>
+              <div className="flex items-center gap-3">
+                <span className="text-[9px] font-black text-[#a1a1aa] uppercase tracking-[0.15em] opacity-60">{action.timestamp}</span>
+                <div className="h-[1px] w-6 bg-white/10" />
+                <span className={`text-[9px] font-black uppercase tracking-[0.2em] ${action.color} opacity-80`}>{action.type}</span>
               </div>
             </div>
           </motion.div>
         ))}
         
         {/* Placeholder for "filling space" aesthetic */}
-        <div className="pt-4 opacity-10 select-none pointer-events-none">
-          <div className="h-4 w-3/4 bg-white rounded mb-2" />
-          <div className="h-4 w-1/2 bg-white rounded" />
+        <div className="pt-6 opacity-5 select-none pointer-events-none">
+          <div className="h-4 w-3/4 bg-white rounded-full mb-3" />
+          <div className="h-4 w-1/2 bg-white rounded-full" />
         </div>
       </div>
     </div>

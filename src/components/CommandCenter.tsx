@@ -130,8 +130,8 @@ export default function CommandCenter() {
   };
 
   return (
-    <div className="flex flex-col gap-6 h-full">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="flex flex-col gap-8 h-full">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       
       <QuickLinks />
 
@@ -140,33 +140,30 @@ export default function CommandCenter() {
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
-        className="glass-panel p-6 bg-[#0a0a0a] border border-[#ffffff10] flex flex-col group hover:border-[var(--color-accent)]/50 hover:shadow-[0_0_30px_rgba(244,63,94,0.15)] transition-all duration-500 relative overflow-hidden"
+        className="glass-panel p-8 flex flex-col group relative overflow-hidden"
       >
-        {/* Glow backdrop */}
-        <div className="absolute -inset-10 bg-gradient-to-br from-[var(--color-accent)]/10 to-transparent opacity-0 group-hover:opacity-100 blur-3xl transition-opacity duration-700 pointer-events-none" />
-        
-        <div className="flex items-center gap-3 mb-4 relative z-10">
-          <div className="p-2 rounded-lg bg-emerald-500/10 text-emerald-500 shadow-[0_0_15px_rgba(16,185,129,0.2)]">
-            <BookHeart size={18} />
+        <div className="flex items-center gap-4 mb-6 relative z-10">
+          <div className="p-2.5 rounded-xl bg-emerald-500/10 text-emerald-500 shadow-[0_0_20px_rgba(16,185,129,0.15)] group-hover:scale-110 transition-transform duration-500">
+            <BookHeart size={20} />
           </div>
-          <h3 className="font-medium text-white tracking-wide uppercase text-sm">Capture Thought</h3>
+          <h3 className="text-[11px] font-black text-white tracking-[0.2em] uppercase">Capture Thought</h3>
         </div>
         
         <textarea 
           value={journalEntry}
           onChange={(e) => setJournalEntry(e.target.value)}
           placeholder="What's on your mind? Type 'Task:' or 'Goal:' to auto-route..."
-          className="w-full bg-transparent border-0 text-[14px] leading-relaxed text-white p-0 focus:outline-none focus:ring-0 transition-all duration-300 placeholder-[#ffffff30] resize-none flex-1 mb-6 relative z-10 font-light"
-          style={{ minHeight: "80px" }}
+          className="w-full bg-transparent border-0 text-[15px] leading-relaxed text-white p-0 focus:outline-none focus:ring-0 transition-all duration-300 placeholder-white/20 resize-none flex-1 mb-8 relative z-10 font-light"
+          style={{ minHeight: "100px" }}
         />
         <div className="flex justify-end relative z-10">
           <button 
             onClick={quickSaveJournal}
             disabled={!journalEntry.trim()}
-            className={`px-4 py-2 text-xs font-semibold rounded-lg transition-all duration-300 flex items-center justify-center gap-2 tracking-wide
+            className={`px-6 py-3 text-xs font-black rounded-xl transition-all duration-500 flex items-center justify-center gap-2.5 tracking-widest uppercase
               ${journalEntry.trim() 
-                ? 'bg-white text-black shadow-[0_0_15px_rgba(255,255,255,0.4)] hover:scale-105 hover:bg-gray-200' 
-                : 'bg-white/5 text-white/30 cursor-not-allowed'}`}
+                ? 'bg-white text-black shadow-[0_15px_30px_rgba(255,255,255,0.2)] hover:scale-105 hover:bg-gray-100' 
+                : 'bg-white/5 text-white/20 cursor-not-allowed border border-white/5'}`}
           >
             <Save size={14} className={journalEntry.trim() ? "animate-pulse" : ""} /> Capture
           </button>
@@ -180,43 +177,40 @@ export default function CommandCenter() {
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
-        className="glass-panel p-6 bg-[#0a0a0a] border border-[#ffffff10] md:col-span-2 group hover:border-amber-500/30 hover:shadow-[0_0_30px_rgba(245,158,11,0.1)] transition-all duration-150 relative overflow-hidden"
+        className="glass-panel p-8 md:col-span-2 group relative overflow-hidden"
       >
-        {/* Glow backdrop */}
-        <div className="absolute -inset-10 bg-gradient-to-tl from-amber-500/5 to-transparent opacity-0 group-hover:opacity-100 blur-3xl transition-opacity duration-150 pointer-events-none" />
-
-        <div className="flex items-center justify-between mb-4 relative z-10">
-          <div className="flex items-center gap-3">
-            <div className="p-2 rounded-lg bg-amber-500/10 text-amber-500 shadow-[0_0_15px_rgba(245,158,11,0.2)]">
-              <Activity size={18} />
+        <div className="flex items-center justify-between mb-8 relative z-10">
+          <div className="flex items-center gap-4">
+            <div className="p-2.5 rounded-xl bg-amber-500/10 text-amber-500 shadow-[0_0_20px_rgba(245,158,11,0.15)] group-hover:scale-110 transition-transform duration-500">
+              <Activity size={20} />
             </div>
-            <h3 className="font-medium text-white tracking-wide uppercase text-sm">Daily Discipline Snapshot</h3>
+            <h3 className="text-[11px] font-black text-white tracking-[0.2em] uppercase">Daily Discipline</h3>
           </div>
-          <button onClick={() => router.push("/habits")} className="text-xs font-bold tracking-wider text-[#a1a1aa] hover:text-amber-400 transition-colors uppercase">
+          <button onClick={() => router.push("/habits")} className="text-[10px] font-black tracking-widest text-[#a1a1aa] hover:text-amber-400 transition-all duration-300 uppercase border-b border-transparent hover:border-amber-400/50 pb-0.5">
             View All
           </button>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 relative z-10">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 relative z-10">
           {activeHabits.map((habit, i) => (
             <div 
               key={i} 
               onClick={() => toggleHabit(habit.id)}
-              className={`flex items-center justify-between p-4 rounded-xl border cursor-pointer transition-all duration-150 group/item ${
+              className={`flex items-center justify-between p-5 rounded-2xl border cursor-pointer transition-all duration-500 group/item ${
                 habit.completedToday 
-                  ? "bg-gradient-to-r from-amber-500/20 to-amber-500/5 border-amber-500/50 shadow-[0_0_15px_rgba(245,158,11,0.2)]" 
-                  : "bg-[#111] border-[#ffffff10] hover:border-amber-500/40 hover:-translate-y-1 hover:shadow-lg"
+                  ? "bg-gradient-to-br from-amber-500/15 to-amber-500/5 border-amber-500/30 shadow-[0_10px_30px_rgba(245,158,11,0.1)]" 
+                  : "bg-white/[0.02] border-white/[0.05] hover:border-amber-500/30 hover:bg-white/[0.04] hover:-translate-y-1"
               }`}
             >
-              <span className={`text-sm font-medium transition-all duration-150 ${habit.completedToday ? 'text-amber-100' : 'text-[#e4e4e7] group-hover/item:text-white'}`}>
+              <span className={`text-[13px] font-bold tracking-wide transition-all duration-300 ${habit.completedToday ? 'text-amber-200' : 'text-[#a1a1aa] group-hover/item:text-white'}`}>
                 {habit.title}
               </span>
-              <div className={`w-5 h-5 rounded-full flex items-center justify-center border-2 transition-all duration-150 ${
+              <div className={`w-6 h-6 rounded-lg flex items-center justify-center border-2 transition-all duration-500 ${
                 habit.completedToday 
-                  ? 'bg-amber-400 border-amber-400 shadow-[0_0_10px_rgba(251,191,36,0.8)]' 
-                  : 'border-[#ffffff30] group-hover/item:border-amber-500/60'
+                  ? 'bg-amber-500 border-amber-500 shadow-[0_0_15px_rgba(245,158,11,0.5)]' 
+                  : 'border-white/10 group-hover/item:border-amber-500/40'
               }`}>
-                {habit.completedToday && <span className="text-[12px] text-black font-bold">✓</span>}
+                {habit.completedToday && <span className="text-[14px] text-black font-black">✓</span>}
               </div>
             </div>
           ))}
@@ -228,13 +222,13 @@ export default function CommandCenter() {
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3 }}
-        className="glass-panel p-6 bg-[#0a0a0a] border border-[#ffffff10] lg:col-span-1 group hover:border-[var(--color-accent)]/30 transition-colors flex flex-col justify-between"
+        className="glass-panel p-8 flex flex-col justify-between group relative overflow-hidden"
       >
-        <div>
-          <div className="text-4xl font-light font-['Outfit'] text-white tracking-tight mb-1">
+        <div className="relative z-10">
+          <div className="text-5xl font-black font-['Outfit'] text-white tracking-tighter mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-gray-500 transition-all duration-700">
             {currentTime ? currentTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '00:00'}
           </div>
-          <div className="text-sm text-[#a1a1aa] font-medium tracking-wide">
+          <div className="text-sm text-[#a1a1aa] font-bold tracking-[0.1em] uppercase opacity-60">
             {currentTime ? currentTime.toLocaleDateString([], { weekday: 'long', month: 'long', day: 'numeric' }) : 'Loading date...'}
           </div>
         </div>
@@ -248,17 +242,17 @@ export default function CommandCenter() {
           const totalDays = isLeap ? 366 : 365;
           const pct = ((dayOfYear / totalDays) * 100).toFixed(1);
           return (
-            <div className="mt-5 pt-4 border-t border-[#ffffff08]">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-[10px] font-bold text-[#a1a1aa] uppercase tracking-widest">Year Progress</span>
-                <span className="text-[10px] font-bold text-white tabular-nums">{pct}%</span>
+            <div className="mt-8 pt-6 border-t border-white/[0.05] relative z-10">
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-[10px] font-black text-[#a1a1aa] uppercase tracking-[0.25em]">Year Ascent</span>
+                <span className="text-[11px] font-black text-white tabular-nums tracking-widest">{pct}%</span>
               </div>
-              <div className="h-1.5 w-full bg-[#1a1a1a] rounded-full overflow-hidden mb-2">
-                <div className="h-full rounded-full bg-[var(--color-accent)] shadow-[0_0_8px_var(--color-accent)] transition-all duration-1000" style={{ width: `${pct}%` }} />
+              <div className="h-2 w-full bg-white/5 rounded-full overflow-hidden mb-3 p-[1px] border border-white/5">
+                <div className="h-full rounded-full bg-gradient-to-r from-[var(--color-accent)] to-rose-500 shadow-[0_0_15px_var(--color-accent)] transition-all duration-1000" style={{ width: `${pct}%` }} />
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-[11px] text-white font-semibold font-['Outfit'] tabular-nums">Day {dayOfYear}</span>
-                <span className="text-[11px] text-[#a1a1aa] font-['Outfit'] tabular-nums">{totalDays - dayOfYear} left</span>
+                <span className="text-[12px] text-white font-black font-['Outfit'] tracking-wider uppercase tabular-nums">Day {dayOfYear}</span>
+                <span className="text-[12px] text-[#a1a1aa] font-bold font-['Outfit'] tabular-nums opacity-60">{totalDays - dayOfYear} left</span>
               </div>
             </div>
           );

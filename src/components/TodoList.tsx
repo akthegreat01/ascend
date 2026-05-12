@@ -149,67 +149,71 @@ export default function TodoList() {
   const progress = activeList.length === 0 ? 0 : (completedCount / activeList.length) * 100;
 
   return (
-    <div className="glass-panel p-6 flex flex-col h-full relative overflow-hidden group">
+    <div className="glass-panel p-8 flex flex-col h-full relative overflow-hidden group">
+      <div className="absolute top-0 right-0 w-48 h-48 bg-[var(--color-accent)]/5 blur-[80px] pointer-events-none rounded-full group-hover:scale-150 transition-transform duration-1000" />
       
-      <div className="flex items-center justify-between mb-6 relative z-10">
+      <div className="flex items-center justify-between mb-8 relative z-10">
         <div>
-          <h3 className="text-xl font-medium text-white tracking-wide font-['Outfit']">Tasks</h3>
-          <div className="flex items-center gap-2 mt-1">
-            <p className="text-sm text-[#a1a1aa]">{completedCount}/{activeList.length} completed</p>
+          <h3 className="text-[11px] font-black text-white tracking-[0.2em] uppercase flex items-center gap-3">
+            <Check size={18} className="text-[var(--color-accent)]" />
+            Execution List
+          </h3>
+          <div className="flex items-center gap-2 mt-2">
+            <p className="text-[10px] font-black text-[#a1a1aa] uppercase tracking-widest opacity-60">{completedCount}/{activeList.length} neutralized</p>
           </div>
         </div>
         
-        <div className="flex bg-[#111] border border-[#ffffff10] rounded-lg p-1">
+        <div className="flex bg-white/[0.03] border border-white/5 rounded-xl p-1.5 shadow-inner">
           <button 
             onClick={() => setView("today")}
-            className={`px-3 py-1 text-xs font-medium rounded-md transition-colors ${view === "today" ? 'bg-white text-black' : 'text-[#a1a1aa] hover:text-white'}`}
+            className={`px-4 py-1.5 text-[10px] font-black uppercase tracking-widest rounded-lg transition-all duration-300 ${view === "today" ? 'bg-white text-black shadow-lg' : 'text-[#a1a1aa] hover:text-white'}`}
           >
             Today
           </button>
           <button 
             onClick={() => setView("tomorrow")}
-            className={`px-3 py-1 text-xs font-medium rounded-md transition-colors ${view === "tomorrow" ? 'bg-white text-black' : 'text-[#a1a1aa] hover:text-white'}`}
+            className={`px-4 py-1.5 text-[10px] font-black uppercase tracking-widest rounded-lg transition-all duration-300 ${view === "tomorrow" ? 'bg-white text-black shadow-lg' : 'text-[#a1a1aa] hover:text-white'}`}
           >
-            Tomorrow
+            Later
           </button>
         </div>
       </div>
 
       {/* Progress Bar */}
-      <div className="h-2 w-full bg-[#1a1a1a] rounded-full overflow-hidden mb-6 relative z-10 shadow-inner">
+      <div className="h-2 w-full bg-white/5 rounded-full overflow-hidden mb-8 relative z-10 p-[1px] border border-white/5">
         <motion.div 
-          className="h-full bg-gradient-to-r from-[var(--color-accent)] via-rose-400 to-[var(--color-accent)] bg-[length:200%_auto] animate-shimmer rounded-full shadow-[0_0_15px_var(--color-accent)]"
+          className="h-full bg-gradient-to-r from-[var(--color-accent)] via-rose-500 to-[var(--color-accent)] bg-[length:200%_auto] animate-shimmer rounded-full shadow-[0_0_20px_rgba(244,63,94,0.4)]"
           initial={{ width: 0 }}
           animate={{ width: `${progress}%` }}
           transition={{ type: "spring", bounce: 0, duration: 1.5 }}
         />
       </div>
 
-      <form onSubmit={addTask} className="mb-6 relative z-10 flex flex-col gap-2">
+      <form onSubmit={addTask} className="mb-8 relative z-10 flex flex-col gap-3">
         <div className="relative">
           <input
             type="text"
             value={newTask}
             onChange={(e) => setNewTask(e.target.value)}
-            placeholder={view === "today" ? "What needs to be done today?" : "Plan for tomorrow..."}
-            className="w-full bg-[#0a0a0a] border border-[#ffffff15] rounded-xl py-3 pl-4 pr-12 text-sm text-white placeholder-[#a1a1aa]/50 focus:outline-none focus:border-[var(--color-accent)] focus:shadow-[0_0_15px_rgba(244,63,94,0.2)] transition-all shadow-inner"
+            placeholder={view === "today" ? "Initiate new objective..." : "Queue for tomorrow..."}
+            className="w-full bg-white/[0.02] border border-white/[0.05] rounded-2xl py-4 pl-5 pr-14 text-[14px] font-medium text-white placeholder-white/20 focus:outline-none focus:border-[var(--color-accent)]/50 focus:bg-white/[0.04] transition-all duration-500 shadow-inner"
           />
           <button
             type="submit"
             disabled={!newTask.trim()}
-            className="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-gradient-to-r from-white to-gray-300 text-black rounded-lg hover:from-white hover:to-white disabled:opacity-50 disabled:cursor-not-allowed transition-all hover:scale-110 hover:shadow-[0_0_15px_rgba(255,255,255,0.4)] active:scale-95"
+            className="absolute right-2.5 top-1/2 -translate-y-1/2 p-2.5 bg-white text-black rounded-xl hover:bg-gray-100 disabled:opacity-20 disabled:cursor-not-allowed transition-all hover:scale-105 active:scale-95 shadow-xl"
           >
-            <Plus size={16} strokeWidth={3} />
+            <Plus size={18} strokeWidth={3} />
           </button>
         </div>
-        <div className="flex gap-2 px-1">
+        <div className="flex gap-3 px-1">
           {(["high", "medium", "low"] as const).map(p => (
             <button
               key={p}
               type="button"
               onClick={() => setNewPriority(p)}
-              className={`text-[10px] font-medium px-2 py-1 rounded-md border transition-all flex items-center gap-1 hover:scale-105 active:scale-95 ${
-                newPriority === p ? priorityColors[p] : 'text-[#a1a1aa] border-transparent hover:bg-white/5'
+              className={`text-[9px] font-black uppercase tracking-[0.15em] px-3 py-1.5 rounded-lg border transition-all duration-300 flex items-center gap-2 hover:scale-105 ${
+                newPriority === p ? priorityColors[p] : 'text-[#a1a1aa] border-white/5 hover:bg-white/5'
               }`}
             >
               <Flag size={10} /> {p}
@@ -218,17 +222,19 @@ export default function TodoList() {
         </div>
       </form>
 
-      <div className="flex-1 overflow-y-auto pr-2 custom-scrollbar flex flex-col gap-2 relative z-10">
+      <div className="flex-1 overflow-y-auto pr-3 custom-scrollbar flex flex-col gap-3 relative z-10">
         <AnimatePresence mode="popLayout">
           {activeList.length === 0 ? (
             <motion.div 
               initial={{ opacity: 0 }} 
               animate={{ opacity: 1 }} 
-              className="flex flex-col items-center justify-center h-full text-center space-y-3 opacity-50"
+              className="flex flex-col items-center justify-center h-full text-center space-y-4 opacity-30"
             >
-              <Check size={32} className="text-[#a1a1aa]" />
-              <p className="text-sm text-[#a1a1aa]">
-                {view === "today" ? "All caught up.\nEnjoy your day." : "Nothing planned yet.\nSet up tomorrow."}
+              <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/5">
+                <Check size={40} className="text-white" />
+              </div>
+              <p className="text-[12px] font-black uppercase tracking-[0.2em] text-white">
+                {view === "today" ? "Protocol Complete" : "Queue Empty"}
               </p>
             </motion.div>
           ) : (
@@ -239,20 +245,22 @@ export default function TodoList() {
                 initial={{ opacity: 0, scale: 0.95, y: 10 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95, transition: { duration: 0.2 } }}
-                className={`group flex items-center justify-between p-3.5 rounded-xl border transition-all duration-300 ${
-                  task.completed ? "bg-[#0a0a0a] border-transparent opacity-60 scale-[0.98]" : "bg-[#111111] border-[#ffffff10] hover:border-[#ffffff25] hover:shadow-lg hover:-translate-y-0.5"
+                className={`group flex items-center justify-between p-4 rounded-2xl border transition-all duration-500 ${
+                  task.completed 
+                    ? "bg-white/[0.01] border-transparent opacity-40 scale-[0.98]" 
+                    : "bg-white/[0.02] border-white/[0.05] hover:border-white/20 hover:bg-white/[0.04] hover:-translate-y-1 hover:shadow-xl"
                 }`}
               >
-                <div className="flex items-center gap-3 overflow-hidden relative">
+                <div className="flex items-center gap-4 overflow-hidden relative">
                   <button
                     onClick={(e) => toggleTask(task.id, task.completed, e)}
-                    className={`flex-shrink-0 w-[24px] h-[24px] rounded-full flex items-center justify-center border-2 transition-all duration-300 hover:scale-110 active:scale-90 relative ${
+                    className={`flex-shrink-0 w-7 h-7 rounded-lg flex items-center justify-center border-2 transition-all duration-500 hover:scale-110 active:scale-90 relative ${
                       task.completed 
-                        ? "bg-[var(--color-accent)] border-[var(--color-accent)] text-white shadow-[0_0_15px_var(--color-accent)]" 
-                        : "border-[#ffffff30] hover:border-[var(--color-accent)]/80 hover:shadow-[0_0_10px_rgba(244,63,94,0.3)]"
+                        ? "bg-[var(--color-accent)] border-[var(--color-accent)] text-white shadow-[0_0_20px_rgba(244,63,94,0.4)]" 
+                        : "border-white/10 hover:border-[var(--color-accent)]/50 bg-black/20"
                     }`}
                   >
-                    {task.completed && <Check size={14} strokeWidth={3} className="animate-glow" />}
+                    {task.completed && <Check size={16} strokeWidth={3} className="animate-glow" />}
                     
                     {/* XP Popups */}
                     <AnimatePresence>
@@ -260,11 +268,11 @@ export default function TodoList() {
                         <motion.div
                           key={popup.id}
                           initial={{ opacity: 1, y: 0, scale: 0.5 }}
-                          animate={{ opacity: 0, y: -40, scale: 1.5 }}
+                          animate={{ opacity: 0, y: -50, scale: 2 }}
                           exit={{ opacity: 0 }}
                           transition={{ duration: 0.8, ease: "easeOut" }}
-                          className="absolute pointer-events-none text-[var(--color-accent)] font-black text-xs whitespace-nowrap drop-shadow-lg z-50"
-                          style={{ left: popup.x - 10, top: popup.y - 10 }}
+                          className="absolute pointer-events-none text-[var(--color-accent)] font-black text-[10px] whitespace-nowrap drop-shadow-[0_0_10px_var(--color-accent)] z-50"
+                          style={{ left: popup.x - 20, top: popup.y - 20 }}
                         >
                           +{popup.amount} XP
                         </motion.div>
@@ -272,19 +280,19 @@ export default function TodoList() {
                     </AnimatePresence>
 
                   </button>
-                  <span className={`text-sm truncate transition-colors duration-300 ${task.completed ? "text-[#a1a1aa] line-through" : "text-white"}`}>
+                  <span className={`text-[14px] font-medium truncate transition-all duration-500 ${task.completed ? "text-[#a1a1aa] line-through italic" : "text-white"}`}>
                     {task.title}
                   </span>
                 </div>
-                <div className="flex items-center gap-2">
-                  <span className={`text-[10px] font-medium px-2 py-1 rounded-md border ${priorityColors[task.priority]} ${task.completed ? 'opacity-50' : ''}`}>
+                <div className="flex items-center gap-3">
+                  <span className={`text-[9px] font-black uppercase tracking-widest px-2.5 py-1 rounded-lg border ${priorityColors[task.priority]} ${task.completed ? 'opacity-30' : ''}`}>
                     {task.priority}
                   </span>
                   <button 
                     onClick={() => deleteTask(task.id)}
-                    className="opacity-0 group-hover:opacity-100 p-1.5 text-rose-400 hover:bg-rose-400/10 rounded-md transition-all duration-200 hover:scale-110 active:scale-95"
+                    className="opacity-0 group-hover:opacity-100 p-2 text-rose-500/60 hover:text-rose-500 hover:bg-rose-500/10 rounded-xl transition-all duration-300 hover:scale-110 active:scale-95"
                   >
-                    <Trash2 size={14} />
+                    <Trash2 size={16} />
                   </button>
                 </div>
               </motion.div>

@@ -41,8 +41,8 @@ export default function ClientLayout({
       ) : (
         <div className="flex min-h-screen relative z-10">
           <Sidebar />
-          <main className="flex-1 ml-64 p-8 relative z-10">
-            <div className="max-w-[1400px] mx-auto">
+          <main className="flex-1 lg:ml-64 relative z-10 transition-all duration-500">
+            <div className="max-w-[1600px] mx-auto p-4 md:p-6 lg:p-8 xl:p-12">
               <PageTransition>
                 {children}
               </PageTransition>
