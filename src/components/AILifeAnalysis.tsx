@@ -74,7 +74,7 @@ export default function AILifeAnalysis() {
     <motion.div 
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
-      className="glass-panel p-8 relative overflow-hidden group border border-[var(--color-accent)]/20 hover:border-[var(--color-accent)]/50 hover:shadow-[0_20px_50px_rgba(244,63,94,0.2)] transition-all duration-700 h-full flex flex-col"
+      className="glass-panel p-8 relative overflow-hidden group border border-[var(--color-accent)]/20 hover:border-[var(--color-accent)]/50 hover:shadow-[0_20px_50px_rgba(244,63,94,0.2)] transition-all duration-700 flex flex-col"
     >
       <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--color-accent)]/10 blur-[100px] pointer-events-none rounded-full group-hover:scale-150 transition-transform duration-1000" />
       <div className="absolute -inset-1 bg-gradient-to-tr from-[var(--color-accent)]/10 to-transparent opacity-0 group-hover:opacity-100 blur-3xl transition-opacity duration-1000 pointer-events-none" />

@@ -18,8 +18,7 @@ export default function LandingPage() {
             transition={{ duration: 0.5 }}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-white text-xs font-bold uppercase tracking-widest mb-8"
           >
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            V2.0 is now live — Experience the future of focus
+            V2.0 is now live — Built by Akshath Kataria
           </motion.div>
           
           <motion.h1
@@ -198,22 +197,22 @@ export default function LandingPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               {
-                name: "Alex Rivera",
-                role: "Software Engineer at Google",
+                name: "Anonymous User",
+                role: "Verified Achiever",
                 text: "Ascend Focus is the only app that managed to get me off my phone and into a flow state. The velocity tracking is a game changer.",
-                avatar: "https://i.pravatar.cc/150?u=alex"
+                avatar: "https://i.pravatar.cc/150?u=anonymous1"
               },
               {
-                name: "Sarah Chen",
-                role: "Medical Student",
+                name: "Anonymous User",
+                role: "Verified Achiever",
                 text: "The study techniques blog and the habit tracker have literally transformed my grades. I feel so much more in control.",
-                avatar: "https://i.pravatar.cc/150?u=sarah"
+                avatar: "https://i.pravatar.cc/150?u=anonymous2"
               },
               {
-                name: "James Wilson",
-                role: "Startup Founder",
+                name: "Anonymous User",
+                role: "Verified Achiever",
                 text: "I've tried every productivity app. Ascend is the only one that feels like it was designed for how my brain actually works.",
-                avatar: "https://i.pravatar.cc/150?u=james"
+                avatar: "https://i.pravatar.cc/150?u=anonymous3"
               }
             ].map((t, i) => (
               <div key={i} className="p-10 rounded-[2.5rem] bg-white/[0.02] border border-white/5">

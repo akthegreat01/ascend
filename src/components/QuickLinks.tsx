@@ -47,15 +47,15 @@ export default function QuickLinks() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: idx * 0.03 }}
-            className="flex flex-col items-center justify-center gap-2 p-4 rounded-2xl bg-white/[0.02] border border-white/[0.05] hover:border-white/20 hover:bg-white/[0.04] transition-all duration-300 hover:-translate-y-1 group/link cursor-pointer"
+            className="flex flex-col items-center justify-center gap-1.5 p-3 rounded-2xl bg-white/[0.02] border border-white/[0.05] hover:border-white/20 hover:bg-white/[0.04] transition-all duration-300 hover:-translate-y-1 group/link cursor-pointer"
           >
             <div 
               className="w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-500 group-hover/link:scale-110 group-hover/link:shadow-lg"
               style={{ backgroundColor: `${link.color}15` }}
             >
-              <link.icon size={16} style={{ color: link.color }} className="opacity-80 group-hover/link:opacity-100 transition-opacity" />
+              <link.icon size={14} style={{ color: link.color }} className="opacity-80 group-hover/link:opacity-100 transition-opacity" />
             </div>
-            <span className="text-[10px] font-black text-[#a1a1aa] group-hover/link:text-white transition-colors text-center leading-tight uppercase tracking-widest">
+            <span className="text-[9px] font-black text-[#a1a1aa] group-hover/link:text-white transition-colors text-center leading-none uppercase tracking-widest truncate w-full px-1">
               {link.name}
             </span>
           </motion.a>
