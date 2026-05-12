@@ -185,7 +185,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           </div>
 
           {/* Ad Slot */}
-          <AdSlot format="sidebar" />
+          <div className="p-8 rounded-3xl bg-white/[0.03] border border-white/10 relative overflow-hidden group">
+             <AdSlot format="sidebar" />
+          </div>
         </aside>
       </div>
     </article>
