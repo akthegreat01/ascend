@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import { Mail, MessageSquare, Twitter, Github, Linkedin, Send, ChevronDown, ChevronUp } from 'lucide-react';
+import { Mail, MessageSquare, X, GitBranch, Globe, Send, ChevronDown, ChevronUp, Users } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const faqs = [
@@ -122,9 +122,9 @@ export default function ContactPage() {
               <h3 className="text-2xl font-bold text-white mb-6">Connect with Us</h3>
               <div className="flex gap-4">
                 {[
-                  { icon: Twitter, href: "#" },
-                  { icon: Github, href: "#" },
-                  { icon: Linkedin, href: "#" }
+                  { icon: X, href: "#" },
+                  { icon: GitBranch, href: "#" },
+                  { icon: Globe, href: "#" }
                 ].map((social, i) => (
                   <a 
                     key={i} 

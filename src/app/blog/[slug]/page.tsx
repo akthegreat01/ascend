@@ -1,16 +1,19 @@
-"use client";
-
 import React from 'react';
-import { useParams, notFound } from 'next/navigation';
+import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { blogPosts } from '@/data/blog-data';
-import { Clock, User, ArrowLeft, Share2, Facebook, Twitter, Linkedin, ChevronDown, ChevronUp } from 'lucide-react';
+import { Clock, ArrowLeft, Share2, MessageSquare, X, Globe } from 'lucide-react';
 import AdSlot from '@/components/AdSlot';
 
-export default function BlogPostPage() {
-  const params = useParams();
-  const slug = params.slug as string;
+export function generateStaticParams() {
+  return blogPosts.map((post) => ({
+    slug: post.slug,
+  }));
+}
+
+export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
   const post = blogPosts.find(p => p.slug === slug);
 
   if (!post) {
@@ -124,7 +127,7 @@ export default function BlogPostPage() {
           <div className="mt-20 flex items-center gap-6">
             <span className="text-sm font-bold text-gray-500 uppercase tracking-widest">Share this article:</span>
             <div className="flex gap-4">
-              {[Twitter, Facebook, Linkedin, Share2].map((Icon, i) => (
+              {[X, MessageSquare, Globe, Share2].map((Icon, i) => (
                 <button key={i} className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center text-gray-400 hover:bg-white/10 hover:text-white hover:scale-110 transition-all">
                   <Icon size={20} />
                 </button>

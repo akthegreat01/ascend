@@ -1,7 +1,7 @@
 import KPICards from "@/components/KPICards";
 import CommandCenter from "@/components/CommandCenter";
 import AILifeAnalysis from "@/components/AILifeAnalysis";
-import EnergyMonitor from "@/components/EnergyMonitor";
+
 import DailyWisdom from "@/components/DailyWisdom";
 import DashboardHeader from "@/components/DashboardHeader";
 import VelocityGraph from "@/components/VelocityGraph";
@@ -55,7 +55,7 @@ export default function Home() {
           <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
             <div className="xl:col-span-1 flex flex-col gap-8">
               <VelocityGraph />
-              <EnergyMonitor />
+
             </div>
             <div className="xl:col-span-1 flex flex-col gap-8">
               <DistributionRadar />

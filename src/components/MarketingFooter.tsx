@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { Twitter, Github, Linkedin, Mail } from 'lucide-react';
+import { X, GitBranch, Globe, Mail } from 'lucide-react';
 
 export default function MarketingFooter() {
   const currentYear = new Date().getFullYear();
@@ -47,7 +47,7 @@ export default function MarketingFooter() {
               Level up your focus, discipline, and life. The ultimate operating system for high performers and lifelong learners.
             </p>
             <div className="flex gap-4">
-              {[Twitter, Github, Linkedin, Mail].map((Icon, i) => (
+              {[X, GitBranch, Globe, Mail].map((Icon, i) => (
                 <a key={i} href="#" className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-gray-500 hover:bg-white hover:text-black transition-all">
                   <Icon size={18} />
                 </a>
