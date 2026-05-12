@@ -140,7 +140,7 @@ export default function SettingsModal() {
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="relative w-full max-w-xl bg-[#0e0e0e] border border-[#ffffff15] rounded-3xl shadow-2xl p-0 flex flex-col overflow-y-auto max-h-[85vh] custom-scrollbar"
+              className="relative w-full max-w-xl bg-[#0e0e0e] border border-white/10 rounded-3xl shadow-2xl p-0 flex flex-col max-h-[90vh] overflow-hidden"
             >
               <div className="flex items-center justify-between p-6 border-b border-[#ffffff10] bg-[#0e0e0e] sticky top-0 z-20">
                 <h2 className="text-xl font-semibold text-white">System Configuration</h2>
@@ -149,13 +149,13 @@ export default function SettingsModal() {
                 </button>
               </div>
 
-              <div className="flex border-b border-[#ffffff10] px-4 bg-[#0e0e0e] sticky top-[72px] z-20">
-                <button onClick={() => setActiveTab("profile")} className={`px-4 py-4 text-sm font-medium border-b-2 transition-colors ${activeTab === "profile" ? "border-[var(--color-accent)] text-white" : "border-transparent text-[#a1a1aa] hover:text-white"}`}>Profile</button>
-                <button onClick={() => setActiveTab("integrations")} className={`px-4 py-4 text-sm font-medium border-b-2 transition-colors ${activeTab === "integrations" ? "border-[var(--color-accent)] text-white" : "border-transparent text-[#a1a1aa] hover:text-white"}`}>Integrations</button>
-                <button onClick={() => setActiveTab("data")} className={`px-4 py-4 text-sm font-medium border-b-2 transition-colors ${activeTab === "data" ? "border-[var(--color-accent)] text-white" : "border-transparent text-[#a1a1aa] hover:text-white"}`}>Data & Privacy</button>
+              <div className="flex border-b border-white/10 px-2 bg-[#0e0e0e] sticky top-[72px] z-20 overflow-x-auto custom-scrollbar no-scrollbar whitespace-nowrap">
+                <button onClick={() => setActiveTab("profile")} className={`px-4 py-4 text-xs font-black uppercase tracking-widest border-b-2 transition-all ${activeTab === "profile" ? "border-[var(--color-accent)] text-white bg-[var(--color-accent)]/5" : "border-transparent text-[#a1a1aa] hover:text-white"}`}>Profile</button>
+                <button onClick={() => setActiveTab("integrations")} className={`px-4 py-4 text-xs font-black uppercase tracking-widest border-b-2 transition-all ${activeTab === "integrations" ? "border-[var(--color-accent)] text-white bg-[var(--color-accent)]/5" : "border-transparent text-[#a1a1aa] hover:text-white"}`}>Integrations</button>
+                <button onClick={() => setActiveTab("data")} className={`px-4 py-4 text-xs font-black uppercase tracking-widest border-b-2 transition-all ${activeTab === "data" ? "border-[var(--color-accent)] text-white bg-[var(--color-accent)]/5" : "border-transparent text-[#a1a1aa] hover:text-white"}`}>System</button>
               </div>
 
-              <div className="p-8 space-y-8 flex-1">
+              <div className="p-5 md:p-8 space-y-8 flex-1 overflow-y-auto">
                 
                 {activeTab === "profile" && (
                   <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-4">

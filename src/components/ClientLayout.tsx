@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react';
+import React, { useState } from 'react';
 import { usePathname } from "next/navigation";
 import Sidebar from "@/components/Sidebar";
 import Scratchpad from "@/components/Scratchpad";
@@ -10,6 +10,7 @@ import OnboardingWalkthrough from "@/components/OnboardingWalkthrough";
 import PageTransition from "@/components/PageTransition";
 import MarketingNavbar from "@/components/MarketingNavbar";
 import MarketingFooter from "@/components/MarketingFooter";
+import { Menu, Zap } from "lucide-react";
 
 export default function ClientLayout({
   children,
@@ -21,10 +22,12 @@ export default function ClientLayout({
   outfitVar: string;
 }) {
   const pathname = usePathname();
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  
   const isMarketingPage = pathname === "/" || pathname.startsWith("/blog") || pathname.startsWith("/about") || pathname.startsWith("/contact") || pathname.startsWith("/privacy") || pathname.startsWith("/terms") || pathname.startsWith("/disclaimer") || pathname.startsWith("/cookie-policy");
 
   return (
-    <body className={`${interVar} ${outfitVar} antialiased min-h-screen selection:bg-white selection:text-black bg-[#050505]`}>
+    <body className={`${interVar} ${outfitVar} antialiased min-h-screen selection:bg-white selection:text-black bg-[#050505] overflow-x-hidden`}>
       <AuraBackground />
       <div className="fixed inset-0 z-50 pointer-events-none noise-overlay mix-blend-overlay"></div>
       
@@ -40,14 +43,32 @@ export default function ClientLayout({
         </div>
       ) : (
         <div className="flex min-h-screen relative z-10">
-          <Sidebar />
-          <main className="flex-1 lg:ml-64 relative z-10 transition-all duration-500">
-            <div className="max-w-[1600px] mx-auto p-4 md:p-6 lg:p-8 xl:p-12">
+          <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
+          
+          <main className="flex-1 lg:ml-64 relative z-10 transition-all duration-500 ease-in-out">
+            {/* Mobile Header */}
+            <div className="lg:hidden sticky top-0 z-[40] flex items-center justify-between p-4 bg-[#050505]/80 backdrop-blur-xl border-b border-white/[0.05]">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-white to-gray-400 flex items-center justify-center">
+                  <span className="text-black font-black text-sm">A</span>
+                </div>
+                <span className="text-xs font-black tracking-widest text-white uppercase">Ascend</span>
+              </div>
+              <button 
+                onClick={() => setIsSidebarOpen(true)}
+                className="p-2 rounded-xl bg-white/5 border border-white/10 text-white transition-all active:scale-95"
+              >
+                <Menu size={20} />
+              </button>
+            </div>
+
+            <div className="max-w-[1600px] mx-auto p-4 md:p-6 lg:p-8 xl:p-12 min-h-screen">
               <PageTransition>
                 {children}
               </PageTransition>
             </div>
           </main>
+          
           <Scratchpad />
           <CommandMenu />
           <OnboardingWalkthrough />

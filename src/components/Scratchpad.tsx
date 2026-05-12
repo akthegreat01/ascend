@@ -51,16 +51,16 @@ export default function Scratchpad() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 50, scale: 0.95 }}
             transition={{ type: "spring", bounce: 0, duration: 0.4 }}
-            className="fixed bottom-6 right-6 w-96 h-[500px] z-[100] glass-panel bg-[#0a0a0a]/90 backdrop-blur-2xl border-[#ffffff20] shadow-2xl flex flex-col overflow-hidden"
+            className="fixed bottom-4 right-4 left-4 md:left-auto md:bottom-6 md:right-6 md:w-96 h-[500px] max-h-[70vh] z-[100] glass-panel bg-[#0a0a0a]/95 backdrop-blur-2xl border-white/10 shadow-2xl flex flex-col overflow-hidden"
           >
-            <div className="flex items-center justify-between p-4 border-b border-[#ffffff10] bg-[#111111]/50">
+            <div className="flex items-center justify-between p-4 border-b border-white/5 bg-white/5">
               <div className="flex items-center gap-2 text-white">
-                <PenLine size={16} />
-                <span className="font-medium text-sm tracking-wide">Journal Scratchpad</span>
+                <PenLine size={16} className="text-[var(--color-accent)]" />
+                <span className="font-bold text-xs uppercase tracking-widest">Scratchpad</span>
               </div>
               <button 
                 onClick={() => setIsOpen(false)}
-                className="text-[#a1a1aa] hover:text-white transition-colors p-1"
+                className="text-[#a1a1aa] hover:text-white transition-all bg-white/5 p-1.5 rounded-lg"
               >
                 <X size={16} />
               </button>
@@ -69,13 +69,13 @@ export default function Scratchpad() {
               ref={textareaRef}
               value={content}
               onChange={(e) => setContent(e.target.value)}
-              placeholder="Dump your thoughts here... (Markdown supported)"
-              className="flex-1 w-full bg-transparent p-4 text-white text-sm resize-none focus:outline-none placeholder-[#ffffff30] custom-scrollbar"
+              placeholder="Dump your thoughts here..."
+              className="flex-1 w-full bg-transparent p-6 text-white text-[15px] leading-relaxed resize-none focus:outline-none placeholder-white/20 custom-scrollbar font-light"
               spellCheck={false}
             />
-            <div className="p-2 border-t border-[#ffffff10] text-[10px] text-[#a1a1aa] flex justify-between bg-[#050505]">
-              <span>Autosaved locally</span>
-              <span>Press Cmd+J to close</span>
+            <div className="px-4 py-3 border-t border-white/5 text-[9px] font-black uppercase tracking-[0.2em] text-[#a1a1aa]/50 flex justify-between bg-black/40">
+              <span>Cloud Sync: Active</span>
+              <span className="hidden md:block">Press Cmd+J to toggle</span>
             </div>
           </motion.div>
         )}

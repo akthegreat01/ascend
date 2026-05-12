@@ -35,7 +35,7 @@ export default function CommandMenu() {
   return (
     <AnimatePresence>
       {open && (
-        <div className="fixed inset-0 z-[300] flex items-start justify-center pt-[15vh]">
+        <div className="fixed inset-0 z-[300] flex items-start justify-center pt-[10vh] md:pt-[15vh] p-4">
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -48,22 +48,22 @@ export default function CommandMenu() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: -20 }}
             transition={{ type: "spring", bounce: 0, duration: 0.3 }}
-            className="relative w-full max-w-[600px] overflow-hidden rounded-2xl border border-[#ffffff20] bg-[#0e0e0e] shadow-2xl"
+            className="relative w-full max-w-[600px] overflow-hidden rounded-2xl border border-white/10 bg-[#0e0e0e] shadow-2xl flex flex-col max-h-[70vh] md:max-h-none"
           >
             <Command
-              className="w-full flex flex-col h-full"
+              className="w-full flex flex-col"
               loop
             >
-              <div className="flex items-center border-b border-[#ffffff10] px-3">
+              <div className="flex items-center border-b border-white/5 px-3">
                 <SearchIcon />
                 <Command.Input 
                   placeholder="Quick Search (Cmd+K)..." 
-                  className="w-full bg-transparent p-4 text-white placeholder-[#ffffff40] outline-none border-none text-base"
+                  className="w-full bg-transparent p-4 text-white placeholder-white/20 outline-none border-none text-base"
                   autoFocus
                 />
               </div>
 
-              <Command.List className="max-h-[400px] overflow-y-auto custom-scrollbar p-2">
+              <Command.List className="overflow-y-auto custom-scrollbar p-2">
                 <Command.Empty className="py-6 text-center text-sm text-[#a1a1aa]">
                   No results found in your neural network.
                 </Command.Empty>
