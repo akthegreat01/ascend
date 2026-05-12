@@ -114,7 +114,7 @@ export default function HealthTracker() {
         <div>
           <h2 className="text-3xl font-light text-white font-['Outfit'] mb-2 flex items-center gap-3">
             <Calendar className="text-[#66fcf1]" size={28} />
-            Biometric Ascend
+            Health Tracker
           </h2>
           <p className="text-xs text-[#a1a1aa] uppercase tracking-[0.3em] font-bold">Monthly Synchronization Log</p>
         </div>

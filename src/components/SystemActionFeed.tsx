@@ -27,7 +27,7 @@ export default function SystemActionFeed() {
           feed.push({
             id: `focus-${d}`,
             type: "focus",
-            content: "Flow State maintained. Neural pathways reinforced.",
+            content: "Flow State maintained. Focus consistency improved.",
             timestamp: d,
             color: "text-emerald-400"
           });
@@ -98,9 +98,9 @@ export default function SystemActionFeed() {
       <div className="flex items-center justify-between mb-8 relative z-10">
         <h3 className="text-[11px] font-black text-white tracking-[0.2em] uppercase flex items-center gap-3">
           <Activity size={18} className="text-[var(--color-accent)] group-hover:scale-110 transition-transform duration-500" />
-          Neural Action Feed
+          System Activity
         </h3>
-        <span className="text-[9px] font-black text-[#a1a1aa] uppercase tracking-widest animate-pulse opacity-60">Live Telemetry</span>
+        <span className="text-[9px] font-black text-[#a1a1aa] uppercase tracking-widest animate-pulse opacity-60">Real-time activity</span>
       </div>
 
       <div className="flex-1 overflow-y-auto custom-scrollbar space-y-6 pr-3 relative z-10">

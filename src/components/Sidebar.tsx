@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
-import { LayoutDashboard, Timer, CheckSquare, BarChart3, Search, Command, Activity, Swords, Target, BookHeart, Palette, Sparkles, Trophy, DollarSign, FileText, Music, Globe, Smile, Bookmark, Dumbbell, Sunrise, Grid3X3, Network, Zap } from "lucide-react";
+import { LayoutDashboard, Timer, CheckSquare, BarChart3, Search, Command, Activity, Swords, Target, BookHeart, Palette, Sparkles, Trophy, DollarSign, FileText, Music, Globe, Smile, Bookmark, Dumbbell, Sunrise, Grid3X3, Zap, Scale, Play } from "lucide-react";
 import { motion } from "framer-motion";
 import SettingsModal from "./SettingsModal";
 
@@ -14,10 +14,9 @@ const navGroups = [
       { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
       { name: "Daily Briefing", href: "/briefing", icon: Sunrise },
       { name: "Focus Timer", href: "/timer", icon: Timer },
+      { name: "Focus Schedule", href: "/schedule", icon: Grid3X3 },
       { name: "Focus Sounds", href: "/focus-sounds", icon: Music },
       { name: "Tasks", href: "/tasks", icon: CheckSquare },
-      { name: "Priority Matrix", href: "/priority", icon: Grid3X3 },
-      { name: "Neural Map", href: "/map", icon: Network },
     ]
   },
   {
@@ -32,6 +31,7 @@ const navGroups = [
   {
     label: "Wellness",
     items: [
+      { name: "Health Tracker", href: "/health", icon: Scale },
       { name: "Mood Tracker", href: "/mood", icon: Smile },
       { name: "Workout Log", href: "/workout", icon: Dumbbell },
     ]
@@ -40,34 +40,22 @@ const navGroups = [
     label: "Reflect",
     items: [
       { name: "Journal", href: "/journal", icon: BookHeart },
-      { name: "Evolution", href: "/evolution", icon: Swords },
       { name: "Analytics", href: "/analytics", icon: BarChart3 },
     ]
   },
   {
     label: "Assets",
     items: [
-      { name: "Wealth Matrix", href: "/wealth", icon: DollarSign },
-      { name: "Neural Notes", href: "/notes", icon: FileText },
+      { name: "Wealth Tracker", href: "/wealth", icon: DollarSign },
+      { name: "Media Vault", href: "/vault", icon: Play },
+      { name: "Notes", href: "/notes", icon: FileText },
       { name: "Reading List", href: "/reading", icon: Bookmark },
     ]
   },
   {
     label: "Integrations",
     items: [
-      { name: "Organise Stuff", href: "/ecosystem", icon: Globe },
-    ]
-  },
-  {
-    label: "Social",
-    items: [
-      { name: "Leaderboard", href: "/leaderboard", icon: Trophy },
-    ]
-  },
-  {
-    label: "Learn",
-    items: [
-      { name: "Library", href: "/blog", icon: BookHeart },
+      { name: "Digital Ecosystem", href: "/ecosystem", icon: Globe },
     ]
   }
 ];

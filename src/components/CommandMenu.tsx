@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { Command } from "cmdk";
 import { useRouter } from "next/navigation";
-import { LayoutDashboard, Timer, CheckSquare, Activity, BarChart3, Settings, PenLine, DollarSign, FileText, Music, Globe, Sunrise, Network, Grid3X3, BookOpen, Zap } from "lucide-react";
+import { LayoutDashboard, Timer, CheckSquare, Activity, BarChart3, Settings, PenLine, DollarSign, FileText, Music, Globe, Sunrise, Grid3X3, BookOpen, Zap } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function CommandMenu() {
@@ -57,7 +57,7 @@ export default function CommandMenu() {
               <div className="flex items-center border-b border-[#ffffff10] px-3">
                 <SearchIcon />
                 <Command.Input 
-                  placeholder="Neural Search (Cmd+K)..." 
+                  placeholder="Quick Search (Cmd+K)..." 
                   className="w-full bg-transparent p-4 text-white placeholder-[#ffffff40] outline-none border-none text-base"
                   autoFocus
                 />
@@ -85,17 +85,12 @@ export default function CommandMenu() {
                     onSelect={() => runCommand(() => router.push("/tasks"))}
                     className="flex items-center gap-3 px-3 py-2.5 rounded-xl cursor-pointer text-sm text-white aria-selected:bg-[#ffffff15] transition-colors"
                   >
-                    <CheckSquare size={16} /> Neural Tasks
+                    <CheckSquare size={16} /> Tasks
                   </Command.Item>
                 </Command.Group>
 
                 <Command.Group heading="Intelligence" className="text-xs font-medium text-[#a1a1aa] px-2 py-1 mt-2">
-                  <Command.Item 
-                    onSelect={() => runCommand(() => router.push("/map"))}
-                    className="flex items-center gap-3 px-3 py-2.5 rounded-xl cursor-pointer text-sm text-white aria-selected:bg-[#ffffff15] transition-colors mt-1"
-                  >
-                    <Network size={16} /> Neural Map
-                  </Command.Item>
+
                   <Command.Item 
                     onSelect={() => runCommand(() => router.push("/priority"))}
                     className="flex items-center gap-3 px-3 py-2.5 rounded-xl cursor-pointer text-sm text-white aria-selected:bg-[#ffffff15] transition-colors"
@@ -106,7 +101,7 @@ export default function CommandMenu() {
                     onSelect={() => runCommand(() => router.push("/notes"))}
                     className="flex items-center gap-3 px-3 py-2.5 rounded-xl cursor-pointer text-sm text-white aria-selected:bg-[#ffffff15] transition-colors"
                   >
-                    <FileText size={16} /> Neural Notes
+                    <FileText size={16} /> Notes
                   </Command.Item>
                 </Command.Group>
 

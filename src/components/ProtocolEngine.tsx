@@ -31,8 +31,8 @@ export default function ProtocolEngine() {
   const protocols = [
     {
       id: "deep_work",
-      name: "Deep Work Protocol",
-      description: "Init Focus Forge + Neural Static Audio",
+      name: "Focus Session",
+      description: "Start Focus Zone + Audio",
       color: "text-emerald-400 bg-emerald-400/10 border-emerald-400/20 hover:border-emerald-400/40 hover:bg-emerald-400/20",
       icon: <Terminal size={14} className="text-emerald-400" />
     },
@@ -64,8 +64,8 @@ export default function ProtocolEngine() {
           <Workflow size={20} />
         </div>
         <div>
-          <h3 className="text-[11px] font-black text-white tracking-[0.2em] uppercase">Execution Protocols</h3>
-          <p className="text-[10px] text-[#a1a1aa] font-bold tracking-widest uppercase opacity-60">Workflow Macros</p>
+          <h3 className="text-[11px] font-black text-white tracking-[0.2em] uppercase">Quick Actions</h3>
+          <p className="text-[10px] text-[#a1a1aa] font-bold tracking-widest uppercase opacity-60">System Macros</p>
         </div>
       </div>
 

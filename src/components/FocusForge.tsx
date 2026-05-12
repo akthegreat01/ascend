@@ -43,13 +43,13 @@ export default function FocusForge() {
           </div>
           <h1 className="text-4xl font-light text-white mb-4 tracking-tight">Mission Accomplished</h1>
           <p className="text-[#a1a1aa] mb-12 max-w-sm mx-auto leading-relaxed">
-            Your neural focus session is complete. The task <span className="text-white italic">"{task}"</span> has been forged.
+            Your focus session is complete. The task <span className="text-white italic">"{task}"</span> has been finished.
           </p>
           <button 
             onClick={() => window.location.reload()}
             className="px-12 py-4 bg-white text-black font-bold rounded-2xl hover:bg-gray-200 transition-all hover:scale-105 active:scale-95"
           >
-            Return to Matrix
+            Go Back
           </button>
         </motion.div>
       </div>
@@ -80,13 +80,13 @@ export default function FocusForge() {
               <div className="w-20 h-20 rounded-3xl bg-[var(--color-accent)]/10 flex items-center justify-center mb-8 border border-[var(--color-accent)]/30">
                 <Zap size={32} className="text-[var(--color-accent)]" />
               </div>
-              <h1 className="text-5xl font-light text-white mb-4 tracking-tighter">Deep Focus Forge</h1>
+              <h1 className="text-5xl font-light text-white mb-4 tracking-tighter">Focus Session</h1>
               <p className="text-[#a1a1aa] mb-12 max-w-sm">Declare your objective. Silence the world. Forge results.</p>
               
               <div className="w-full space-y-6">
                 <input 
                   type="text" 
-                  placeholder="WHAT ARE WE FORGING?"
+                  placeholder="WHAT IS YOUR OBJECTIVE?"
                   value={task}
                   onChange={e => setTask(e.target.value.toUpperCase())}
                   className="w-full bg-transparent border-b-2 border-white/10 py-4 text-3xl font-light text-white text-center focus:outline-none focus:border-[var(--color-accent)] transition-all placeholder:text-white/5 tracking-widest"
@@ -112,7 +112,7 @@ export default function FocusForge() {
                   >
                     <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/50 to-transparent -translate-x-full group-hover:animate-[shimmer_1s_infinite] pointer-events-none" />
                     <span className="relative z-10 flex items-center justify-center gap-3 text-xl uppercase tracking-[0.3em] drop-shadow-md">
-                      Ignite Forge
+                      Start Session
                     </span>
                   </button>
                 </div>
@@ -126,7 +126,7 @@ export default function FocusForge() {
               className="flex flex-col items-center w-full"
             >
               <div className="mb-12">
-                <p className="text-[10px] font-black text-[var(--color-accent)] uppercase tracking-[0.4em] mb-4 glow-text">Neural Core Active</p>
+                <p className="text-[10px] font-black text-[var(--color-accent)] uppercase tracking-[0.4em] mb-4 glow-text">Focus Active</p>
                 <h2 className="text-2xl font-light text-[#e4e4e7] tracking-widest opacity-40 uppercase">{task}</h2>
               </div>
 
@@ -164,7 +164,7 @@ export default function FocusForge() {
                       <Wind size={20} />
                     </button>
                   </div>
-                  <span className="text-[10px] font-bold text-[#a1a1aa] uppercase tracking-widest">Ambient Shield</span>
+                  <span className="text-[10px] font-bold text-[#a1a1aa] uppercase tracking-widest">Soundscape</span>
                 </div>
               </div>
 

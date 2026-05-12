@@ -102,7 +102,7 @@ export default function CommandCenter() {
       const newGoal = {
         id: Date.now().toString(),
         title: cleanText,
-        description: "Captured via Neural Router",
+        description: "Captured via System Router",
         deadline: new Date(new Date().setMonth(new Date().getMonth() + 3)).toISOString().split('T')[0],
         category: "Captured",
         milestones: []
@@ -123,7 +123,7 @@ export default function CommandCenter() {
       };
       
       localStorage.setItem("ascend_journal", JSON.stringify([newEntry, ...entries]));
-      alert("Memory sealed to Vault 🧠");
+      alert("Entry Saved ✅");
     }
     
     setJournalEntry("");
@@ -244,7 +244,7 @@ export default function CommandCenter() {
           return (
             <div className="mt-8 pt-6 border-t border-white/[0.05] relative z-10">
               <div className="flex items-center justify-between mb-3">
-                <span className="text-[10px] font-black text-[#a1a1aa] uppercase tracking-[0.25em]">Year Ascent</span>
+                <span className="text-[10px] font-black text-[#a1a1aa] uppercase tracking-[0.25em]">Year Progress</span>
                 <span className="text-[11px] font-black text-white tabular-nums tracking-widest">{pct}%</span>
               </div>
               <div className="h-2 w-full bg-white/5 rounded-full overflow-hidden mb-3 p-[1px] border border-white/5">

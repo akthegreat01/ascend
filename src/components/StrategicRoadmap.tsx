@@ -5,9 +5,9 @@ import { Target, ChevronRight, Compass } from "lucide-react";
 
 export default function StrategicRoadmap() {
   const roadmap = [
-    { phase: "Q2 Core", title: "Neural Protocol Sync", progress: 65 },
+    { phase: "Q2 Core", title: "Core System Sync", progress: 65 },
     { phase: "Q3 Expansion", title: "Digital Ecosystem Hub", progress: 20 },
-    { phase: "Q4 Mastery", title: "Automated Life OS", progress: 5 }
+    { phase: "Q4 Mastery", title: "Productivity System", progress: 5 }
   ];
 
   return (
@@ -53,8 +53,8 @@ export default function StrategicRoadmap() {
               <Target size={20} />
             </div>
             <div>
-              <p className="text-[12px] font-black text-white uppercase tracking-wider mb-0.5">Primary Directive</p>
-              <p className="text-[11px] font-bold text-[#a1a1aa] tracking-tight uppercase opacity-60">Neural Engine Integration</p>
+              <p className="text-[12px] font-black text-white uppercase tracking-wider mb-0.5">Primary Goal</p>
+              <p className="text-[11px] font-bold text-[#a1a1aa] tracking-tight uppercase opacity-60">Core System Integration</p>
             </div>
           </div>
           <ChevronRight size={16} className="text-[#a1a1aa] group-hover/item:text-white transition-all transform group-hover/item:translate-x-1" />

@@ -60,7 +60,7 @@ export default function AILifeAnalysis() {
 
     // Default insights if not enough data
     if (generatedInsights.length === 0) {
-      generatedInsights.push("Ascend is gathering telemetry on your focus patterns. Log your first session to begin deep analysis.");
+      generatedInsights.push("System is gathering telemetry on your focus patterns. Log your first session to begin deep analysis.");
       generatedInsights.push("Strategic Tip: Peak mental clarity often occurs after a reset. Ensure your work environment is calibrated.");
     }
 
@@ -84,7 +84,7 @@ export default function AILifeAnalysis() {
           <div className="p-2.5 rounded-xl bg-[var(--color-accent)]/10 text-[var(--color-accent)] shadow-[0_0_20px_rgba(244,63,94,0.15)] group-hover:scale-110 transition-transform duration-500">
             <BrainCircuit size={20} />
           </div>
-          <h3 className="text-[11px] font-black text-white tracking-[0.2em] uppercase">Ascend Intelligence</h3>
+          <h3 className="text-[11px] font-black text-white tracking-[0.2em] uppercase">System Analysis</h3>
         </div>
         <div className="flex items-center gap-2.5 px-3 py-1.5 rounded-xl bg-black/40 border border-white/5 text-[var(--color-accent)] shadow-inner">
           <div className="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)] animate-pulse shadow-[0_0_10px_var(--color-accent)]" />
