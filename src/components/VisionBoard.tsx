@@ -67,8 +67,9 @@ export default function VisionBoard() {
 
   const resolveImageUrl = async (url: string) => {
     const trimmedUrl = url.trim();
+    if (!trimmedUrl) return null;
 
-    // 1. Direct image check
+    // 1. Direct image check (highest priority)
     const isDirectImage = /\.(jpeg|jpg|gif|png|webp|avif)(\?.*)?$/i.test(trimmedUrl) || 
                          trimmedUrl.includes('images.unsplash.com') ||
                          trimmedUrl.includes('i.pinimg.com') ||
@@ -76,42 +77,55 @@ export default function VisionBoard() {
                          
     if (isDirectImage) return trimmedUrl;
 
-    // 2. Pinterest specific handling
-    const pinIdMatch = trimmedUrl.match(/pinterest\.com\/pin\/(\d+)/);
+    // 2. Pinterest specific handling (Subdomains like in.pinterest.com supported)
+    const pinIdMatch = trimmedUrl.match(/(?:pinterest\.[a-z.]+|pin\.it)\/pin\/(\d+)/) || 
+                       trimmedUrl.match(/pinterest\.[a-z.]+\/pin\/(\d+)/);
+    
     if (pinIdMatch) {
       const pinImg = await fetchPinterestPin(pinIdMatch[1]);
       if (pinImg) return pinImg;
     }
 
-    // 3. Generic resolution via Microlink (handles Pinterest short links, Dribbble, etc.)
+    // 3. Generic resolution via Microlink
     try {
-      const response = await fetch(`https://api.microlink.io?url=${encodeURIComponent(trimmedUrl)}`);
+      const response = await fetch(`https://api.microlink.io?url=${encodeURIComponent(trimmedUrl)}&palette=true`);
       const data = await response.json();
       
       if (data.status === 'success') {
-        // Check if Microlink followed a redirect to a Pinterest Pin
-        const resolvedUrl = data.data.url;
-        const secondPinMatch = resolvedUrl.match(/pinterest\.com\/pin\/(\d+)/);
+        // Follow redirect for short links
+        const resolvedUrl = data.data.url || trimmedUrl;
+        const secondPinMatch = resolvedUrl.match(/pin\/(\d+)/);
         if (secondPinMatch) {
           const pinImg = await fetchPinterestPin(secondPinMatch[1]);
           if (pinImg) return pinImg;
         }
 
+        // Use the primary image found by Microlink
         if (data.data.image?.url) {
           return data.data.image.url;
         }
       }
     } catch (err) {
-      console.warn("Microlink resolution failed", err);
+      console.warn("Resolution failed", err);
     }
 
-    return trimmedUrl;
+    // 4. Final check: if it still doesn't look like an image, don't return it
+    return null; 
   };
 
   const handlePreview = async () => {
+    if (!newUrl.trim()) return;
     setIsResolving(true);
+    setError(null);
     const resolved = await resolveImageUrl(newUrl);
-    setPreviewUrl(resolved);
+    if (resolved) {
+      setPreviewUrl(resolved);
+    } else {
+      setPreviewUrl(null);
+      if (newUrl.length > 10) {
+        setError("Could not find a valid image at this link. Try right-clicking the image and selecting 'Copy Image Address'.");
+      }
+    }
     setIsResolving(false);
   };
 
