@@ -39,27 +39,80 @@ export default function VisionBoard() {
     }
   }, [images, isLoaded]);
 
-  const resolveImageUrl = async (url: string) => {
-    // 1. Direct image check
-    const isDirectImage = /\.(jpeg|jpg|gif|png|webp|avif)(\?.*)?$/i.test(url) || 
-                         url.includes('images.unsplash.com') ||
-                         url.includes('i.pinimg.com') ||
-                         url.startsWith('data:image/');
-                         
-    if (isDirectImage) return url;
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
-    // 2. Generic resolution via Microlink (handles Pinterest, Dribbble, etc.)
-    try {
-      const response = await fetch(`https://api.microlink.io?url=${encodeURIComponent(url)}&palette=true`);
-      const data = await response.json();
-      if (data.status === 'success' && data.data.image?.url) {
-        return data.data.image.url;
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (newUrl.trim() && (newUrl.startsWith("http") || newUrl.startsWith("data:"))) {
+        handlePreview();
+      } else {
+        setPreviewUrl(null);
       }
-    } catch (err) {
-      console.warn("Microlink resolution failed, using original URL", err);
+    }, 800);
+    return () => clearTimeout(timer);
+  }, [newUrl]);
+
+  const fetchPinterestPin = async (pinId: string) => {
+    try {
+      // Use AllOrigins as a free CORS proxy to hit Pinterest's public pidgets API
+      const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(`https://api.pinterest.com/v3/pidgets/pins/info/?pin_ids=${pinId}`)}`);
+      const rawData = await response.json();
+      const data = JSON.parse(rawData.contents);
+      return data?.data?.[0]?.images?.['564x']?.url || data?.data?.[0]?.images?.['736x']?.url;
+    } catch (e) {
+      console.error("Pinterest extraction failed", e);
+      return null;
+    }
+  }
+
+  const resolveImageUrl = async (url: string) => {
+    const trimmedUrl = url.trim();
+
+    // 1. Direct image check
+    const isDirectImage = /\.(jpeg|jpg|gif|png|webp|avif)(\?.*)?$/i.test(trimmedUrl) || 
+                         trimmedUrl.includes('images.unsplash.com') ||
+                         trimmedUrl.includes('i.pinimg.com') ||
+                         trimmedUrl.startsWith('data:image/');
+                         
+    if (isDirectImage) return trimmedUrl;
+
+    // 2. Pinterest specific handling
+    const pinIdMatch = trimmedUrl.match(/pinterest\.com\/pin\/(\d+)/);
+    if (pinIdMatch) {
+      const pinImg = await fetchPinterestPin(pinIdMatch[1]);
+      if (pinImg) return pinImg;
     }
 
-    return url;
+    // 3. Generic resolution via Microlink (handles Pinterest short links, Dribbble, etc.)
+    try {
+      const response = await fetch(`https://api.microlink.io?url=${encodeURIComponent(trimmedUrl)}`);
+      const data = await response.json();
+      
+      if (data.status === 'success') {
+        // Check if Microlink followed a redirect to a Pinterest Pin
+        const resolvedUrl = data.data.url;
+        const secondPinMatch = resolvedUrl.match(/pinterest\.com\/pin\/(\d+)/);
+        if (secondPinMatch) {
+          const pinImg = await fetchPinterestPin(secondPinMatch[1]);
+          if (pinImg) return pinImg;
+        }
+
+        if (data.data.image?.url) {
+          return data.data.image.url;
+        }
+      }
+    } catch (err) {
+      console.warn("Microlink resolution failed", err);
+    }
+
+    return trimmedUrl;
+  };
+
+  const handlePreview = async () => {
+    setIsResolving(true);
+    const resolved = await resolveImageUrl(newUrl);
+    setPreviewUrl(resolved);
+    setIsResolving(false);
   };
 
   const addImage = async () => {
@@ -69,7 +122,7 @@ export default function VisionBoard() {
     setError(null);
 
     try {
-      const finalUrl = await resolveImageUrl(newUrl.trim());
+      const finalUrl = previewUrl || await resolveImageUrl(newUrl.trim());
       
       const newImage: VisionImage = {
         id: Date.now().toString(),
@@ -80,6 +133,7 @@ export default function VisionBoard() {
       setImages([newImage, ...images]);
       setNewUrl("");
       setNewCaption("");
+      setPreviewUrl(null);
       setIsAdding(false);
     } catch (err) {
       setError("Unable to manifest this image. Please try a direct link.");
@@ -150,6 +204,23 @@ export default function VisionBoard() {
                   />
                 </div>
               </div>
+
+              {/* Preview Section */}
+              <AnimatePresence>
+                {previewUrl && (
+                  <motion.div 
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.9 }}
+                    className="relative w-full max-w-sm mx-auto aspect-video rounded-2xl overflow-hidden border border-white/10 shadow-2xl"
+                  >
+                    <img src={previewUrl} alt="Preview" className="w-full h-full object-cover" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-4">
+                      <span className="text-[10px] font-bold text-white uppercase tracking-widest">Image Preview</span>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
 
               {error && (
                 <motion.div 
