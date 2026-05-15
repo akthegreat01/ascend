@@ -57,9 +57,9 @@ export default function ProtocolEngine() {
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.15 }}
-      className="glass-panel p-8 flex flex-col group relative overflow-hidden"
+      className="glass-panel p-6 flex flex-col group relative overflow-hidden"
     >
-      <div className="flex items-center gap-4 mb-8 relative z-10">
+      <div className="flex items-center gap-4 mb-5 relative z-10">
         <div className="p-2.5 rounded-xl bg-[var(--color-accent)]/10 text-[var(--color-accent)] shadow-[0_0_20px_rgba(244,63,94,0.15)] group-hover:scale-110 transition-transform duration-500">
           <Workflow size={20} />
         </div>
@@ -69,13 +69,13 @@ export default function ProtocolEngine() {
         </div>
       </div>
 
-      <div className="flex flex-col gap-4 relative z-10">
+      <div className="flex flex-col gap-3 relative z-10">
         {protocols.map(p => (
           <button
             key={p.id}
             onClick={() => executeProtocol(p.id)}
             disabled={activeProtocol !== null}
-            className={`flex items-start gap-4 p-5 rounded-2xl border text-left transition-all duration-500 ${p.color} ${activeProtocol === p.id ? "animate-pulse scale-[0.98] opacity-80" : ""} ${activeProtocol && activeProtocol !== p.id ? "opacity-30" : ""}`}
+            className={`flex items-start gap-4 p-3.5 rounded-2xl border text-left transition-all duration-500 ${p.color} ${activeProtocol === p.id ? "animate-pulse scale-[0.98] opacity-80" : ""} ${activeProtocol && activeProtocol !== p.id ? "opacity-30" : ""}`}
           >
             <div className="mt-0.5 p-2 rounded-lg bg-black/20 group-hover:bg-black/40 transition-colors">{p.icon}</div>
             <div className="flex-1">

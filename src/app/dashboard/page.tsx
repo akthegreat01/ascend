@@ -1,8 +1,6 @@
 import KPICards from "@/components/KPICards";
 import CommandCenter from "@/components/CommandCenter";
 import AILifeAnalysis from "@/components/AILifeAnalysis";
-
-import DailyWisdom from "@/components/DailyWisdom";
 import DashboardHeader from "@/components/DashboardHeader";
 import VelocityGraph from "@/components/VelocityGraph";
 import DistributionRadar from "@/components/DistributionRadar";
@@ -12,72 +10,71 @@ import AffirmationCard from "@/components/AffirmationCard";
 import StreakTracker from "@/components/StreakTracker";
 import AdSlot from "@/components/AdSlot";
 import ActivityHeatmap from "@/components/ActivityHeatmap";
-import StrategicRoadmap from "@/components/StrategicRoadmap";
 import SystemActionFeed from "@/components/SystemActionFeed";
+import XPEngine from "@/components/XPEngine";
+import AICoach from "@/components/AICoach";
+import MomentumScore from "@/components/MomentumScore";
+import LifeDashboard from "@/components/LifeDashboard";
 
+
+import TodoList from "@/components/TodoList";
+import TimeBlocker from "@/components/TimeBlocker";
 
 export default function Home() {
   return (
-    <div className="flex flex-col relative z-10 pb-20">
+    <div className="flex flex-col relative z-10 pb-12 gap-4">
       
-      {/* Header Section */}
-      <div className="mb-10">
-        <DashboardHeader />
-      </div>
+      {/* ═══ TOP BAR: Header + KPIs ═══ */}
+      <DashboardHeader />
+      <KPICards />
 
-      {/* KPI Section */}
-      <div className="mb-12">
-        <KPICards />
-      </div>
-
-      <div className="space-y-12">
-        {/* Row 1: Focus & Direction */}
-        <section>
-          <h2 className="section-label">Focus & Direction</h2>
-          <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
-            <div className="xl:col-span-2 flex flex-col gap-8">
-              <CommandCenter />
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <StrategicRoadmap />
-                <DailyWisdom />
-              </div>
-            </div>
-            <div className="xl:col-span-1 flex flex-col gap-8">
-              <SystemActionFeed />
-              <AILifeAnalysis />
-            </div>
+      {/* ═══ ROW 1: Core Terminal — 2/3 + 1/3 ═══ */}
+      <div className="grid grid-cols-1 xl:grid-cols-12 gap-4">
+        {/* LEFT — Main Work Area */}
+        <div className="xl:col-span-8 flex flex-col gap-4">
+          <CommandCenter />
+          
+          {/* Action Hub */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 h-[500px]">
+            <TodoList />
+            <TimeBlocker />
           </div>
-        </section>
-
-        {/* Row 2: Performance Analytics */}
-        <section>
-          <h2 className="section-label">Performance Analytics</h2>
-          <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
-            <div className="xl:col-span-1 flex flex-col gap-8">
-              <VelocityGraph />
-
-            </div>
-            <div className="xl:col-span-1 flex flex-col gap-8">
-              <DistributionRadar />
-              <ActivityHeatmap />
-            </div>
-            <div className="xl:col-span-1 flex flex-col gap-8">
-              <div className="grid grid-cols-2 gap-4">
-                <StreakTracker />
-                <WellnessWidget />
-              </div>
-              <AffirmationCard />
-              <CountdownWidget />
-              <AdSlot format="square" />
-            </div>
+          
+          {/* Intelligence Strip */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <XPEngine />
+            <AICoach />
+            <MomentumScore />
           </div>
-        </section>
+        </div>
+
+        {/* RIGHT — Activity Feed + AI Analysis */}
+        <div className="xl:col-span-4 flex flex-col gap-4">
+          <SystemActionFeed />
+          <AILifeAnalysis />
+        </div>
       </div>
 
-      {/* Horizontal Ad Break */}
-      <div className="mt-16">
-        <AdSlot format="horizontal" />
+      {/* ═══ ROW 2: Life Systems Matrix ═══ */}
+      <LifeDashboard />
+
+      {/* ═══ ROW 3: Analytics + Utilities ═══ */}
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+        <VelocityGraph />
+        <DistributionRadar />
+        <ActivityHeatmap />
+        <div className="flex flex-col gap-4">
+          <div className="grid grid-cols-2 gap-4">
+            <StreakTracker />
+            <WellnessWidget />
+          </div>
+          <AffirmationCard />
+          <CountdownWidget />
+        </div>
       </div>
+
+      {/* Ad */}
+      <AdSlot format="horizontal" />
     </div>
   );
 }

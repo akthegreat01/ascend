@@ -93,6 +93,7 @@ export default function TodoList() {
     if (isLoaded) {
       localStorage.setItem("ascend_premium_tasks", JSON.stringify(tasks));
       localStorage.setItem("ascend_premium_tasks_tomorrow", JSON.stringify(tomorrowTasks));
+      window.dispatchEvent(new Event("ascend_task_updated"));
     }
   }, [tasks, tomorrowTasks, isLoaded]);
 
@@ -245,10 +246,10 @@ export default function TodoList() {
                 initial={{ opacity: 0, scale: 0.95, y: 10 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95, transition: { duration: 0.2 } }}
-                className={`group flex items-center justify-between p-4 rounded-2xl border transition-all duration-500 ${
+                className={`group flex items-center justify-between p-4 rounded-2xl transition-all duration-500 ${
                   task.completed 
-                    ? "bg-white/[0.01] border-transparent opacity-40 scale-[0.98]" 
-                    : "bg-white/[0.02] border-white/[0.05] hover:border-white/20 hover:bg-white/[0.04] hover:-translate-y-1 hover:shadow-xl"
+                    ? "bg-white/[0.01] border border-transparent opacity-40 scale-[0.98]" 
+                    : "premium-card hover:-translate-y-1"
                 }`}
               >
                 <div className="flex items-center gap-4 overflow-hidden relative">

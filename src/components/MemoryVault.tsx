@@ -21,10 +21,11 @@ export default function MemoryVault() {
 
       <div className="flex-1 flex flex-col gap-4 relative z-10">
         <motion.div
-          whileHover={{ scale: 1.02 }}
-          className="p-4 rounded-xl border border-[#d4af37]/30 bg-[#d4af37]/5 relative overflow-hidden cursor-pointer"
+          whileHover={{ scale: 1.02, y: -2 }}
+          transition={{ type: "spring", stiffness: 400, damping: 30 }}
+          className="p-5 rounded-[20px] bg-white/[0.03] border border-white/[0.05] relative overflow-hidden cursor-pointer shadow-lg hover:shadow-xl hover:bg-white/[0.05] transition-colors"
         >
-          <div className="absolute left-0 top-0 w-1 h-full bg-[#d4af37] shadow-[0_0_10px_#d4af37]"></div>
+          <div className="absolute left-0 top-0 w-1 h-full bg-gradient-to-b from-indigo-400 to-purple-400"></div>
           <div className="flex items-start justify-between">
             <div>
               <p className="text-xs text-[#d4af37] font-medium tracking-wide mb-1 flex items-center gap-1">

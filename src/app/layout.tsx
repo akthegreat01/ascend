@@ -40,25 +40,27 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <ClientLayout interVar={inter.variable} outfitVar={outfit.variable}>
-        {children}
-      </ClientLayout>
-      
-      {/* Ad Optimization & Analytics */}
-      <Script 
-        async 
-        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9046932302377091" 
-        crossOrigin="anonymous" 
-        strategy="afterInteractive"
-      />
-      <Script id="google-analytics" strategy="afterInteractive">
-        {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-XXXXXXXXXX');
-        `}
-      </Script>
+      <body className={`${inter.variable} ${outfit.variable} antialiased min-h-screen selection:bg-white selection:text-black overflow-x-hidden`}>
+        <ClientLayout>
+          {children}
+        </ClientLayout>
+        
+        {/* Ad Optimization & Analytics */}
+        <Script 
+          async 
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9046932302377091" 
+          crossOrigin="anonymous" 
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-XXXXXXXXXX');
+          `}
+        </Script>
+      </body>
     </html>
   );
 }

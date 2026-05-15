@@ -6,52 +6,84 @@ import { useEffect, useState } from "react";
 
 export default function DistributionRadar() {
   const [isLoaded, setIsLoaded] = useState(false);
-  
-  // Strategic Focus Stats
   const [chartCategories, setChartCategories] = useState([
-    { label: "MIND", value: 0.01 },
-    { label: "BODY", value: 0.01 },
-    { label: "WEALTH", value: 0.01 },
-    { label: "LEARNING", value: 0.01 },
-    { label: "SOCIAL", value: 0.01 }
+    { label: "MIND", value: 0.01 }, { label: "BODY", value: 0.01 }, { label: "WEALTH", value: 0.01 },
+    { label: "LEARN", value: 0.01 }, { label: "SOCIAL", value: 0.01 }
   ]);
   
-  const size = 250;
+  const size = 120;
   const center = size / 2;
-  const radius = (size / 2) - 40;
+  const radius = (size / 2) - 20;
 
   useEffect(() => {
-    // Read user data from localStorage
-    const hobbiesStr = localStorage.getItem("ascend_hobbies");
-    let mind = 0, body = 0, wealth = 0, learning = 0, social = 0;
-    
-    if (hobbiesStr) {
-      const hobbies = JSON.parse(hobbiesStr);
-      hobbies.forEach((h: any) => {
-        const lvl = Math.min(1.0, (h.level || 1) / 20);
-        const cat = (h.category || h.name || "").toLowerCase();
-        if (!cat) return;
-        
-        if (cat.includes("mind") || cat.includes("focus") || cat.includes("meditat") || cat.includes("read")) mind = Math.max(mind, lvl);
-        else if (cat.includes("body") || cat.includes("fitness") || cat.includes("gym") || cat.includes("run") || cat.includes("sport")) body = Math.max(body, lvl);
-        else if (cat.includes("wealth") || cat.includes("business") || cat.includes("career") || cat.includes("financ") || cat.includes("invest")) wealth = Math.max(wealth, lvl);
-        else if (cat.includes("learn") || cat.includes("skill") || cat.includes("creative") || cat.includes("code") || cat.includes("study") || cat.includes("music") || cat.includes("art") || cat.includes("draw") || cat.includes("photo")) learning = Math.max(learning, lvl);
-        else social = Math.max(social, lvl);
-      });
-    }
+    const generate = () => {
+      const hobbiesStr = localStorage.getItem("ascend_hobbies");
+      const tasksStr = localStorage.getItem("ascend_premium_tasks");
+      const goalsStr = localStorage.getItem("ascend_goals");
+      const habitsStr = localStorage.getItem("ascend_habits");
 
-    setChartCategories([
-      { label: "MIND", value: Math.max(0.01, mind) },
-      { label: "BODY", value: Math.max(0.01, body) },
-      { label: "WEALTH", value: Math.max(0.01, wealth) },
-      { label: "LEARNING", value: Math.max(0.01, learning) },
-      { label: "SOCIAL", value: Math.max(0.01, social) }
-    ]);
-    
-    setIsLoaded(true);
+      let mind = 0, body = 0, wealth = 0, learning = 0, social = 0;
+      
+      // Process Hobbies
+      if (hobbiesStr) {
+        JSON.parse(hobbiesStr).forEach((h: any) => {
+          const lvl = Math.min(1.0, (h.level || 1) / 20);
+          const cat = (h.category || h.name || "").toLowerCase();
+          if (cat.includes("mind") || cat.includes("focus")) mind += lvl;
+          if (cat.includes("body") || cat.includes("fitness") || cat.includes("gym")) body += lvl;
+          if (cat.includes("wealth") || cat.includes("business")) wealth += lvl;
+          if (cat.includes("learn") || cat.includes("skill") || cat.includes("code")) learning += lvl;
+          if (cat.includes("social") || cat.includes("music") || cat.includes("art")) social += lvl;
+        });
+      }
+
+      // Process Habits
+      if (habitsStr) {
+        JSON.parse(habitsStr).forEach((h: any) => {
+          const title = (h.name || "").toLowerCase();
+          if (title.includes("meditat") || title.includes("read") || title.includes("journal")) mind += 0.2;
+          if (title.includes("workout") || title.includes("run") || title.includes("water") || title.includes("sleep")) body += 0.2;
+          if (title.includes("work") || title.includes("side hustle") || title.includes("save")) wealth += 0.2;
+          if (title.includes("study") || title.includes("code") || title.includes("learn")) learning += 0.2;
+          if (title.includes("call") || title.includes("friend") || title.includes("family")) social += 0.2;
+        });
+      }
+
+      // Process Tasks
+      if (tasksStr) {
+        JSON.parse(tasksStr).forEach((t: any) => {
+          if (!t.completed) return;
+          const title = (t.title || "").toLowerCase();
+          if (title.includes("meditat") || title.includes("read")) mind += 0.05;
+          if (title.includes("workout") || title.includes("gym")) body += 0.05;
+          if (title.includes("work") || title.includes("client") || title.includes("pay")) wealth += 0.05;
+          if (title.includes("study") || title.includes("course")) learning += 0.05;
+          if (title.includes("meeting") || title.includes("call")) social += 0.05;
+        });
+      }
+
+      // Normalize
+      const maxVal = Math.max(0.1, mind, body, wealth, learning, social);
+      const normalize = (v: number) => Math.max(0.01, Math.min(1, v / maxVal));
+
+      setChartCategories([
+        { label: "MIND", value: normalize(mind) }, { label: "BODY", value: normalize(body) },
+        { label: "WEALTH", value: normalize(wealth) }, { label: "LEARN", value: normalize(learning) },
+        { label: "SOCIAL", value: normalize(social) }
+      ]);
+      setIsLoaded(true);
+    };
+
+    generate();
+    window.addEventListener("ascend_habit_updated", generate);
+    window.addEventListener("ascend_task_updated", generate);
+    return () => {
+      window.removeEventListener("ascend_habit_updated", generate);
+      window.removeEventListener("ascend_task_updated", generate);
+    };
   }, []);
 
-  if (!isLoaded) return <div className="glass-panel p-6 h-[300px] animate-pulse" />;
+  if (!isLoaded) return <div className="glass-panel p-4 h-[140px] animate-pulse" />;
 
   const getCoordinates = (value: number, index: number) => {
     const angle = (Math.PI * 2 * index) / chartCategories.length - Math.PI / 2;
@@ -62,110 +94,59 @@ export default function DistributionRadar() {
 
   const points = chartCategories.map((cat, i) => getCoordinates(cat.value, i));
   const pathData = points.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x},${p.y}`).join(" ") + " Z";
-
-  // Grid background
-  const gridLevels = [0.25, 0.5, 0.75, 1];
+  const gridLevels = [0.33, 0.66, 1];
 
   return (
-    <div className="glass-panel p-6 bg-[#0a0a0a] border border-[#ffffff10] relative overflow-hidden group hover:border-amber-500/30 transition-colors duration-500">
-      <div className="absolute -inset-10 bg-gradient-to-tr from-amber-500/10 to-transparent opacity-0 group-hover:opacity-100 blur-3xl transition-opacity duration-700 pointer-events-none" />
-
-      <div className="flex items-center gap-2 mb-2 relative z-10">
-        <Network size={18} className="text-amber-400" />
-        <h3 className="text-sm font-medium text-white tracking-wide uppercase">Neuro-Balance Matrix</h3>
+    <div className="glass-panel p-4 flex flex-col group h-full items-center">
+      <div className="flex items-center justify-between w-full mb-2">
+        <div className="flex items-center gap-2">
+          <Network size={12} className="text-amber-400" />
+          <h3 className="text-[10px] font-bold text-[#a1a1aa] tracking-[0.15em] uppercase">Distribution</h3>
+        </div>
       </div>
-      <p className="text-[10px] text-[#a1a1aa] tracking-widest uppercase mb-4">Focus Distribution</p>
 
       {chartCategories.every(c => c.value <= 0.01) ? (
-        <div className="relative w-full flex flex-col items-center justify-center py-12">
-          <Network size={24} className="text-[#ffffff10] mb-2" />
-          <p className="text-xs text-[#a1a1aa]">No data yet</p>
-          <p className="text-[10px] text-[#ffffff30] mt-1">Track hobbies to see your balance</p>
+        <div className="flex-1 flex flex-col items-center justify-center">
+          <Network size={16} className="text-white/10 mb-1" />
+          <p className="text-[10px] text-[#555] font-mono">No data</p>
         </div>
       ) : (
-      <div className="relative w-full flex justify-center items-center mt-6">
-        <svg width={size} height={size} className="overflow-visible drop-shadow-[0_0_15px_rgba(245,158,11,0.2)]">
-          {/* Background web */}
-          {gridLevels.map((level, levelIdx) => {
-            const levelPoints = chartCategories.map((_, i) => getCoordinates(level, i));
-            const levelPath = levelPoints.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x},${p.y}`).join(" ") + " Z";
-            return (
-              <path 
-                key={levelIdx}
-                d={levelPath}
-                fill="none"
-                stroke="#ffffff10"
-                strokeWidth="1"
-                className="group-hover:stroke-[#ffffff20] transition-colors"
-              />
-            )
-          })}
+        <div className="relative flex-1 flex justify-center items-center mt-1">
+          <svg width={size} height={size} className="overflow-visible">
+            {gridLevels.map((level, levelIdx) => {
+              const levelPoints = chartCategories.map((_, i) => getCoordinates(level, i));
+              const levelPath = levelPoints.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x},${p.y}`).join(" ") + " Z";
+              return <path key={levelIdx} d={levelPath} fill="none" stroke="#ffffff10" strokeWidth="1" />
+            })}
 
-          {/* Axes */}
-          {chartCategories.map((_, i) => {
-            const endPoint = getCoordinates(1, i);
-            return (
-              <line
-                key={`axis-${i}`}
-                x1={center}
-                y1={center}
-                x2={endPoint.x}
-                y2={endPoint.y}
-                stroke="#ffffff10"
-                strokeWidth="1"
-                className="group-hover:stroke-[#ffffff20] transition-colors"
-              />
-            )
-          })}
+            {chartCategories.map((_, i) => {
+              const endPoint = getCoordinates(1, i);
+              return <line key={`axis-${i}`} x1={center} y1={center} x2={endPoint.x} y2={endPoint.y} stroke="#ffffff10" strokeWidth="1" />
+            })}
 
-          {/* Value Polygon */}
-          <motion.path
-            d={pathData}
-            fill="rgba(245,158,11,0.2)"
-            stroke="#f59e0b"
-            strokeWidth="2"
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 1.5, type: "spring", bounce: 0.4 }}
-            style={{ transformOrigin: "center" }}
-            className="drop-shadow-[0_0_10px_rgba(245,158,11,0.6)]"
-          />
+            <motion.path
+              d={pathData}
+              fill="rgba(245,158,11,0.15)"
+              stroke="#f59e0b"
+              strokeWidth="1.5"
+              initial={{ scale: 0, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 1 }}
+              style={{ transformOrigin: "center" }}
+            />
 
-          {/* Points & Labels */}
-          {chartCategories.map((cat, i) => {
-            const p = getCoordinates(cat.value, i);
-            const labelP = getCoordinates(1.25, i);
-            return (
-              <g key={`point-${i}`}>
-                <motion.circle
-                  cx={p.x}
-                  cy={p.y}
-                  r="4"
-                  fill="#fff"
-                  stroke="#f59e0b"
-                  strokeWidth="2"
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 1 + (i * 0.1), type: "spring" }}
-                  className="hover:scale-[2] hover:fill-[#f59e0b] cursor-pointer transition-all drop-shadow-[0_0_5px_#fff]"
-                />
-                <text
-                  x={labelP.x}
-                  y={labelP.y}
-                  fill="#a1a1aa"
-                  fontSize="9"
-                  fontWeight="bold"
-                  textAnchor="middle"
-                  alignmentBaseline="middle"
-                  className="uppercase tracking-[0.2em] group-hover:fill-white transition-colors"
-                >
-                  {cat.label}
-                </text>
-              </g>
-            )
-          })}
-        </svg>
-      </div>
+            {chartCategories.map((cat, i) => {
+              const p = getCoordinates(cat.value, i);
+              const labelP = getCoordinates(1.3, i);
+              return (
+                <g key={`point-${i}`}>
+                  <motion.circle cx={p.x} cy={p.y} r="2" fill="#fff" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 + (i * 0.1) }} />
+                  <text x={labelP.x} y={labelP.y} fill="#666" fontSize="7" fontFamily="monospace" textAnchor="middle" alignmentBaseline="middle">{cat.label}</text>
+                </g>
+              )
+            })}
+          </svg>
+        </div>
       )}
     </div>
   );

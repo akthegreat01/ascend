@@ -58,10 +58,10 @@ export default function JournalVault() {
       
       {/* Editor Section */}
       <div className="lg:col-span-2 flex flex-col gap-4">
-        <div className="glass-panel bg-[#0a0a0a] p-0 flex flex-col h-[600px] border border-[#ffffff10] relative overflow-hidden group">
+        <div className="glass-panel p-0 flex flex-col h-[600px] relative overflow-hidden group">
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[var(--color-accent)] to-transparent opacity-50" />
           
-          <div className="p-6 border-b border-[#ffffff0a] flex justify-between items-center bg-[#111111]/50 backdrop-blur-md">
+          <div className="p-6 border-b border-white/5 flex justify-between items-center bg-white/[0.02]">
             <div>
               <p className="text-[10px] text-[#a1a1aa] tracking-widest uppercase font-bold mb-1">Today's Entry</p>
               <h2 className="text-xl font-medium text-white">{today}</h2>
@@ -86,7 +86,7 @@ export default function JournalVault() {
             className="flex-1 w-full bg-transparent p-6 text-white text-lg font-light leading-relaxed resize-none focus:outline-none placeholder-[#ffffff30] custom-scrollbar"
           />
 
-          <div className="p-4 border-t border-[#ffffff0a] flex justify-end bg-[#111111]/50 backdrop-blur-md">
+          <div className="p-4 border-t border-white/5 flex justify-end bg-white/[0.02]">
             <button 
               onClick={saveEntry}
               disabled={!currentEntry.trim()}
@@ -103,7 +103,7 @@ export default function JournalVault() {
         <h3 className="text-sm font-medium text-white tracking-wide uppercase px-2">The Vault</h3>
         <div className="flex-1 overflow-y-auto custom-scrollbar space-y-4 pr-2 max-h-[600px]">
           {entries.length === 0 && (
-            <div className="glass-panel p-6 bg-[#0a0a0a] text-center text-[#a1a1aa] text-sm">
+            <div className="glass-panel p-6 text-center text-[#a1a1aa] text-sm">
               Your vault is empty. Seal your first memory.
             </div>
           )}
@@ -112,7 +112,7 @@ export default function JournalVault() {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               key={entry.id}
-              className="glass-panel p-5 bg-[#0a0a0a] border border-[#ffffff10] hover:border-[var(--color-accent)]/30 transition-colors group relative"
+              className="glass-panel p-5 group relative transition-all"
             >
               <div className="flex justify-between items-start mb-3">
                 <div className="flex items-center gap-2">

@@ -11,15 +11,12 @@ import PageTransition from "@/components/PageTransition";
 import MarketingNavbar from "@/components/MarketingNavbar";
 import MarketingFooter from "@/components/MarketingFooter";
 import { Menu, Zap } from "lucide-react";
+import { PremiumProvider } from "@/context/PremiumContext";
 
 export default function ClientLayout({
   children,
-  interVar,
-  outfitVar,
 }: {
   children: React.ReactNode;
-  interVar: string;
-  outfitVar: string;
 }) {
   const pathname = usePathname();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -27,7 +24,7 @@ export default function ClientLayout({
   const isMarketingPage = pathname === "/" || pathname.startsWith("/blog") || pathname.startsWith("/about") || pathname.startsWith("/contact") || pathname.startsWith("/privacy") || pathname.startsWith("/terms") || pathname.startsWith("/disclaimer") || pathname.startsWith("/cookie-policy");
 
   return (
-    <body className={`${interVar} ${outfitVar} antialiased min-h-screen selection:bg-white selection:text-black bg-[#050505] overflow-x-hidden`}>
+    <PremiumProvider>
       <AuraBackground />
       <div className="fixed inset-0 z-50 pointer-events-none noise-overlay mix-blend-overlay"></div>
       
@@ -47,7 +44,7 @@ export default function ClientLayout({
           
           <main className="flex-1 lg:ml-64 relative z-10 transition-all duration-500 ease-in-out">
             {/* Mobile Header */}
-            <div className="lg:hidden sticky top-0 z-[40] flex items-center justify-between p-4 bg-[#050505]/80 backdrop-blur-xl border-b border-white/[0.05]">
+            <div className="lg:hidden sticky top-0 z-[40] flex items-center justify-between p-4 bg-black/30 backdrop-blur-[40px] border-b border-white/[0.06] shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
               <div className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-white to-gray-400 flex items-center justify-center">
                   <span className="text-black font-black text-sm">A</span>
@@ -74,6 +71,6 @@ export default function ClientLayout({
           <OnboardingWalkthrough />
         </div>
       )}
-    </body>
+    </PremiumProvider>
   );
 }

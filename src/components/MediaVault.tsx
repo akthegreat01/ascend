@@ -67,7 +67,7 @@ export default function MediaVault() {
   if (!isLoaded) return <div className="glass-panel p-6 animate-pulse h-[300px]" />;
 
   return (
-    <div className="glass-panel p-6 flex flex-col h-full relative overflow-hidden group hover:border-indigo-500/30 transition-all duration-500">
+    <div className="glass-panel p-6 flex flex-col h-full relative overflow-hidden group hover:border-white/20 transition-all duration-500">
       {/* Background glow */}
       <div className="absolute -inset-10 bg-gradient-to-tr from-indigo-500/5 to-transparent opacity-0 group-hover:opacity-100 blur-3xl transition-opacity duration-700 pointer-events-none" />
 
@@ -88,7 +88,7 @@ export default function MediaVault() {
             value={newUrl}
             onChange={(e) => setNewUrl(e.target.value)}
             placeholder="Paste YouTube or Reel URL..."
-            className="w-full bg-[#0a0a0a] border border-[#ffffff15] rounded-xl py-3 pl-10 pr-4 text-sm text-white placeholder-[#a1a1aa]/50 focus:outline-none focus:border-indigo-500 focus:shadow-[0_0_15px_rgba(99,102,241,0.2)] transition-all shadow-inner"
+            className="w-full bg-white/[0.03] border border-white/[0.08] rounded-xl py-3 pl-10 pr-4 text-sm text-white placeholder-white/30 focus:outline-none focus:border-white/30 focus:bg-white/[0.06] transition-all shadow-inner font-light"
             required
           />
           <LinkIcon size={14} className="absolute left-4 top-1/2 -translate-y-1/2 text-[#a1a1aa]/50" />
@@ -96,7 +96,7 @@ export default function MediaVault() {
         <button
           type="submit"
           disabled={!newUrl.trim()}
-          className="p-3 bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-xl hover:from-indigo-400 hover:to-purple-400 disabled:opacity-50 transition-all hover:scale-105 active:scale-95 shadow-[0_0_15px_rgba(99,102,241,0.3)]"
+          className="p-3 bg-white text-black rounded-xl hover:bg-gray-200 disabled:opacity-50 transition-all hover:scale-105 active:scale-95 shadow-xl"
         >
           <Plus size={18} strokeWidth={3} />
         </button>
@@ -120,7 +120,7 @@ export default function MediaVault() {
                 initial={{ opacity: 0, scale: 0.95, x: -10 }}
                 animate={{ opacity: 1, scale: 1, x: 0 }}
                 exit={{ opacity: 0, scale: 0.95, transition: { duration: 0.2 } }}
-                className="group/item flex items-center justify-between p-3.5 rounded-xl bg-[#111111] border border-[#ffffff10] hover:border-indigo-500/40 hover:shadow-[0_0_15px_rgba(99,102,241,0.15)] transition-all duration-300 hover:-translate-y-0.5 cursor-pointer"
+                className="group/item flex items-center justify-between p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.05] hover:border-white/20 hover:bg-white/[0.05] hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 cursor-pointer"
                 onClick={() => openLink(item.url)}
               >
                 <div className="flex items-center gap-3 overflow-hidden">

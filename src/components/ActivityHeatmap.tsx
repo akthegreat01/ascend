@@ -9,25 +9,28 @@ export default function ActivityHeatmap() {
   const [streak, setStreak] = useState(0);
 
   useEffect(() => {
-    const savedDates = localStorage.getItem("ascend_focus_dates");
-    if (savedDates) {
-      const parsed = JSON.parse(savedDates);
-      setDates(parsed);
-      
-      let currentStreak = 0;
-      const today = new Date();
-      for (let i = 0; i < 365; i++) {
-        const d = new Date(today);
-        d.setDate(d.getDate() - i);
-        const dateStr = d.toISOString().split('T')[0];
-        if (parsed.includes(dateStr)) {
-          currentStreak++;
-        } else if (i !== 0) {
-          break;
+    const generate = () => {
+      const savedDates = localStorage.getItem("ascend_focus_dates");
+      if (savedDates) {
+        const parsed = JSON.parse(savedDates);
+        setDates(parsed);
+        
+        let currentStreak = 0;
+        const today = new Date();
+        for (let i = 0; i < 365; i++) {
+          const d = new Date(today);
+          d.setDate(d.getDate() - i);
+          const dateStr = d.toISOString().split('T')[0];
+          if (parsed.includes(dateStr)) currentStreak++;
+          else if (i !== 0) break;
         }
+        setStreak(currentStreak);
       }
-      setStreak(currentStreak);
-    }
+    };
+
+    generate();
+    window.addEventListener("ascend_stats_updated", generate);
+    return () => window.removeEventListener("ascend_stats_updated", generate);
   }, []);
 
   const generateGrid = () => {
@@ -45,10 +48,8 @@ export default function ActivityHeatmap() {
         <div 
           key={dateStr}
           title={dateStr}
-          className={`w-4 h-4 rounded-sm transition-all duration-300 ${
-            isActive 
-              ? 'bg-[var(--color-accent)] shadow-[0_0_5px_var(--color-accent)]' 
-              : 'bg-[#1a1a1a] border border-[#ffffff0a] hover:border-[#ffffff30]'
+          className={`w-3 h-3 rounded-[2px] transition-all duration-300 ${
+            isActive ? 'bg-orange-500' : 'bg-white/5'
           }`}
         />
       );
@@ -60,27 +61,24 @@ export default function ActivityHeatmap() {
     <motion.div 
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
-      className="glass-panel p-6 bg-[#0a0a0a] border border-[#ffffff10] flex flex-col group hover:border-[var(--color-accent)]/30 transition-colors"
+      className="glass-panel p-4 flex flex-col group h-full"
     >
       <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center gap-3">
-          <div className="p-2 rounded-lg bg-orange-500/10 text-orange-500">
-            <Activity size={18} />
-          </div>
-          <div>
-            <h3 className="font-medium text-white">Execution Heatmap</h3>
-            <p className="text-xs text-[#a1a1aa]">Last 28 Days</p>
-          </div>
+        <div className="flex items-center gap-2">
+          <Activity size={12} className="text-orange-500" />
+          <h3 className="text-[10px] font-bold text-[#a1a1aa] uppercase tracking-[0.15em]">Heatmap</h3>
         </div>
         
-        <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-500">
-          <Flame size={12} className={streak > 0 ? "animate-pulse" : ""} />
-          <span className="text-xs font-bold">{streak} Day Streak</span>
-        </div>
+        {streak > 0 && (
+          <div className="flex items-center gap-1">
+            <Flame size={10} className="text-orange-500 animate-pulse" />
+            <span className="text-[8px] font-mono text-orange-400">{streak}d</span>
+          </div>
+        )}
       </div>
       
-      <div className="flex-1 flex flex-col justify-center overflow-x-auto custom-scrollbar pb-2">
-        <div className="flex gap-2 mx-auto min-w-max">
+      <div className="flex-1 flex flex-col items-center justify-center overflow-hidden">
+        <div className="grid grid-cols-7 gap-1">
           {generateGrid()}
         </div>
       </div>

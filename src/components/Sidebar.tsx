@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { LayoutDashboard, Timer, CheckSquare, BarChart3, Search, Command, Activity, Swords, Target, BookHeart, Palette, Sparkles, Trophy, DollarSign, FileText, Music, Globe, Smile, Bookmark, Dumbbell, Sunrise, Grid3X3, Zap, Scale, Play } from "lucide-react";
 import { motion } from "framer-motion";
 import SettingsModal from "./SettingsModal";
+import { usePremium } from "@/context/PremiumContext";
 
 const navGroups = [
   {
@@ -40,14 +41,14 @@ const navGroups = [
     label: "Reflect",
     items: [
       { name: "Journal", href: "/journal", icon: BookHeart },
-      { name: "Analytics", href: "/analytics", icon: BarChart3 },
+      { name: "Analytics", href: "/analytics", icon: BarChart3, isPremium: true },
     ]
   },
   {
     label: "Assets",
     items: [
       { name: "Wealth Tracker", href: "/wealth", icon: DollarSign },
-      { name: "Media Vault", href: "/vault", icon: Play },
+      { name: "Media Vault", href: "/vault", icon: Play, isPremium: true },
       { name: "Notes", href: "/notes", icon: FileText },
       { name: "Reading List", href: "/reading", icon: Bookmark },
     ]
@@ -68,7 +69,8 @@ export default function Sidebar({
   onClose?: () => void; 
 }) {
   const pathname = usePathname();
-  const [name, setName] = useState("Akshath");
+  const [name, setName] = useState("User");
+  const { isPremium } = usePremium();
 
   useEffect(() => {
     const loadProfile = () => {
@@ -96,7 +98,7 @@ export default function Sidebar({
         />
       )}
 
-      <aside className={`fixed left-0 top-0 h-screen w-64 border-r border-white/[0.03] bg-[#050505]/95 backdrop-blur-3xl flex flex-col pt-8 pb-6 px-5 z-50 transition-all duration-500 ease-in-out lg:translate-x-0 ${isOpen ? "translate-x-0" : "-translate-x-full"}`}>
+      <aside className={`fixed left-0 top-0 h-screen w-64 border-r border-white/[0.06] bg-black/30 backdrop-blur-[60px] shadow-[10px_0_40px_rgba(0,0,0,0.5)] flex flex-col pt-8 pb-6 px-5 z-50 transition-all duration-[400ms] ease-out lg:translate-x-0 ${isOpen ? "translate-x-0" : "-translate-x-full"}`}>
         
         {/* Brand & Mobile Close */}
         <div className="flex items-center justify-between mb-10 px-2">
@@ -168,6 +170,11 @@ export default function Sidebar({
                     <span className={`relative z-10 text-[13px] font-semibold tracking-wide transition-colors duration-300 ${isActive ? "text-white" : "text-[#a1a1aa] group-hover:text-white"}`}>
                       {item.name}
                     </span>
+                    {(item as any).isPremium && !isPremium && (
+                      <span className="ml-auto text-[8px] font-black bg-gradient-to-r from-amber-400 to-orange-500 text-black px-1.5 py-0.5 rounded-md uppercase tracking-tighter relative z-10">
+                        Pro
+                      </span>
+                    )}
                   </Link>
                 );
               })}
@@ -192,8 +199,10 @@ export default function Sidebar({
             <div className="flex flex-col items-start overflow-hidden relative z-10">
               <span className="text-sm font-bold text-white truncate w-full group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-gray-400 transition-all duration-500">{name}</span>
               <div className="flex items-center gap-2 mt-1">
-                <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_12px_rgba(52,211,153,0.6)] animate-pulse" />
-                <span className="text-[9px] text-[var(--color-accent)] font-black uppercase tracking-[0.15em]">Elite Tier</span>
+                <div className={`w-1.5 h-1.5 rounded-full ${isPremium ? "bg-emerald-400 shadow-[0_0_12px_rgba(52,211,153,0.6)]" : "bg-amber-400 shadow-[0_0_12px_rgba(251,191,36,0.6)]"} animate-pulse` } />
+                <span className="text-[9px] text-[var(--color-accent)] font-black uppercase tracking-[0.15em]">
+                  {isPremium ? "Elite Tier" : "Standard Tier"}
+                </span>
               </div>
             </div>
           </button>

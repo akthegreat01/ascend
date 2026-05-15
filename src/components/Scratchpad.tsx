@@ -51,7 +51,7 @@ export default function Scratchpad() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 50, scale: 0.95 }}
             transition={{ type: "spring", bounce: 0, duration: 0.4 }}
-            className="fixed bottom-4 right-4 left-4 md:left-auto md:bottom-6 md:right-6 md:w-96 h-[500px] max-h-[70vh] z-[100] glass-panel bg-[#0a0a0a]/95 backdrop-blur-2xl border-white/10 shadow-2xl flex flex-col overflow-hidden"
+            className="fixed bottom-4 right-4 left-4 md:left-auto md:bottom-6 md:right-6 md:w-96 h-[500px] max-h-[70vh] z-[100] glass-panel border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] flex flex-col overflow-hidden"
           >
             <div className="flex items-center justify-between p-4 border-b border-white/5 bg-white/5">
               <div className="flex items-center gap-2 text-white">

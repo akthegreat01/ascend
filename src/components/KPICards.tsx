@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Briefcase, Monitor, Coffee, TrendingUp } from "lucide-react";
+import { Briefcase, Monitor, Coffee, Flame } from "lucide-react";
 import { useState, useEffect } from "react";
 
 export default function KPICards() {
@@ -10,9 +10,7 @@ export default function KPICards() {
 
   const loadStats = () => {
     const statsStr = localStorage.getItem("ascend_stats");
-    if (statsStr) {
-      setStats(JSON.parse(statsStr));
-    }
+    if (statsStr) setStats(JSON.parse(statsStr));
     setIsLoaded(true);
   };
 
@@ -22,83 +20,67 @@ export default function KPICards() {
     return () => window.removeEventListener("ascend_stats_updated", loadStats);
   }, []);
 
-  const formatHours = (seconds: number) => {
-    if (seconds === 0) return "00:00 h";
+  const formatTime = (seconds: number) => {
+    if (seconds === 0) return "0h 0m";
     const h = Math.floor(seconds / 3600);
     const m = Math.floor((seconds % 3600) / 60);
-    return `${h.toString().padStart(2, "0")}:${m.toString().padStart(2, "0")} h`;
+    return h > 0 ? `${h}h ${m}m` : `${m}m`;
   };
 
-  const calculateConsistency = () => {
-    if (typeof window === "undefined") return "0 Days";
-    
+  const getStreak = () => {
+    if (typeof window === "undefined") return 0;
     const datesStr = localStorage.getItem("ascend_focus_dates");
-    if (!datesStr) return "0 Days";
+    if (!datesStr) return 0;
     const dates: string[] = JSON.parse(datesStr);
-    
     let streak = 0;
     const today = new Date();
-    
     for (let i = 0; i < 365; i++) {
       const d = new Date(today);
       d.setDate(d.getDate() - i);
       const dateStr = d.toISOString().split('T')[0];
-      
-      if (dates.includes(dateStr)) {
-        streak++;
-      } else if (i !== 0) { // If it's not today, and it's missing, streak breaks
-        break;
-      }
+      if (dates.includes(dateStr)) streak++;
+      else if (i !== 0) break;
     }
-    
-    return `${streak} Days`;
+    return streak;
   };
 
   const kpiData = [
-    { title: "Work Time", value: formatHours(stats.workTime), trend: "+0.0%", trendUp: true, icon: Briefcase, color: "text-[#66fcf1]", bg: "bg-[#66fcf1]/10" },
-    { title: "Active Time", value: formatHours(stats.workTime + stats.breakTime), trend: "+0.0%", trendUp: true, icon: Monitor, color: "text-[#45a29e]", bg: "bg-[#45a29e]/10" },
-    { title: "Break Time", value: formatHours(stats.breakTime), trend: "0.0%", trendUp: true, icon: Coffee, color: "text-[#f43f5e]", bg: "bg-[#f43f5e]/10" },
-    { title: "Consistency", value: calculateConsistency(), trend: "Streak", trendUp: true, icon: TrendingUp, color: "text-amber-500", bg: "bg-amber-500/10" },
+    { title: "Focus", value: formatTime(stats.workTime), icon: Briefcase, color: "#5E5CE6" }, // Apple Indigo
+    { title: "Active", value: formatTime(stats.workTime + stats.breakTime), icon: Monitor, color: "#0A84FF" }, // Apple Blue
+    { title: "Break", value: formatTime(stats.breakTime), icon: Coffee, color: "#FF375F" }, // Apple Pink
+    { title: "Streak", value: `${getStreak()}d`, icon: Flame, color: "#FF9F0A" }, // Apple Orange
   ];
 
-  if (!isLoaded) return <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 animate-pulse h-[120px]" />;
+  if (!isLoaded) {
+    return (
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+        {[...Array(4)].map((_, i) => (
+          <div key={i} className="glass-panel skeleton h-[72px]" />
+        ))}
+      </div>
+    );
+  }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
       {kpiData.map((kpi, idx) => (
         <motion.div
           key={idx}
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: idx * 0.1 }}
-          className="glass-panel p-6 relative overflow-hidden group hover:border-[var(--color-accent)]/30 transition-all duration-500 bg-[#0c0c0c]/50 glow-border"
+          transition={{ delay: idx * 0.05, duration: 0.4 }}
+          className="glass-panel px-4 py-3 flex items-center gap-3 group hover:border-white/[0.12] transition-all duration-300"
         >
-          <div className="flex justify-between items-start mb-6">
-            <span className="text-[10px] font-black text-[#a1a1aa]/60 tracking-[0.2em] uppercase">{kpi.title}</span>
-            <div className={`p-2.5 rounded-xl ${kpi.bg} shadow-lg shadow-black/20 group-hover:scale-110 transition-transform duration-500`}>
-              <kpi.icon size={18} className={kpi.color} />
-            </div>
+          <div 
+            className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:scale-110"
+            style={{ backgroundColor: `${kpi.color}12`, border: `1px solid ${kpi.color}20` }}
+          >
+            <kpi.icon size={14} style={{ color: kpi.color }} />
           </div>
-          <div className="flex items-end justify-between">
-            <h3 className="text-3xl sm:text-4xl font-black text-white tracking-tighter font-['Outfit'] tabular-nums group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-gray-500 transition-all duration-500">
-              {kpi.value}
-            </h3>
-            
-            {/* Sparkline decoration */}
-            <div className="flex items-end gap-[4px] h-10 opacity-20 group-hover:opacity-60 transition-opacity duration-700">
-              {[...Array(6)].map((_, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ height: "20%" }}
-                  animate={{ height: ["20%", `${30 + Math.random() * 70}%`, "20%"] }}
-                  transition={{ duration: 2 + Math.random(), repeat: Infinity, ease: "easeInOut" }}
-                  className={`w-1.5 rounded-full ${kpi.color.replace('text-', 'bg-')} shadow-[0_0_15px_currentColor]`}
-                />
-              ))}
-            </div>
+          <div className="min-w-0">
+            <p className="text-[9px] font-bold text-[#a1a1aa]/60 uppercase tracking-[0.15em] leading-none mb-0.5">{kpi.title}</p>
+            <p className="text-lg font-black text-white font-['Outfit'] tabular-nums tracking-tight leading-none">{kpi.value}</p>
           </div>
-          {/* Subtle background glow effect on hover */}
-          <div className={`absolute -inset-2 opacity-0 group-hover:opacity-5 bg-gradient-to-tr from-${kpi.color.split('-')[1]}-500 to-transparent blur-3xl transition-opacity duration-700 pointer-events-none`} />
         </motion.div>
       ))}
     </div>

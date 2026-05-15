@@ -81,9 +81,9 @@ export default function DailyBriefing() {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="relative overflow-hidden rounded-[20px] bg-gradient-to-br from-[#111] via-[#0a0a0a] to-[#111] border border-[#ffffff08] p-10"
+        className="relative overflow-hidden p-10 glass-panel border border-white/5 shadow-2xl"
       >
-        <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-[var(--color-accent)] opacity-[0.03] blur-[100px] rounded-full pointer-events-none" />
+        <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-[var(--color-accent)] opacity-[0.05] blur-[120px] rounded-full pointer-events-none" />
         <div className="relative z-10">
           <p className="text-[#a1a1aa] text-sm mb-1">{currentTime.toLocaleDateString([], { weekday: "long", month: "long", day: "numeric" })}</p>
           <h1 className="text-4xl font-light text-white tracking-tight mb-2">
@@ -107,7 +107,7 @@ export default function DailyBriefing() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 + i * 0.05 }}
           >
-            <Link href={card.link} className="glass-panel p-5 bg-[#0a0a0a] border border-[#ffffff10] flex flex-col gap-3 group hover:border-[#ffffff20] transition-all block">
+            <Link href={card.link} className="glass-panel p-5 flex flex-col gap-3 group transition-all block">
               <div className="flex items-center justify-between">
                 <card.icon size={16} className={card.color} />
                 <ArrowRight size={12} className="text-[#ffffff15] group-hover:text-[#a1a1aa] transition-colors" />
@@ -127,7 +127,7 @@ export default function DailyBriefing() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="glass-panel p-6 bg-[#0a0a0a] border border-[#ffffff10]"
+          className="glass-panel p-6"
         >
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-sm font-semibold text-white uppercase tracking-wide">Today's Priority</h2>
@@ -135,11 +135,11 @@ export default function DailyBriefing() {
           </div>
           <div className="space-y-2">
             {data.pendingTasks.map((task: any, i: number) => (
-              <div key={i} className="flex items-center gap-3 p-3 rounded-xl bg-[#111] border border-[#ffffff06]">
-                <Circle size={14} className="text-[#ffffff20] shrink-0" />
-                <span className="text-sm text-white font-light">{task.title}</span>
+              <div key={i} className="flex items-center gap-3 p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.04] backdrop-blur-sm">
+                <Circle size={14} className="text-[#ffffff30] shrink-0" />
+                <span className="text-sm text-white/90 font-light">{task.title}</span>
                 {task.priority === "high" && (
-                  <span className="ml-auto text-[9px] font-bold text-rose-400 uppercase">High</span>
+                  <span className="ml-auto text-[9px] font-bold text-rose-400 uppercase tracking-widest bg-rose-500/10 px-2 py-1 rounded-md">High</span>
                 )}
               </div>
             ))}
@@ -154,19 +154,19 @@ export default function DailyBriefing() {
         transition={{ delay: 0.4 }}
         className="grid grid-cols-1 md:grid-cols-2 gap-4"
       >
-        <div className="glass-panel p-5 bg-[#0a0a0a] border border-[#ffffff10]">
-          <div className="flex items-center gap-2 mb-2">
+        <div className="glass-panel p-6">
+          <div className="flex items-center gap-2 mb-3">
             <Zap size={14} className="text-cyan-400" />
             <span className="text-[10px] font-bold text-[#a1a1aa] uppercase tracking-widest">Water Today</span>
           </div>
-          <div className="text-2xl font-light text-white font-['Outfit']">{data.water} <span className="text-sm text-[#a1a1aa]">glasses</span></div>
+          <div className="text-3xl font-light text-white font-['Outfit']">{data.water} <span className="text-sm text-[#a1a1aa]">glasses</span></div>
         </div>
-        <div className="glass-panel p-5 bg-[#0a0a0a] border border-[#ffffff10]">
-          <div className="flex items-center gap-2 mb-2">
+        <div className="glass-panel p-6">
+          <div className="flex items-center gap-2 mb-3">
             <Sunrise size={14} className="text-indigo-400" />
             <span className="text-[10px] font-bold text-[#a1a1aa] uppercase tracking-widest">Sleep Last Night</span>
           </div>
-          <div className="text-2xl font-light text-white font-['Outfit']">{data.sleep} <span className="text-sm text-[#a1a1aa]">hours</span></div>
+          <div className="text-3xl font-light text-white font-['Outfit']">{data.sleep} <span className="text-sm text-[#a1a1aa]">hours</span></div>
         </div>
       </motion.div>
     </div>

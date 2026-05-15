@@ -2,97 +2,71 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Flame, Trophy, Star, TrendingUp, Zap } from "lucide-react";
+import { Flame, Star, TrendingUp, Zap } from "lucide-react";
 
 export default function StreakTracker() {
   const [streaks, setStreaks] = useState({ focus: 0, habits: 0, journal: 0, login: 0 });
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    const calculateStreak = (key: string, datesFn: () => string[]) => {
-      const dates = datesFn();
-      let streak = 0;
-      const today = new Date();
-      for (let i = 0; i < 365; i++) {
-        const d = new Date(today);
-        d.setDate(d.getDate() - i);
-        const ds = d.toISOString().split("T")[0];
-        if (dates.includes(ds)) streak++;
-        else if (i !== 0) break;
-      }
-      return streak;
+    const generate = () => {
+      const calc = (dates: string[]) => {
+        let streak = 0; const today = new Date();
+        for (let i = 0; i < 365; i++) {
+          const d = new Date(today); d.setDate(d.getDate() - i);
+          if (dates.includes(d.toISOString().split("T")[0])) streak++;
+          else if (i !== 0) break;
+        }
+        return streak;
+      };
+
+      const focus = calc(JSON.parse(localStorage.getItem("ascend_focus_dates") || "[]"));
+      const hr = JSON.parse(localStorage.getItem("ascend_habit_records") || "{}");
+      const hd = new Set<string>();
+      Object.values(hr).forEach((r: any) => Object.keys(r).forEach(d => { if (r[d]) hd.add(d); }));
+      const habits = calc([...hd]);
+      const journal = calc((JSON.parse(localStorage.getItem("ascend_journal") || "[]")).map((e: any) => e.date?.split("T")?.[0]).filter(Boolean));
+      const loginD = JSON.parse(localStorage.getItem("ascend_login_dates") || "[]");
+      const tStr = new Date().toISOString().split("T")[0];
+      if (!loginD.includes(tStr)) { loginD.push(tStr); localStorage.setItem("ascend_login_dates", JSON.stringify(loginD)); }
+      const login = calc(loginD);
+
+      setStreaks({ focus, habits, journal, login });
+      setIsLoaded(true);
     };
 
-    const focus = calculateStreak("focus", () => JSON.parse(localStorage.getItem("ascend_focus_dates") || "[]"));
-
-    // Habits streak: days where at least one habit was done
-    const habitRecords = JSON.parse(localStorage.getItem("ascend_habit_records") || "{}");
-    const habitDates = new Set<string>();
-    Object.values(habitRecords).forEach((record: any) => {
-      Object.keys(record).forEach(date => { if (record[date]) habitDates.add(date); });
-    });
-    const habits = calculateStreak("habits", () => [...habitDates]);
-
-    // Journal streak
-    const journal = JSON.parse(localStorage.getItem("ascend_journal") || "[]");
-    const journalDates = journal.map((e: any) => e.date?.split("T")?.[0]).filter(Boolean);
-    const journalStreak = calculateStreak("journal", () => journalDates);
-
-    // Login streak
-    const loginDates = JSON.parse(localStorage.getItem("ascend_login_dates") || "[]");
-    const today = new Date().toISOString().split("T")[0];
-    if (!loginDates.includes(today)) {
-      loginDates.push(today);
-      localStorage.setItem("ascend_login_dates", JSON.stringify(loginDates));
-    }
-    const loginStreak = calculateStreak("login", () => loginDates);
-
-    setStreaks({ focus, habits, journal: journalStreak, login: loginStreak });
-    setIsLoaded(true);
+    generate();
+    const events = ["ascend_stats_updated", "ascend_habit_updated", "ascend_journal_updated"];
+    events.forEach(e => window.addEventListener(e, generate));
+    return () => events.forEach(e => window.removeEventListener(e, generate));
   }, []);
 
-  if (!isLoaded) return null;
+  if (!isLoaded) return <div className="glass-panel skeleton h-[100px]" />;
 
   const items = [
-    { label: "Focus", value: streaks.focus, icon: Zap, color: "#f43f5e" },
-    { label: "Habits", value: streaks.habits, icon: Flame, color: "#f59e0b" },
-    { label: "Journal", value: streaks.journal, icon: Star, color: "#a855f7" },
-    { label: "Login", value: streaks.login, icon: TrendingUp, color: "#10b981" },
+    { label: "FOCUS", val: streaks.focus, icon: Zap, c: "#f43f5e" },
+    { label: "HABITS", val: streaks.habits, icon: Flame, c: "#f59e0b" },
+    { label: "JOURNAL", val: streaks.journal, icon: Star, c: "#a855f7" },
+    { label: "LOGIN", val: streaks.login, icon: TrendingUp, c: "#10b981" },
   ];
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="glass-panel p-5 bg-[#0a0a0a] border border-[#ffffff10] group hover:border-orange-500/20 transition-colors"
-    >
-      <div className="flex items-center gap-2 mb-4">
-        <Flame size={16} className="text-orange-400" />
-        <h3 className="text-xs font-bold text-[#a1a1aa] uppercase tracking-widest">Streaks</h3>
+    <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} className="glass-panel p-3">
+      <div className="flex items-center gap-1.5 mb-2.5">
+        <Flame size={10} className="text-orange-400" />
+        <h3 className="text-[9px] font-bold text-[#a1a1aa] uppercase tracking-[0.15em]">Streaks</h3>
       </div>
-
-      <div className="grid grid-cols-2 gap-2">
-        {items.map((item, i) => (
-          <motion.div
-            key={item.label}
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: i * 0.05 }}
-            className="p-3 rounded-xl bg-[#111] border border-[#ffffff06] flex items-center gap-3 group/streak"
-          >
-            <div
-              className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-transform duration-200 group-hover/streak:scale-110"
-              style={{ backgroundColor: `${item.color}15` }}
-            >
-              <item.icon size={14} style={{ color: item.color }} />
+      <div className="grid grid-cols-2 gap-1.5">
+        {items.map((it, i) => (
+          <div key={it.label} className="p-2 rounded-lg bg-white/[0.02] border border-white/[0.04] flex items-center gap-2">
+            <div className="w-5 h-5 rounded flex items-center justify-center shrink-0" style={{ background: `${it.c}15` }}>
+              <it.icon size={10} style={{ color: it.c }} />
             </div>
             <div>
-              <div className="text-lg font-light text-white font-['Outfit'] tabular-nums leading-none">
-                {item.value}
-              </div>
-              <div className="text-[9px] text-[#a1a1aa] uppercase tracking-wider font-bold">{item.label}</div>
+              <div className="text-xs font-black text-white tabular-nums leading-none">{it.val}</div>
+              <div className="text-[7px] text-[#666] uppercase tracking-wider font-mono">{it.label}</div>
             </div>
-          </motion.div>
+          </div>
         ))}
       </div>
     </motion.div>
